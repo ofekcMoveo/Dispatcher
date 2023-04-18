@@ -161,7 +161,11 @@
         <scene sceneID="laH-XE-Bbm">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="juY-qz-BxR" customClass="NavigationViewController" customModule="Dispatcher" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" image="home" selectedImage="selectenHome" id="npJ-gm-srA"/>
+                    <tabBarItem key="tabBarItem" image="home" selectedImage="selectenHome" id="npJ-gm-srA">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-9"/>
+                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Cx8-Eh-tpJ">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -211,7 +215,7 @@
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="favorites" width="28" height="28"/>
-        <image name="home" width="28" height="28"/>
+        <image name="home" width="22" height="24"/>
         <image name="logoIcon" width="40" height="32"/>
         <image name="notificationsIcon" width="16" height="20"/>
         <image name="profile" width="28" height="28"/>
