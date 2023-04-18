@@ -4,7 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,21 +12,55 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="TopView" id="Sap-C2-iBI">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="fkN-d6-a7j">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rlK-UA-eMP">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                            </imageView>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3DZ-AM-4LS">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="300"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="6OF-KG-hI3">
+                                                <rect key="frame" x="101" y="61" width="191" height="178"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="191" id="Efy-1Q-tV5"/>
+                                                    <constraint firstAttribute="height" constant="178" id="nhr-Bv-5eL"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="1Cp-J5-IuS"/>
+                                            <constraint firstItem="6OF-KG-hI3" firstAttribute="centerX" secondItem="3DZ-AM-4LS" secondAttribute="centerX" id="Aca-fO-b8m"/>
+                                            <constraint firstItem="6OF-KG-hI3" firstAttribute="centerY" secondItem="3DZ-AM-4LS" secondAttribute="centerY" id="vqH-li-bh8"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" restorationIdentifier="ButtomView" translatesAutoresizingMaskIntoConstraints="NO" id="V67-cI-lo6">
+                                        <rect key="frame" x="0.0" y="308" width="393" height="544"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dispatcher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZF-Op-3xx">
+                                                <rect key="frame" x="114.66666666666669" y="400.66666666666663" width="164" height="38.333333333333314"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="dZF-Op-3xx" secondAttribute="bottom" constant="105" id="QfT-Ow-7ti"/>
+                                            <constraint firstItem="dZF-Op-3xx" firstAttribute="centerX" secondItem="V67-cI-lo6" secondAttribute="centerX" id="xbx-4b-mbg"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="LYv-RT-j1Q"/>
+                        <color key="backgroundColor" red="0.14901960780000001" green="0.12941176469999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="fkN-d6-a7j" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="3Gf-Y7-rTF"/>
-                            <constraint firstItem="fkN-d6-a7j" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="7iy-Rx-UxS"/>
-                            <constraint firstItem="fkN-d6-a7j" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ahm-FR-dL0"/>
-                            <constraint firstAttribute="bottom" secondItem="fkN-d6-a7j" secondAttribute="bottom" id="ccy-n9-gdw"/>
+                            <constraint firstItem="rlK-UA-eMP" firstAttribute="top" secondItem="Sap-C2-iBI" secondAttribute="top" id="L99-74-gNN"/>
+                            <constraint firstAttribute="bottom" secondItem="rlK-UA-eMP" secondAttribute="bottom" id="Sd6-zC-Dl0"/>
+                            <constraint firstItem="rlK-UA-eMP" firstAttribute="leading" secondItem="Sap-C2-iBI" secondAttribute="leading" id="ikh-tt-Njc"/>
+                            <constraint firstAttribute="trailing" secondItem="rlK-UA-eMP" secondAttribute="trailing" id="vyL-0R-wsh"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -36,9 +70,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Splash" width="125" height="222.33332824707031"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="Logo" width="63.666667938232422" height="59.333332061767578"/>
     </resources>
 </document>
