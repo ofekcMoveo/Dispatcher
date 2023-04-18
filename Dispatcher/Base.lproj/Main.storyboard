@@ -121,21 +121,31 @@
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="notificationsIcon" style="plain" id="Uor-Ej-iR0">
                                 <color key="tintColor" name="iconsColor"/>
+                                <connections>
+                                    <action selector="notificationsPressed:" destination="BzR-Vt-ntS" id="IK7-EQ-fdM"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem image="searchIcon" style="plain" id="cWj-hT-Ekl">
                                 <color key="tintColor" name="iconsColor"/>
+                                <connections>
+                                    <action selector="searchPressed:" destination="BzR-Vt-ntS" id="t9T-Hq-JD4"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="notificationsNavBarItem" destination="Uor-Ej-iR0" id="mRz-BW-UFV"/>
+                        <outlet property="searchNavBarItem" destination="cWj-hT-Ekl" id="Srt-Kb-3jR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ADy-mj-GkS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-489" y="237"/>
         </scene>
-        <!--Navigation View Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="7og-nR-Gfl">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1RT-DQ-qvJ" customClass="NavigationViewController" customModule="Dispatcher" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1RT-DQ-qvJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="profile" selectedImage="selectedProfile" id="X07-DV-YK8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tty-ae-EQ7">
@@ -157,10 +167,10 @@
             </objects>
             <point key="canvasLocation" x="-1587.0229007633586" y="-515.49295774647885"/>
         </scene>
-        <!--Navigation View Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="laH-XE-Bbm">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="juY-qz-BxR" customClass="NavigationViewController" customModule="Dispatcher" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="juY-qz-BxR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" image="home" selectedImage="selectenHome" id="npJ-gm-srA">
                         <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-9"/>
                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
@@ -186,10 +196,10 @@
             </objects>
             <point key="canvasLocation" x="-488" y="-515"/>
         </scene>
-        <!--Navigation View Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="e6h-yk-X2D">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="osu-C7-WyZ" customClass="NavigationViewController" customModule="Dispatcher" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="osu-C7-WyZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="favorites" selectedImage="selectedFavorites" id="AA3-9X-OSd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yrq-8D-NFp">

@@ -9,21 +9,22 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var searchNavBarItem: UIBarButtonItem!
+    @IBOutlet weak var notificationsNavBarItem: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func searchPressed(_ sender: UIBarButtonItem) {
+        searchNavBarItem.tintColor = .white
+        notificationsNavBarItem.tintColor = UIColor(named: "iconsColor")
     }
-    */
-
+    
+    @IBAction func notificationsPressed(_ sender: UIBarButtonItem) {
+        notificationsNavBarItem.tintColor = .white
+        searchNavBarItem.tintColor = UIColor(named: "iconsColor")
+        
+    }
 }
