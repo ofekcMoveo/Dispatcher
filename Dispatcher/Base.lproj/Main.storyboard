@@ -118,34 +118,35 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="UxR-ls-pFV"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjn-wg-k7J">
-                                        <rect key="frame" x="273" y="45" width="50" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjn-wg-k7J">
+                                        <rect key="frame" x="263" y="45" width="60" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="7zd-Z9-1gm"/>
-                                            <constraint firstAttribute="width" constant="50" id="EIC-EV-G7E"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="GBi-Cg-DGl"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="Sfh-D0-gQk"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="XQF-bJ-0Lo"/>
-                                            <constraint firstAttribute="height" constant="50" id="jq8-Gj-ZLw"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="reG-zU-B6W"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="searchIcon"/>
+                                        <connections>
+                                            <action selector="searchButtonPressed:" destination="BzR-Vt-ntS" eventType="touchUpInside" id="ExW-1f-6ns"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xd-B7-bhd">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xd-B7-bhd">
                                         <rect key="frame" x="333" y="45" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="3Bo-6y-uKj"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="5gM-kJ-8vO"/>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="H69-sr-VhY"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="INt-8h-dGl"/>
-                                            <constraint firstAttribute="height" constant="50" id="Ofa-Wh-SbR"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="cbo-4u-2qC"/>
                                             <constraint firstAttribute="width" constant="50" id="vdV-Qx-FRr"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="zND-4Y-ZCl"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="notificationsIcon"/>
+                                        <connections>
+                                            <action selector="notificationsButtonPressed:" destination="BzR-Vt-ntS" eventType="touchUpInside" id="jky-nf-WaN"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="backgroundColor"/>
@@ -180,21 +181,15 @@
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="notificationsIcon" style="plain" id="Uor-Ej-iR0">
                                 <color key="tintColor" name="iconsColor"/>
-                                <connections>
-                                    <action selector="notificationsPressed:" destination="BzR-Vt-ntS" id="IK7-EQ-fdM"/>
-                                </connections>
                             </barButtonItem>
                             <barButtonItem image="searchIcon" style="plain" id="cWj-hT-Ekl">
                                 <color key="tintColor" name="iconsColor"/>
-                                <connections>
-                                    <action selector="searchPressed:" destination="BzR-Vt-ntS" id="t9T-Hq-JD4"/>
-                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="notificationsNavBarItem" destination="Uor-Ej-iR0" id="mRz-BW-UFV"/>
-                        <outlet property="searchNavBarItem" destination="cWj-hT-Ekl" id="Srt-Kb-3jR"/>
+                        <outlet property="notificationsButton" destination="5xd-B7-bhd" id="JDB-V7-At5"/>
+                        <outlet property="searchButton" destination="Wjn-wg-k7J" id="URz-LC-SWF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ADy-mj-GkS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

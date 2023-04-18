@@ -9,8 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    @IBOutlet weak var searchNavBarItem: UIBarButtonItem!
-    @IBOutlet weak var notificationsNavBarItem: UIBarButtonItem!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var notificationsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,14 +19,12 @@ class HomeViewController: UIViewController {
     }
     
     
-    @IBAction func searchPressed(_ sender: UIBarButtonItem) {
-        searchNavBarItem.tintColor = .white
-        notificationsNavBarItem.tintColor = UIColor(named: "iconsColor")
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
     }
     
-    @IBAction func notificationsPressed(_ sender: UIBarButtonItem) {
-        notificationsNavBarItem.tintColor = .white
-        searchNavBarItem.tintColor = UIColor(named: "iconsColor")
+    
+    @IBAction func notificationsButtonPressed(_ sender: UIButton) {
+        
         
     }
 }
