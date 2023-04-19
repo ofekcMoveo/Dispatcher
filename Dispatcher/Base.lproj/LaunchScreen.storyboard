@@ -3,53 +3,15 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" restorationIdentifier="TopView" id="Sap-C2-iBI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="6OF-KG-hI3">
-                                <rect key="frame" x="101" y="138" width="212" height="178"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="178" id="Fdm-Oa-EbU"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dispatcher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZF-Op-3xx">
-                                <rect key="frame" x="125" y="761" width="164" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="sfD-lA-aD7"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="LYv-RT-j1Q"/>
-                        <color key="backgroundColor" red="0.14901960780000001" green="0.12941176469999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="dZF-Op-3xx" firstAttribute="centerX" secondItem="Sap-C2-iBI" secondAttribute="centerX" id="Bgn-0E-YYq"/>
-                            <constraint firstItem="6OF-KG-hI3" firstAttribute="top" secondItem="LYv-RT-j1Q" secondAttribute="top" constant="90" id="CAj-zu-q6c"/>
-                            <constraint firstItem="6OF-KG-hI3" firstAttribute="leading" secondItem="LYv-RT-j1Q" secondAttribute="leading" constant="101" id="MZh-Mk-csY"/>
-                            <constraint firstItem="LYv-RT-j1Q" firstAttribute="trailing" secondItem="6OF-KG-hI3" secondAttribute="trailing" constant="101" id="Wc8-pg-TgN"/>
-                            <constraint firstAttribute="bottom" secondItem="dZF-Op-3xx" secondAttribute="bottom" constant="105" id="vm9-wc-e4Y"/>
-                            <constraint firstItem="dZF-Op-3xx" firstAttribute="top" relation="lessThanOrEqual" secondItem="6OF-KG-hI3" secondAttribute="bottom" multiplier="1.33333" constant="390" id="wHG-HA-z6x"/>
-                            <constraint firstItem="6OF-KG-hI3" firstAttribute="centerX" secondItem="Sap-C2-iBI" secondAttribute="centerX" id="x8w-hv-5CQ"/>
-                        </constraints>
-                    </view>
-                </viewController>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Logo" width="95.5" height="89"/>
-    </resources>
 </document>
