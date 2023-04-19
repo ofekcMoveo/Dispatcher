@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BiU-yt-af2">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -43,11 +43,11 @@
             <objects>
                 <viewController id="cMP-XL-tfv" customClass="FavoritesViewController" customModule="Dispatcher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7D5-GG-Rq8">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saveditems" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Cu-oh-q4O">
-                                <rect key="frame" x="122" y="409.66666666666669" width="149" height="33"/>
+                                <rect key="frame" x="85.5" y="267.5" width="149" height="33"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -71,11 +71,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ProfileViewController" customModule="Dispatcher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profilepage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3B-to-uQs">
-                                <rect key="frame" x="124" y="409.66666666666669" width="145" height="33"/>
+                                <rect key="frame" x="87.5" y="267.5" width="145" height="33"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -99,17 +99,17 @@
             <objects>
                 <viewController id="BzR-Vt-ntS" customClass="HomeViewController" customModule="Dispatcher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qry-6f-kqe">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Homepage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbo-TD-VD8">
-                                <rect key="frame" x="127.33333333333333" y="409.66666666666669" width="138.33333333333337" height="33"/>
+                                <rect key="frame" x="91" y="267.5" width="138" height="33"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" restorationIdentifier="HeaderView" translatesAutoresizingMaskIntoConstraints="NO" id="9ji-6p-TrG">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="95"/>
+                            <view contentMode="scaleToFill" restorationIdentifier="HeaderView" translatesAutoresizingMaskIntoConstraints="NO" id="9ji-6p-TrG" userLabel="HeaderView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoIcon" translatesAutoresizingMaskIntoConstraints="NO" id="aaR-rJ-CiT">
                                         <rect key="frame" x="10" y="35" width="60" height="60"/>
@@ -118,45 +118,39 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="UxR-ls-pFV"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjn-wg-k7J">
-                                        <rect key="frame" x="263" y="45" width="60" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="GBi-Cg-DGl"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="Sfh-D0-gQk"/>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="XQF-bJ-0Lo"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="reG-zU-B6W"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="searchIcon"/>
-                                        <connections>
-                                            <action selector="searchButtonPressed:" destination="BzR-Vt-ntS" eventType="touchUpInside" id="ExW-1f-6ns"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xd-B7-bhd">
-                                        <rect key="frame" x="333" y="45" width="50" height="50"/>
+                                        <rect key="frame" x="270" y="45" width="50" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="3Bo-6y-uKj"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="5gM-kJ-8vO"/>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="H69-sr-VhY"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="INt-8h-dGl"/>
-                                            <constraint firstAttribute="width" constant="50" id="vdV-Qx-FRr"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="zND-4Y-ZCl"/>
+                                            <constraint firstAttribute="width" constant="50" id="ZDa-cV-Lwz"/>
+                                            <constraint firstAttribute="height" constant="50" id="aZ0-4w-tAA"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="notificationsIcon"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="notificationsIcon" title=" " subtitle=" "/>
                                         <connections>
                                             <action selector="notificationsButtonPressed:" destination="BzR-Vt-ntS" eventType="touchUpInside" id="jky-nf-WaN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjn-wg-k7J">
+                                        <rect key="frame" x="250" y="45" width="20" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="DRn-kz-U5v"/>
+                                            <constraint firstAttribute="height" constant="50" id="qKh-Xq-MtX"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="searchIcon" title=" " subtitle=" "/>
+                                        <connections>
+                                            <action selector="searchButtonPressed:" destination="BzR-Vt-ntS" eventType="touchUpInside" id="ExW-1f-6ns"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="backgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="5xd-B7-bhd" secondAttribute="trailing" constant="10" id="84K-Q2-Lv5"/>
-                                    <constraint firstAttribute="bottom" secondItem="5xd-B7-bhd" secondAttribute="bottom" id="8KZ-uP-GE4"/>
+                                    <constraint firstItem="5xd-B7-bhd" firstAttribute="leading" secondItem="Wjn-wg-k7J" secondAttribute="trailing" id="Hcx-zy-6rr"/>
+                                    <constraint firstAttribute="trailing" secondItem="5xd-B7-bhd" secondAttribute="trailing" id="VVi-w3-l20"/>
                                     <constraint firstItem="aaR-rJ-CiT" firstAttribute="leading" secondItem="9ji-6p-TrG" secondAttribute="leading" constant="10" id="eGF-mj-Vx8"/>
-                                    <constraint firstAttribute="bottom" secondItem="Wjn-wg-k7J" secondAttribute="bottom" id="hjL-um-R6l"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wjn-wg-k7J" secondAttribute="bottom" id="heu-tc-Ghm"/>
                                     <constraint firstAttribute="bottom" secondItem="aaR-rJ-CiT" secondAttribute="bottom" id="lWe-dE-lIY"/>
-                                    <constraint firstItem="5xd-B7-bhd" firstAttribute="leading" secondItem="Wjn-wg-k7J" secondAttribute="trailing" constant="10" id="rP8-og-esc"/>
+                                    <constraint firstAttribute="bottom" secondItem="5xd-B7-bhd" secondAttribute="bottom" id="par-Zd-U57"/>
                                     <constraint firstAttribute="height" constant="95" id="tv6-aQ-fDW"/>
                                 </constraints>
                             </view>
@@ -203,7 +197,7 @@
                     <tabBarItem key="tabBarItem" title="" image="profile" selectedImage="selectedProfile" id="X07-DV-YK8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tty-ae-EQ7">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <navigationBarAppearance key="standardAppearance">
                             <color key="backgroundColor" name="backgroundColor"/>
@@ -256,7 +250,7 @@
                     <tabBarItem key="tabBarItem" title="" image="favorites" selectedImage="selectedFavorites" id="AA3-9X-OSd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yrq-8D-NFp">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <navigationBarAppearance key="standardAppearance">
                             <color key="backgroundColor" name="backgroundColor"/>
