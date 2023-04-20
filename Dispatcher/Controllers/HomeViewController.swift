@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var notificationsButton: UIButton!
     @IBOutlet weak var articlesTableView: UITableView!
     
-    let articlesToDisplay = Articles()
+    let articlesToDisplay = Articles().articales
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,12 +42,20 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articlesToDisplay.articales.count
+        return articlesToDisplay.count
         
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ArticleCell.articleCellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ArticleCell.articleCellIdentifier, for: indexPath) as! ArticleCell
+        
+        cell.dateLabel.text = articlesToDisplay[indexPath.row].Date
+        cell.autherLabel.text = articlesToDisplay[indexPath.row].auther
+        cell.titleLabel.text = articlesToDisplay[indexPath.row].title
+        cell.subTitleLabel.text = articlesToDisplay[indexPath.row].subTitle
+        cell.tagLabel.text = articlesToDisplay[indexPath.row].tags.first
+        cell.moreTagsLabel.text  = "+ \(articlesToDisplay[indexPath.row].tags.count - 1)"
+        
         
         return cell
     }
@@ -56,5 +64,6 @@ extension HomeViewController: UITableViewDataSource {
 }
 
 extension HomeViewController: UITableViewDelegate {
+    
     
 }
