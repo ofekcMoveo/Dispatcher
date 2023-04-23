@@ -21,6 +21,9 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var moreTagsLabel: UILabel!
     @IBOutlet weak var addToFavoritesButton: UIButton!
     
+    let delegate: ArticleCellDelegate? = nil
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -33,12 +36,9 @@ class ArticleCell: UITableViewCell {
 
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
     
+    @IBAction func navigateButtonPressed(_ sender: UIButton) {
+        
     }
-    
-    
     
 }

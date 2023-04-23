@@ -68,6 +68,9 @@
                             <fontDescription key="titleFontDescription" type="boldSystem" pointSize="14"/>
                             <color key="baseBackgroundColor" name="primaryButtonColor"/>
                         </buttonConfiguration>
+                        <connections>
+                            <action selector="navigateButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="SGD-4E-uY2"/>
+                        </connections>
                     </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7h-Ti-VcG">
                         <rect key="frame" x="293" y="156" width="40" height="23"/>
