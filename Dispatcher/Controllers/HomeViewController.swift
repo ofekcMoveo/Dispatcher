@@ -20,7 +20,6 @@ class HomeViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         
         articlesTableView.rowHeight = 450
-    
         articlesTableView.dataSource = self
         articlesTableView.delegate = self
         
@@ -37,6 +36,8 @@ class HomeViewController: UIViewController {
         
         
     }
+    
+    
 }
 
 
@@ -55,12 +56,11 @@ extension HomeViewController: UITableViewDataSource {
         cell.titleLabel.text = currentArticle.title
         cell.subTitleLabel.text = currentArticle.subTitle
         cell.tagLabel.text = currentArticle.tags.first
-        cell.moreTagsLabel.text  = "+ \(currentArticle.tags.count) - 1)"
+        cell.moreTagsLabel.text  = "+ \(currentArticle.tags.count - 1)"
         
         cell.delegate = self
         return cell
     }
-    
     
 }
 

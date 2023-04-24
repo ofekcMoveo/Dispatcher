@@ -7,12 +7,15 @@
 
 import UIKit
 
+//MARK: - ArticleCellDelegate
+
 protocol ArticleCellDelegate {
     func navigateButtonPressed(_ articleTitle: String)
     func favoritesButtonPressed(_ articleTitle: String)
     
 }
 
+//MARK: - rticleCell class
 
 class ArticleCell: UITableViewCell {
     
@@ -67,7 +70,7 @@ class ArticleCell: UITableViewCell {
         delegate?.navigateButtonPressed(self.titleLabel.text ?? "")
     }
     
-    @IBAction func addToFavoritesButtonPressed(_ sender: UIButton) {
+    @IBAction func favoritesButtonPressed(_ sender: UIButton) {
         delegate?.favoritesButtonPressed(self.titleLabel.text ?? "")
     }
 }

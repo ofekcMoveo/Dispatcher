@@ -43,7 +43,7 @@
                             <constraint firstAttribute="height" constant="20" id="Ohl-6k-cSr"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcc-RH-J3T">
@@ -98,7 +98,7 @@
                             <color key="baseBackgroundColor" red="0.074509803921568626" green="0.074509803921568626" blue="0.074509803921568626" alpha="0.69803921568627447" colorSpace="calibratedRGB"/>
                         </buttonConfiguration>
                         <connections>
-                            <action selector="addToFavoritesButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JqU-iX-VIR"/>
+                            <action selector="favoritesButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Cvt-Hf-bv1"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDQ-KI-Y9E">
@@ -118,7 +118,7 @@
                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="oeX-5Y-5d6"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" name="subTitlesColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -150,10 +150,10 @@
             <color key="backgroundColor" name="screenBackgroundColor"/>
             <edgeInsets key="layoutMargins" top="10" left="10" bottom="10" right="10"/>
             <connections>
-                <outlet property="addToFavoritesButton" destination="24k-ZH-ua9" id="IHz-sP-HVI"/>
                 <outlet property="autherLabel" destination="y3B-Jx-3Bv" id="vU3-1u-zTW"/>
                 <outlet property="dateLabel" destination="rDQ-KI-Y9E" id="es4-79-lvk"/>
                 <outlet property="dispatchButton" destination="kcc-RH-J3T" id="S1x-X9-mYc"/>
+                <outlet property="favoritesButton" destination="24k-ZH-ua9" id="wwb-2H-mm1"/>
                 <outlet property="moreTagsLabel" destination="Y7h-Ti-VcG" id="TN9-UT-aIh"/>
                 <outlet property="subTitleLabel" destination="FJ2-AG-gEW" id="lwT-Wc-b64"/>
                 <outlet property="tagLabel" destination="1sy-Op-M7i" id="lH9-0e-boD"/>
