@@ -151,7 +151,7 @@
                                 <rect key="frame" x="0.0" y="152" width="393" height="700"/>
                                 <color key="backgroundColor" name="screenBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="700" id="LFR-iF-fdQ"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="700" id="LFR-iF-fdQ"/>
                                 </constraints>
                                 <color key="separatorColor" name="screenBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="screenBackgroundColor"/>
