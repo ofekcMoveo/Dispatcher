@@ -38,14 +38,30 @@ class ArticleCell: UITableViewCell {
         super.awakeFromNib()
         
         makeCardShape()
-
+        setUIobjectsColor()
+        setUIobjectsShape()
+    }
+    
+    private func setUIobjectsShape() {
         tagLabel.layer.cornerRadius = 10
         moreTagsLabel.layer.cornerRadius = 10
         dispatchButton.layer.cornerRadius = 20
         favoritesButton.layer.cornerRadius = favoritesButton.frame.width / 2
+        favoritesButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        
     }
     
-    func makeCardShape() {
+    private func setUIobjectsColor() {
+        tagLabel.textColor = UIColor(named: "labelsTextColor")
+        moreTagsLabel.textColor = UIColor(named: "labelsTextColor")
+        titleLabel.textColor = .black
+        subTitleLabel.textColor = UIColor(named: "labelsTextColor")
+        dateLabel.textColor = UIColor(named: "labelsTextColor")
+        autherLabel.textColor = UIColor(named: "labelsTextColor")
+        dispatchButton.setTitleColor(.white, for: .normal)
+    }
+    
+    private func makeCardShape() {
         self.layer.cornerRadius = 20
         contentView.layer.cornerRadius = 20
         contentView.layoutMargins.bottom = 15
@@ -67,10 +83,10 @@ class ArticleCell: UITableViewCell {
 
     
     @IBAction func navigateButtonPressed(_ sender: UIButton) {
-        delegate?.navigateButtonPressed(self.titleLabel.text ?? "")
+        delegate?.navigateButtonPressed(titleLabel.text ?? "")
     }
     
     @IBAction func favoritesButtonPressed(_ sender: UIButton) {
-        delegate?.favoritesButtonPressed(self.titleLabel.text ?? "")
+        delegate?.favoritesButtonPressed(titleLabel.text ?? "")
     }
 }

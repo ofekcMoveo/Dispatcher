@@ -12,6 +12,6 @@ struct Article {
     let subTitle: String
     let auther: String
     let tags: [String]
-    let Date: String
+    let date: String
     let imageURL: String
 }

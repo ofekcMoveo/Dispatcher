@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -36,7 +37,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4y5-WI-pDn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-489" y="-1382"/>
+            <point key="canvasLocation" x="-999" y="-1448"/>
         </scene>
         <!--Favorites View Controller-->
         <scene sceneID="qGc-AP-cdS">
@@ -146,34 +147,21 @@
                                     <constraint firstAttribute="bottom" secondItem="5xd-B7-bhd" secondAttribute="bottom" id="par-Zd-U57"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleAspectFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ntx-aV-dth" userLabel="ArticlesTable View">
-                                <rect key="frame" x="0.0" y="138" width="414" height="758"/>
-                                <color key="backgroundColor" name="screenBackgroundColor"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleAspectFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ntx-aV-dth" userLabel="ArticlesTable View">
+                                <rect key="frame" x="0.0" y="95" width="414" height="801"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="separatorColor" name="screenBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="screenBackgroundColor"/>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Top Headlines in Israel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbx-EZ-2Fh">
-                                <rect key="frame" x="16" y="103" width="271" height="27"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="231" id="OgY-H2-bhb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" name="screenBackgroundColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Y9G-a7-aht"/>
                         <color key="backgroundColor" name="screenBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Ntx-aV-dth" firstAttribute="trailing" secondItem="Y9G-a7-aht" secondAttribute="trailing" id="3PA-D1-o1X"/>
-                            <constraint firstItem="Ntx-aV-dth" firstAttribute="top" secondItem="nbx-EZ-2Fh" secondAttribute="bottom" constant="8" symbolic="YES" id="E4K-bG-65O"/>
                             <constraint firstItem="9ji-6p-TrG" firstAttribute="top" secondItem="Qry-6f-kqe" secondAttribute="top" id="IbR-e9-Fiy"/>
                             <constraint firstAttribute="bottom" secondItem="Ntx-aV-dth" secondAttribute="bottom" id="U4n-a9-JdQ"/>
                             <constraint firstItem="Ntx-aV-dth" firstAttribute="leading" secondItem="Y9G-a7-aht" secondAttribute="leading" id="Y0Z-3p-sQv"/>
+                            <constraint firstItem="Ntx-aV-dth" firstAttribute="top" secondItem="9ji-6p-TrG" secondAttribute="bottom" id="Zga-Rg-QIl"/>
                             <constraint firstItem="9ji-6p-TrG" firstAttribute="trailing" secondItem="Qry-6f-kqe" secondAttribute="trailing" id="cAe-NJ-wkS"/>
-                            <constraint firstItem="nbx-EZ-2Fh" firstAttribute="leading" secondItem="Y9G-a7-aht" secondAttribute="leading" constant="16" id="hUm-8S-B78"/>
-                            <constraint firstItem="nbx-EZ-2Fh" firstAttribute="top" secondItem="9ji-6p-TrG" secondAttribute="bottom" constant="8" symbolic="YES" id="htA-l5-BVe"/>
                             <constraint firstItem="Ntx-aV-dth" firstAttribute="centerX" secondItem="Qry-6f-kqe" secondAttribute="centerX" id="p8Z-QX-CuY"/>
                             <constraint firstItem="9ji-6p-TrG" firstAttribute="leading" secondItem="Qry-6f-kqe" secondAttribute="leading" id="qdr-Hc-HOS"/>
                             <constraint firstItem="Ntx-aV-dth" firstAttribute="trailing" secondItem="Y9G-a7-aht" secondAttribute="trailing" id="xk0-uS-QcK"/>
@@ -299,5 +287,8 @@
         <namedColor name="screenBackgroundColor">
             <color red="0.97299998998641968" green="0.97299998998641968" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -33,7 +33,7 @@
                             <constraint firstAttribute="height" constant="20" id="mKA-sN-tBw"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" name="subTitlesColor"/>
+                        <color key="textColor" name="labelsTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title of the article" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPh-UF-4tX">
@@ -71,7 +71,7 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="Ytw-oE-p4q"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" name="subTitlesColor"/>
+                        <color key="textColor" name="labelsTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1sy-Op-M7i">
@@ -83,7 +83,7 @@
                             <constraint firstAttribute="height" constant="23" id="Wgs-YW-DWJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" name="subTitlesColor"/>
+                        <color key="textColor" name="labelsTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24k-ZH-ua9">
@@ -108,7 +108,7 @@
                             <constraint firstAttribute="height" constant="22" id="kWq-Xh-n4J"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" name="subTitlesColor"/>
+                        <color key="textColor" name="labelsTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="SubTitle with the begining of the text until there's no space..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJ2-AG-gEW">
@@ -118,7 +118,7 @@
                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="oeX-5Y-5d6"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" name="subTitlesColor"/>
+                        <color key="textColor" name="labelsTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -166,14 +166,14 @@
         <image name="Arrow - Right" width="18" height="14"/>
         <image name="defaultArticalImage" width="114.33333587646484" height="49.666667938232422"/>
         <image name="favoritesStar" width="18" height="18"/>
+        <namedColor name="labelsTextColor">
+            <color red="0.3529411764705882" green="0.3529411764705882" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="primaryButtonColor">
             <color red="0.0" green="0.3449999988079071" blue="0.72500002384185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="screenBackgroundColor">
             <color red="0.97299998998641968" green="0.97299998998641968" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="subTitlesColor">
-            <color red="0.3529999852180481" green="0.3529999852180481" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
