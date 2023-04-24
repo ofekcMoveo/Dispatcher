@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol ArticleCellDelegate {
+    func navigateButtonPressed(_ articleTitle: String)
+    func favoritesButtonPressed(_ articleTitle: String)
+    
+}
+
+
 class ArticleCell: UITableViewCell {
     
     static let articleCellIdentifier = "articleCell"
@@ -19,25 +26,29 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var dispatchButton: UIButton!
     @IBOutlet weak var moreTagsLabel: UILabel!
-    @IBOutlet weak var addToFavoritesButton: UIButton!
+    @IBOutlet weak var favoritesButton: UIButton!
     
-    var delegate: ArticleTableViewDelegate? = nil
+    var delegate: ArticleCellDelegate?
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        makeCardShape()
+
+        tagLabel.layer.cornerRadius = 10
+        moreTagsLabel.layer.cornerRadius = 10
+        dispatchButton.layer.cornerRadius = 20
+        favoritesButton.layer.cornerRadius = favoritesButton.frame.width / 2
+    }
+    
+    func makeCardShape() {
         self.layer.cornerRadius = 20
         contentView.layer.cornerRadius = 20
         contentView.layoutMargins.bottom = 15
         contentView.layoutMargins.top = 15
         contentView.layoutMargins.left = 15
         contentView.layoutMargins.right = 15
-
-        tagLabel.layer.cornerRadius = 10
-        moreTagsLabel.layer.cornerRadius = 10
-        dispatchButton.layer.cornerRadius = 20
-        addToFavoritesButton.layer.cornerRadius = addToFavoritesButton.frame.width / 2
         
         layoutSubviews()
         contentView.layer.borderWidth = 1
@@ -53,10 +64,10 @@ class ArticleCell: UITableViewCell {
 
     
     @IBAction func navigateButtonPressed(_ sender: UIButton) {
-        delegate?.navigateToArticle(self.titleLabel.text!)
+        delegate?.navigateButtonPressed(self.titleLabel.text ?? "")
     }
     
     @IBAction func addToFavoritesButtonPressed(_ sender: UIButton) {
-        delegate?.addArticleToFavorites(self.titleLabel.text!)
+        delegate?.favoritesButtonPressed(self.titleLabel.text ?? "")
     }
 }

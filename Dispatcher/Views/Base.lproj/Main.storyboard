@@ -167,7 +167,7 @@
                         <color key="backgroundColor" name="screenBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Ntx-aV-dth" firstAttribute="trailing" secondItem="Y9G-a7-aht" secondAttribute="trailing" id="3PA-D1-o1X"/>
-                            <constraint firstItem="Ntx-aV-dth" firstAttribute="top" secondItem="nbx-EZ-2Fh" secondAttribute="bottom" constant="8" symbolic="YES" id="93T-Lf-soB"/>
+                            <constraint firstItem="Ntx-aV-dth" firstAttribute="top" relation="lessThanOrEqual" secondItem="nbx-EZ-2Fh" secondAttribute="bottom" constant="8" symbolic="YES" id="93T-Lf-soB"/>
                             <constraint firstAttribute="bottom" secondItem="Ntx-aV-dth" secondAttribute="bottom" id="96t-Nm-B4r"/>
                             <constraint firstItem="9ji-6p-TrG" firstAttribute="top" secondItem="Qry-6f-kqe" secondAttribute="top" id="IbR-e9-Fiy"/>
                             <constraint firstItem="Ntx-aV-dth" firstAttribute="leading" secondItem="Y9G-a7-aht" secondAttribute="leading" id="XAL-61-6F6"/>

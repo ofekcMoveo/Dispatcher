@@ -48,13 +48,14 @@ extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ArticleCell.articleCellIdentifier, for: indexPath) as! ArticleCell
+        let currentArticle = articlesToDisplay[indexPath.row]
         
-        cell.dateLabel.text = articlesToDisplay[indexPath.row].Date
-        cell.autherLabel.text = articlesToDisplay[indexPath.row].auther
-        cell.titleLabel.text = articlesToDisplay[indexPath.row].title
-        cell.subTitleLabel.text = articlesToDisplay[indexPath.row].subTitle
-        cell.tagLabel.text = articlesToDisplay[indexPath.row].tags.first
-        cell.moreTagsLabel.text  = "+ \(articlesToDisplay[indexPath.row].tags.count - 1)"
+        cell.dateLabel.text = currentArticle.Date
+        cell.autherLabel.text = currentArticle.auther
+        cell.titleLabel.text = currentArticle.title
+        cell.subTitleLabel.text = currentArticle.subTitle
+        cell.tagLabel.text = currentArticle.tags.first
+        cell.moreTagsLabel.text  = "+ \(currentArticle.tags.count) - 1)"
         
         cell.delegate = self
         return cell
@@ -63,12 +64,12 @@ extension HomeViewController: UITableViewDataSource {
     
 }
 
-extension HomeViewController: ArticleTableViewDelegate, UITableViewDelegate {
-    func navigateToArticle(_ articleTitle: String) {
+extension HomeViewController: ArticleCellDelegate, UITableViewDelegate {
+    func navigateButtonPressed(_ articleTitle: String) {
         print(articleTitle)
     }
     
-    func addArticleToFavorites(_ articleTitle: String) {
+    func favoritesButtonPressed(_ articleTitle: String) {
         print(articleTitle)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ArticleTableViewDelegate {
+protocol ArticleCellDelegate {
     func navigateToArticle(_ articleTitle: String)
     func addArticleToFavorites(_ articleTitle: String)
     
