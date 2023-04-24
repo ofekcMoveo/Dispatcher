@@ -56,17 +56,19 @@ extension HomeViewController: UITableViewDataSource {
         cell.tagLabel.text = articlesToDisplay[indexPath.row].tags.first
         cell.moreTagsLabel.text  = "+ \(articlesToDisplay[indexPath.row].tags.count - 1)"
         
-        
+        cell.delegate = self
         return cell
     }
     
     
 }
 
-extension HomeViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+extension HomeViewController: ArticleTableViewDelegate, UITableViewDelegate {
+    func navigateToArticle(_ articleTitle: String) {
+        print(articleTitle)
     }
     
-    
+    func addArticleToFavorites(_ articleTitle: String) {
+        print(articleTitle)
+    }
 }
