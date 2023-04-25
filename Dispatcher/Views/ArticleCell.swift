@@ -10,18 +10,17 @@ import UIKit
 //MARK: - ArticleCellDelegate
 
 protocol ArticleCellDelegate {
-    func navigateButtonPressed(_ articleTitle: String)
-    func favoritesButtonPressed(_ articleTitle: String)
+    func navigateButtonPressed(_ articleID: String)
+    func favoritesButtonPressed(_ articleID: String)
     
 }
 
-//MARK: - rticleCell class
+//MARK: - ArticleCell class
 
 class ArticleCell: UITableViewCell {
     
     static let articleCellIdentifier = "articleCell"
     
-
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tagLabel: UILabel!
@@ -32,26 +31,27 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var favoritesButton: UIButton!
     
     var delegate: ArticleCellDelegate?
+    var id: String = ""
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        makeCardShape()
-        setUIobjectsColor()
-        setUIobjectsShape()
+        setCellMarginsAndBorder()
+        setTextColorForCellElements()
+        setCornerRadiusForCellElements()
+        
+        favoritesButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
     }
     
-    private func setUIobjectsShape() {
+    private func setCornerRadiusForCellElements() {
         tagLabel.layer.cornerRadius = 10
         moreTagsLabel.layer.cornerRadius = 10
         dispatchButton.layer.cornerRadius = 20
         favoritesButton.layer.cornerRadius = favoritesButton.frame.width / 2
-        favoritesButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        
     }
     
-    private func setUIobjectsColor() {
+    private func setTextColorForCellElements() {
         tagLabel.textColor = UIColor(named: "labelsTextColor")
         moreTagsLabel.textColor = UIColor(named: "labelsTextColor")
         titleLabel.textColor = .black
@@ -61,7 +61,7 @@ class ArticleCell: UITableViewCell {
         dispatchButton.setTitleColor(.white, for: .normal)
     }
     
-    private func makeCardShape() {
+    private func setCellMarginsAndBorder() {
         self.layer.cornerRadius = 20
         contentView.layer.cornerRadius = 20
         contentView.layoutMargins.bottom = 15
@@ -83,10 +83,10 @@ class ArticleCell: UITableViewCell {
 
     
     @IBAction func navigateButtonPressed(_ sender: UIButton) {
-        delegate?.navigateButtonPressed(titleLabel.text ?? "")
+        delegate?.navigateButtonPressed(id)
     }
     
     @IBAction func favoritesButtonPressed(_ sender: UIButton) {
-        delegate?.favoritesButtonPressed(titleLabel.text ?? "")
+        delegate?.favoritesButtonPressed(id)
     }
 }

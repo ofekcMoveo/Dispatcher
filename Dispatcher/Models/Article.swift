@@ -8,6 +8,7 @@
 import Foundation
 
 struct Article {
+    let id: String
     let title: String
     let subTitle: String
     let auther: String
