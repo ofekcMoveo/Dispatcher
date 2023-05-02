@@ -180,6 +180,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="articlesTableView" destination="Ntx-aV-dth" id="rb1-Yx-Rdh"/>
+                        <outlet property="homepageView" destination="Qry-6f-kqe" id="hO0-lK-Jvs"/>
                         <outlet property="notificationsButton" destination="5xd-B7-bhd" id="JDB-V7-At5"/>
                         <outlet property="searchButton" destination="Wjn-wg-k7J" id="URz-LC-SWF"/>
                     </connections>
