@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 
-class HomeViewController: UIViewController {
+class HomepageViewController: UIViewController {
     
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var notificationsButton: UIButton!
@@ -26,18 +26,9 @@ class HomeViewController: UIViewController {
         articlesTableView.dataSource = self
         articlesTableView.delegate = self
         
-        articlesTableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: AppConstants.articleCellIdentifier)
+        articlesTableView.register(UINib(nibName: AppConstants.articleCellNibName, bundle: nil), forCellReuseIdentifier: AppConstants.articleCellIdentifier)
         configureActivityIndicator()
         fetchArticles()
-    }
-    
-    private func showErrorAlert(_ msg: String) {
-        
-        let alertController = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
     }
     
     private func configureActivityIndicator() {
@@ -48,9 +39,10 @@ class HomeViewController: UIViewController {
     
     private func fetchArticles() {
         self.activityIndicator.startAnimating()
-        homepageViewModel.getArticlesFromAPI(completionHandler: { errorMsg in
+        homepageViewModel.getTopArticlesFromAPI(completionHandler: { errorMsg in
             if(errorMsg != nil) {
-                self.showErrorAlert((errorMsg!))
+                self.present(Utils.showErrorAlert(errorMsg!),animated: true, completion: nil)
+                self.activityIndicator.stopAnimating()
             } else {
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
@@ -74,7 +66,7 @@ class HomeViewController: UIViewController {
     
 }
 
-extension HomeViewController: UITableViewDataSource {
+extension HomepageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return homepageViewModel.articlesAmount()
         
@@ -90,7 +82,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.titleLabel.text = currentArticle.title
             cell.subTitleLabel.text = currentArticle.summary
             cell.tagLabel.text = currentArticle.topic.first
-            cell.dateLabel.text = formatDate(currentArticle.date)
+            cell.dateLabel.text = Utils.formatDate(currentArticle.date)
 
             let numberOfTags = currentArticle.topic.count - 1
             if(numberOfTags > 0) {
@@ -126,17 +118,9 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
-    
-    private func formatDate(_ date: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-        dateFormatter.locale = Locale(identifier: "en_US")
-        let fomattedDate = dateFormatter.date(from: date) ?? Date()
-        return dateFormatter.string(from: fomattedDate)
-    }
 }
 
-extension HomeViewController: ArticleCellDelegate, UITableViewDelegate {
+extension HomepageViewController: ArticleCellDelegate, UITableViewDelegate {
     func navigateButtonPressed(_ articleID: String) {
         print(articleID)
     }

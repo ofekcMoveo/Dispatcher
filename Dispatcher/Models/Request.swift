@@ -13,11 +13,26 @@ struct Request {
     var headers: HTTPHeaders
     var parameters: [String: Any]
     var method: HTTPMethod
+    var urlWithParams: String = ""
     
     init(baseUrl: String, headers: HTTPHeaders, parameters: [String : Any], method: HTTPMethod) {
         self.baseUrl = baseUrl
         self.headers = headers
         self.parameters = parameters
         self.method = method
+        
+        if(parameters.count > 0) {
+            buildUrlWithParams()
+        }
     }
+    
+    mutating func buildUrlWithParams() {
+        urlWithParams.append("\(baseUrl)?")
+        for parm in parameters {
+            urlWithParams.append("\(parm.key)=\(parm.value)&")
+        }
+        
+        urlWithParams.removeLast()
+    }
+    
 }

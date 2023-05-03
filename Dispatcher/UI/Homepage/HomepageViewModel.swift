@@ -10,11 +10,10 @@ import UIKit
 
 class HomepageViewModel {
     
-    private let articlesRepository = ArticlesRepository()
     var articlesToDisplay: [Article] = []
      
-    func getArticlesFromAPI(completionHandler: @escaping (_ errorMsg: String?) -> Void) {
-        articlesRepository.getData { articles, errorMsg in
+    func getTopArticlesFromAPI(completionHandler: @escaping (_ errorMsg: String?) -> Void) {
+        AppConstants.articlesRepository.getLatestArticles() { articles, errorMsg in
             if (errorMsg != nil) {
                 completionHandler(errorMsg)
             } else {
