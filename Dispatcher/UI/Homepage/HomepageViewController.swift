@@ -103,7 +103,7 @@ extension HomepageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (homepageViewModel.articlesToDisplay.count - 1) {
+        if indexPath.row == (homepageViewModel.articlesToDisplay.count - 2) {
             if (currentPage < homepageViewModel.totalResultsPages) {
                 currentPage += 1
                 fetchArticles()

@@ -11,17 +11,22 @@ class SearchViewModel {
     var articlesToDisplay: [Article] = []
     var latestSearches: [String] = []
     var totalResultsPages = 1
+    var isPaginating = false
     
     func getArticlesFromAPIBySearch(_ searchKeyWords: String, pageNumber: Int, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
-        AppConstants.articlesRepository.getArticlesByKeywords(searchKeyWords, pageNumber: pageNumber, completionHandler: { articles, totalPages, errorMsg in
-            if (errorMsg != nil) {
-                completionHandler(errorMsg)
-            } else {
-                self.articlesToDisplay = articles
-                self.totalResultsPages = totalPages
-                completionHandler(nil)
-            }
-        })
+        if (isPaginating == false) {
+            isPaginating = true
+            AppConstants.articlesRepository.getArticlesByKeywords(searchKeyWords, pageNumber: pageNumber, completionHandler: { articles, totalPages, errorMsg in
+                if (errorMsg != nil) {
+                    completionHandler(errorMsg)
+                } else {
+                    self.articlesToDisplay = articles
+                    self.totalResultsPages = totalPages
+                    self.isPaginating = false
+                    completionHandler(nil)
+                }
+            })
+        }
     }
     
     func articlesAmount() -> Int {

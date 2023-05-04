@@ -12,15 +12,20 @@ class HomepageViewModel {
     
     var articlesToDisplay: [Article] = []
     var totalResultsPages = 1
+    var isPaginating = false
      
     func getTopArticlesFromAPI(pageNumber: Int, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
-        AppConstants.articlesRepository.getLatestArticles(pageNumber: pageNumber) { articles, totalPages,  errorMsg in
-            if (errorMsg != nil) {
-                completionHandler(errorMsg)
-            } else {
-                self.articlesToDisplay = articles
-                self.totalResultsPages = totalPages
-                completionHandler(nil)
+        if(isPaginating == false) {
+            isPaginating = true
+            AppConstants.articlesRepository.getLatestArticles(pageNumber: pageNumber) { articles, totalPages,  errorMsg in
+                if (errorMsg != nil) {
+                    completionHandler(errorMsg)
+                } else {
+                    self.articlesToDisplay.append(contentsOf: articles)
+                    self.totalResultsPages = totalPages
+                    self.isPaginating = false
+                    completionHandler(nil)
+                }
             }
         }
     }

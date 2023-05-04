@@ -108,12 +108,12 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (searchViewModel.articlesToDisplay.count - 1) {
+        if indexPath.row == (searchViewModel.articlesToDisplay.count - 2) {
             if (currentPage < searchViewModel.totalResultsPages) {
                 currentPage += 1
                 fetchArticlesBySearchKeywords()
             }
-        }
+        } 
     }
 }
 

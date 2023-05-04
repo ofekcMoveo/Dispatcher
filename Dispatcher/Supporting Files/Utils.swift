@@ -34,7 +34,8 @@ struct Utils {
                 }
             }
         }
-        
+
         return UIImage()
     }
+    
 }

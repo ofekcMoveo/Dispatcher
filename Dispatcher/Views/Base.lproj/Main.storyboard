@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="F4O-w4-xin">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BiU-yt-af2">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -364,7 +364,7 @@
                                             <action selector="notificationsButtonPressed:" destination="BzR-Vt-ntS" eventType="touchUpInside" id="jky-nf-WaN"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjn-wg-k7J">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjn-wg-k7J">
                                         <rect key="frame" x="320.5" y="45" width="49" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="qKh-Xq-MtX"/>
@@ -414,7 +414,7 @@
                             <barButtonItem title="Item" image="notificationsIcon" style="plain" id="Uor-Ej-iR0">
                                 <color key="tintColor" name="iconsColor"/>
                             </barButtonItem>
-                            <barButtonItem image="searchIcon" style="plain" id="cWj-hT-Ekl">
+                            <barButtonItem image="searchIconLight" style="plain" id="cWj-hT-Ekl">
                                 <color key="tintColor" name="iconsColor"/>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -510,7 +510,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="m3G-Z4-Knh"/>
+        <segue reference="HeL-DO-qcQ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
@@ -521,7 +521,6 @@
         <image name="not-found" width="66.5" height="66.5"/>
         <image name="notificationsIcon" width="16" height="20"/>
         <image name="profile" width="28" height="28"/>
-        <image name="searchIcon" width="20" height="20"/>
         <image name="searchIconDark" width="25" height="24"/>
         <image name="searchIconLight" width="20" height="20"/>
         <image name="selectedFavorites" width="35" height="36"/>
