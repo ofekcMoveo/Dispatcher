@@ -10,7 +10,7 @@ import Alamofire
 
 class AlamofireManager {
     
-    func SendRequest<T:Decodable>(_ request: Request, completionHandler: @escaping (Result<T, Error>) -> Void) {
+    func sendRequest<T:Decodable>(_ request: Request, completionHandler: @escaping (Result<T, Error>) -> Void) {
         AF.request(request.baseUrl, method: request.method, parameters: request.parameters, headers: request.headers)
             .responseDecodable(of: T.self) { response in
                 switch response.result {

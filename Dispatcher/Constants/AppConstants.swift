@@ -9,4 +9,5 @@ import Foundation
 
 struct AppConstants {
     static let articleCellIdentifier = "articleCell"
+    static articleCellNibName = "ArticleCell"
 }
