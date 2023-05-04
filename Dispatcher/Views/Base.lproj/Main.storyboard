@@ -38,18 +38,18 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4y5-WI-pDn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-999" y="-1448"/>
+            <point key="canvasLocation" x="-933" y="-1527"/>
         </scene>
         <!--Search Screen View Controller-->
         <scene sceneID="Mhg-7r-2kP">
             <objects>
                 <viewController id="F4O-w4-xin" customClass="SearchScreenViewController" customModule="Dispatcher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9r7-cE-yJl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdx-7h-PnZ" userLabel="SearchTextEditView">
-                                <rect key="frame" x="0.0" y="56" width="414" height="74"/>
+                                <rect key="frame" x="0.0" y="8" width="414" height="74"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLt-2f-h4l">
                                         <rect key="frame" x="7" y="20" width="45" height="34.5"/>
@@ -58,6 +58,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="Arrow - Left" title=" "/>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="F4O-w4-xin" eventType="touchUpInside" id="YPe-4M-AFq"/>
+                                        </connections>
                                     </button>
                                     <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="rXr-qK-guj">
                                         <rect key="frame" x="52" y="-3" width="352" height="80"/>
@@ -84,9 +87,11 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6lX-Il-2cu">
-                                <rect key="frame" x="0.0" y="130" width="414" height="766"/>
+                                <rect key="frame" x="0.0" y="82" width="414" height="804"/>
                                 <color key="backgroundColor" name="screenBackgroundColor"/>
+                                <color key="tintColor" name="screenBackgroundColor"/>
                                 <color key="separatorColor" name="secondaryButtonColor"/>
+                                <color key="sectionIndexBackgroundColor" name="screenBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="llY-Ch-VOU">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -106,14 +111,18 @@
                                                 <attributedString key="attributedTitle">
                                                     <fragment content="CLEAR">
                                                         <attributes>
-                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="NSColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <font key="NSFont" size="10" name="Helvetica"/>
                                                             <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
                                                 <color key="baseBackgroundColor" name="secondaryButtonColor"/>
                                             </buttonConfiguration>
+                                            <connections>
+                                                <action selector="clearButtonPressed:" destination="F4O-w4-xin" eventType="touchUpInside" id="Zs6-od-6qG"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" name="screenBackgroundColor"/>
@@ -142,15 +151,15 @@
                     <navigationItem key="navigationItem" id="BRh-Me-3YU"/>
                     <connections>
                         <outlet property="babkButton" destination="jLt-2f-h4l" id="xIG-hY-6Fg"/>
-                        <outlet property="clearButton" destination="QOV-Hl-RVu" id="jch-O7-QpI"/>
+                        <outlet property="clearButton" destination="QOV-Hl-RVu" id="auD-Nh-DNh"/>
                         <outlet property="searchBar" destination="rXr-qK-guj" id="jGR-eh-13W"/>
                         <outlet property="searchTableView" destination="6lX-Il-2cu" id="dMX-y7-9ZY"/>
-                        <segue destination="rxg-Pq-c9G" kind="presentation" identifier="fromPreviousSearchToResults" modalPresentationStyle="fullScreen" id="RWA-46-Q6d"/>
+                        <segue destination="rxg-Pq-c9G" kind="presentation" identifier="fromLatestSearchToResults" modalPresentationStyle="fullScreen" id="RWA-46-Q6d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dfw-HO-jhK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-55.072463768115945" y="-1527.4553571428571"/>
+            <point key="canvasLocation" x="169.56521739130437" y="-1527.4553571428571"/>
         </scene>
         <!--Search Results Screen View Controller-->
         <scene sceneID="9qW-3m-M51">
@@ -170,6 +179,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="Arrow - Left" title=" "/>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="rxg-Pq-c9G" eventType="touchUpInside" id="gy7-n1-jJj"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzN-jx-rNP">
                                         <rect key="frame" x="53" y="22" width="270" height="32"/>
@@ -185,6 +197,9 @@
                                         <rect key="frame" x="326" y="19" width="83" height="38"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="searchIconDark" title=" "/>
+                                        <connections>
+                                            <segue destination="F4O-w4-xin" kind="presentation" id="m3G-Z4-Knh"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -254,6 +269,7 @@
                     <connections>
                         <outlet property="backButton" destination="WPS-CZ-iMh" id="X7e-Tc-0Oa"/>
                         <outlet property="noResultsView" destination="MLG-Ub-wwK" id="SKa-NM-5an"/>
+                        <outlet property="searchButton" destination="CJa-IQ-TIh" id="AUi-YQ-b3M"/>
                         <outlet property="searchKeyWordsLabel" destination="gzN-jx-rNP" id="Fub-LO-r4T"/>
                         <outlet property="searchResultsTableView" destination="4Vn-vu-C8g" id="xtL-TU-TOn"/>
                         <outlet property="searchResultsView" destination="u1g-96-vqQ" id="Rkc-nE-9Lg"/>
@@ -261,7 +277,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkP-bQ-AZc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750.72463768115949" y="-1527.4553571428571"/>
+            <point key="canvasLocation" x="1063.768115942029" y="-1527.4553571428571"/>
         </scene>
         <!--Favorites View Controller-->
         <scene sceneID="qGc-AP-cdS">
@@ -357,6 +373,7 @@
                                         <buttonConfiguration key="configuration" style="plain" image="searchIconLight" title=" " subtitle=" "/>
                                         <connections>
                                             <action selector="searchButtonPressed:" destination="BzR-Vt-ntS" eventType="touchUpInside" id="ExW-1f-6ns"/>
+                                            <segue destination="F4O-w4-xin" kind="presentation" id="HeL-DO-qcQ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -492,6 +509,9 @@
             <point key="canvasLocation" x="540" y="-515"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="m3G-Z4-Knh"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="Arrow - Left" width="23" height="18"/>

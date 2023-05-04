@@ -25,4 +25,16 @@ struct Utils {
         let fomattedDate = dateFormatter.date(from: date) ?? Date()
         return dateFormatter.string(from: fomattedDate)
     }
+    
+    static func loadImageFromUrl(_ imageUrl: String) -> UIImage {
+        if let url = URL(string: imageUrl) {
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                   return image
+                }
+            }
+        }
+        
+        return UIImage()
+    }
 }

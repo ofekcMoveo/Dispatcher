@@ -27,6 +27,7 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var dispatchButton: UIButton!
     @IBOutlet weak var moreTagsLabel: UILabel!
     @IBOutlet weak var favoritesButton: UIButton!
+    @IBOutlet weak var articleImage: UIImageView!
     
     var delegate: ArticleCellDelegate?
     var id: String = ""

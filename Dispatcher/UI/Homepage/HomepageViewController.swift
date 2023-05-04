@@ -17,6 +17,7 @@ class HomepageViewController: UIViewController {
     
     let homepageViewModel = HomepageViewModel()
     let activityIndicator = UIActivityIndicatorView()
+    var currentPage = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,22 +40,22 @@ class HomepageViewController: UIViewController {
     
     private func fetchArticles() {
         self.activityIndicator.startAnimating()
-        homepageViewModel.getTopArticlesFromAPI(completionHandler: { errorMsg in
+        homepageViewModel.getTopArticlesFromAPI(pageNumber: currentPage, completionHandler: { errorMsg in
             if(errorMsg != nil) {
                 self.present(Utils.showErrorAlert(errorMsg!),animated: true, completion: nil)
                 self.activityIndicator.stopAnimating()
             } else {
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
+                    self.currentPage += 1
                     self.articlesTableView.reloadData()
                 }
             }
         })
     }
     
-    
-    
     @IBAction func searchButtonPressed(_ sender: UIButton) {
+        
     }
     
     
@@ -83,7 +84,8 @@ extension HomepageViewController: UITableViewDataSource {
             cell.subTitleLabel.text = currentArticle.summary
             cell.tagLabel.text = currentArticle.topic.first
             cell.dateLabel.text = Utils.formatDate(currentArticle.date)
-
+            cell.articleImage.image = Utils.loadImageFromUrl(currentArticle.imageURL)
+            
             let numberOfTags = currentArticle.topic.count - 1
             if(numberOfTags > 0) {
                 cell.moreTagsLabel.text = "+ \(numberOfTags)"
@@ -97,6 +99,15 @@ extension HomepageViewController: UITableViewDataSource {
             
         } else {
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == (homepageViewModel.articlesToDisplay.count - 1) {
+            if (currentPage < homepageViewModel.totalResultsPages) {
+                currentPage += 1
+                fetchArticles()
+            }
         }
     }
     

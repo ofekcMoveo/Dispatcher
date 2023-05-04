@@ -27,6 +27,7 @@ struct Request {
     }
     
     mutating func buildUrlWithParams() {
+        urlWithParams = ""
         urlWithParams.append("\(baseUrl)?")
         for parm in parameters {
             urlWithParams.append("\(parm.key)=\(parm.value)&")

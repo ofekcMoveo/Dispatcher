@@ -13,8 +13,9 @@ class ArticlesRepository {
     let alamofireManager = AlamofireManager()
     var articles: [Article] = []
     
-    func getLatestArticles(completionHandler: @escaping (_ articles: [Article], _ errorMsg: String?) -> Void) {
-        let request = buildLatestArticlesRequest()
+    func getLatestArticles(pageNumber: Int, completionHandler: @escaping (_ articles: [Article], _ totalPages: Int, _ errorMsg: String?) -> Void) {
+        self.articles = []
+        let request = buildLatestArticlesRequest(pageNumber)
         
         alamofireManager.sendRequest(request) { (result: Result<ArticleApiObject, Error>) in
             switch result {
@@ -31,25 +32,26 @@ class ArticlesRepository {
                             language: article.language,
                             date: article.publishedDate)
                         self.articles.append(article)
-                        completionHandler(self.articles, nil)
+                        completionHandler(self.articles, Int(dataResult.totalPages), nil)
                     }
                 }
             case .failure(let error):
-                completionHandler([], error.localizedDescription)
+                completionHandler([], 0, error.localizedDescription)
             }
         }
     }
     
-    private func buildLatestArticlesRequest() -> Request {
+    private func buildLatestArticlesRequest(_ pageNumber: Int) -> Request {
         return Request(
             baseUrl: APIConstants.latestHeadlinesNewscatcherURL,
             headers: ["x-api-key": APIConstants.APIkey],
-            parameters: ["countries" : "IL", "lang" : "en"],
+            parameters: ["countries" : "IL", "page_size": APIConstants.ARTICLES_TO_FETCH_AMOUNT, "page" : pageNumber],
             method: .get)
     }
     
-    func getArticlesByKeywords(_ searchKeywords: String, completionHandler: @escaping ( _ articles: [Article], _ errorMsg: String?) -> Void) {
-        let request = buildSearchArticlesRequest(searchKeywords)
+    func getArticlesByKeywords(_ searchKeywords: String, pageNumber: Int, completionHandler: @escaping ( _ articles: [Article], _ totalPages: Int, _ errorMsg: String?) -> Void) {
+        self.articles = []
+        let request = buildSearchArticlesRequest(searchKeywords, pageNumber)
         
         alamofireManager.sendRequest(request) { (result: Result<ArticleApiObject, Error>) in
             switch result {
@@ -66,21 +68,21 @@ class ArticlesRepository {
                             language: article.language,
                             date: article.publishedDate)
                         self.articles.append(article)
-                        completionHandler(self.articles, nil)
+                        completionHandler(self.articles, Int(dataResult.totalPages), nil)
                     }
                 }
             case .failure(let error):
-                completionHandler([], error.localizedDescription)
+                completionHandler([], 0, error.localizedDescription)
             }
         }
     }
 }
     
-private func buildSearchArticlesRequest(_ searchKeywords: String) -> Request {
+private func buildSearchArticlesRequest(_ searchKeywords: String, _ pageNumber: Int) -> Request {
     return Request(
         baseUrl: APIConstants.searchArticlesNewscatcherURL,
         headers: ["x-api-key": APIConstants.APIkey],
-        parameters: ["q" : searchKeywords, "countries" : "IL"],
+        parameters: ["q" : searchKeywords, "countries" : "IL", "page_size" : APIConstants.ARTICLES_TO_FETCH_AMOUNT , "page" : pageNumber],
         method: .get)
 }
 

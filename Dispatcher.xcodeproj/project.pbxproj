@@ -17,10 +17,10 @@
 		6B8908C329FFB686003E08A1 /* ArticleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8908C229FFB686003E08A1 /* ArticleResponse.swift */; };
 		6B8908C729FFC157003E08A1 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8908C629FFC157003E08A1 /* Request.swift */; };
 		6B8908C929FFD578003E08A1 /* UserInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8908C829FFD578003E08A1 /* UserInput.swift */; };
-		6B8908D02A01126E003E08A1 /* SearchScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8908CF2A01126E003E08A1 /* SearchScreenViewModel.swift */; };
+		6B8908D02A01126E003E08A1 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8908CF2A01126E003E08A1 /* SearchViewModel.swift */; };
 		6B8908D32A013097003E08A1 /* SearchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8908CD2A01124E003E08A1 /* SearchScreenViewController.swift */; };
-		6B8908E42A01663A003E08A1 /* PreviousSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8908E22A01663A003E08A1 /* PreviousSearchCell.swift */; };
-		6B8908E52A01663A003E08A1 /* PreviousSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B8908E32A01663A003E08A1 /* PreviousSearchCell.xib */; };
+		6B8908E42A01663A003E08A1 /* LatestSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8908E22A01663A003E08A1 /* LatestSearchCell.swift */; };
+		6B8908E52A01663A003E08A1 /* LatestSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B8908E32A01663A003E08A1 /* LatestSearchCell.xib */; };
 		6B95EF2129F006DF0014C6EF /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B95EF2029F006DF0014C6EF /* Article.swift */; };
 		6B95EF2729F019360014C6EF /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B95EF2529F019360014C6EF /* ArticleCell.swift */; };
 		6B95EF2829F019360014C6EF /* ArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B95EF2629F019360014C6EF /* ArticleCell.xib */; };
@@ -52,9 +52,9 @@
 		6B8908C629FFC157003E08A1 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		6B8908C829FFD578003E08A1 /* UserInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInput.swift; sourceTree = "<group>"; };
 		6B8908CD2A01124E003E08A1 /* SearchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenViewController.swift; sourceTree = "<group>"; };
-		6B8908CF2A01126E003E08A1 /* SearchScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenViewModel.swift; sourceTree = "<group>"; };
-		6B8908E22A01663A003E08A1 /* PreviousSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousSearchCell.swift; sourceTree = "<group>"; };
-		6B8908E32A01663A003E08A1 /* PreviousSearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviousSearchCell.xib; sourceTree = "<group>"; };
+		6B8908CF2A01126E003E08A1 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		6B8908E22A01663A003E08A1 /* LatestSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestSearchCell.swift; sourceTree = "<group>"; };
+		6B8908E32A01663A003E08A1 /* LatestSearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LatestSearchCell.xib; sourceTree = "<group>"; };
 		6B95EF2029F006DF0014C6EF /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		6B95EF2529F019360014C6EF /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		6B95EF2629F019360014C6EF /* ArticleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				6B8908CD2A01124E003E08A1 /* SearchScreenViewController.swift */,
-				6B8908CF2A01126E003E08A1 /* SearchScreenViewModel.swift */,
+				6B8908CF2A01126E003E08A1 /* SearchViewModel.swift */,
 				6B40CD662A027014003397A8 /* SearchResultsScreenViewController.swift */,
 			);
 			path = Search;
@@ -134,8 +134,8 @@
 		6B8908E62A016644003E08A1 /* SearchTableCells */ = {
 			isa = PBXGroup;
 			children = (
-				6B8908E22A01663A003E08A1 /* PreviousSearchCell.swift */,
-				6B8908E32A01663A003E08A1 /* PreviousSearchCell.xib */,
+				6B8908E22A01663A003E08A1 /* LatestSearchCell.swift */,
+				6B8908E32A01663A003E08A1 /* LatestSearchCell.xib */,
 			);
 			path = SearchTableCells;
 			sourceTree = "<group>";
@@ -325,7 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BD3F3F829EC2760007C4652 /* Assets.xcassets in Resources */,
-				6B8908E52A01663A003E08A1 /* PreviousSearchCell.xib in Resources */,
+				6B8908E52A01663A003E08A1 /* LatestSearchCell.xib in Resources */,
 				6B95EF2829F019360014C6EF /* ArticleCell.xib in Resources */,
 				6BD3F3F329EC275F007C4652 /* Main.storyboard in Resources */,
 			);
@@ -381,7 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B8908D32A013097003E08A1 /* SearchScreenViewController.swift in Sources */,
-				6B8908E42A01663A003E08A1 /* PreviousSearchCell.swift in Sources */,
+				6B8908E42A01663A003E08A1 /* LatestSearchCell.swift in Sources */,
 				6B95EF2129F006DF0014C6EF /* Article.swift in Sources */,
 				6B8908BD29FFB372003E08A1 /* AlamofireManager.swift in Sources */,
 				6B8908C129FFB64E003E08A1 /* ArticleApiObject.swift in Sources */,
@@ -396,7 +396,7 @@
 				6BD3F45129EDAA05007C4652 /* ProfileViewController.swift in Sources */,
 				6BD3F42929ED60BF007C4652 /* TabBarController.swift in Sources */,
 				6B95EF4029FA9D9E0014C6EF /* ProfileViewModel.swift in Sources */,
-				6B8908D02A01126E003E08A1 /* SearchScreenViewModel.swift in Sources */,
+				6B8908D02A01126E003E08A1 /* SearchViewModel.swift in Sources */,
 				6B1FE64429FE52B200A7477E /* ArticlesRepository.swift in Sources */,
 				6B40CD672A027014003397A8 /* SearchResultsScreenViewController.swift in Sources */,
 				6B8908C329FFB686003E08A1 /* ArticleResponse.swift in Sources */,

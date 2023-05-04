@@ -7,31 +7,34 @@
 
 import UIKit
 
-protocol PreviousSearchCellDelegate {
+protocol LatestSearchCellDelegate {
     func removeButtonPressed(_ searchToRemove: String)
+    func searchCellSelected(_ search: String)
 }
 
-class PreviousSearchCell: UITableViewCell {
+class LatestSearchCell: UITableViewCell {
     
     @IBOutlet weak var searchWordsLabel: UILabel!
     @IBOutlet weak var removeButton: UIButton!
     
-    var delegate: PreviousSearchCellDelegate?
+    var delegate: LatestSearchCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        searchWordsLabel.text == "" ? (removeButton.isHidden = true) : (removeButton.isHidden = false)
+        self.contentView.backgroundColor = UIColor(named: "screenBackgroungColor")
+        removeButton.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
-    
+
     @IBAction func removeButtonPressed(_ sender: UIButton) {
         delegate?.removeButtonPressed(searchWordsLabel.text ?? "")
     }
+    
+
     
 }
