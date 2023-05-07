@@ -6,15 +6,14 @@
 //
 
 import Foundation
-import UIKit
 
 class HomepageViewModel {
     
     private let articlesRepository = ArticlesRepository()
     var articlesToDisplay: [Article] = []
      
-    func getArticlesFromAPI(completionHandler: @escaping (_ errorMsg: String?) -> Void) {
-        articlesRepository.getData { articles, errorMsg in
+    func getArticlesToDisplay(completionHandler: @escaping (_ errorMsg: String?) -> Void) {
+        articlesRepository.getArticlesFromApi { articles, errorMsg in
             if (errorMsg != nil) {
                 completionHandler(errorMsg)
             } else {
@@ -28,7 +27,7 @@ class HomepageViewModel {
         return articlesToDisplay.count
     }
     
-    func currentArticle(index: Int) -> Article {
+    func getArticleByIndex(index: Int) -> Article {
         return articlesToDisplay[index]
     }
 

@@ -11,6 +11,7 @@
 		6B1FE64129FE50BB00A7477E /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1FE64029FE50BB00A7477E /* AppConstants.swift */; };
 		6B1FE64429FE52B200A7477E /* ArticlesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1FE64329FE52B200A7477E /* ArticlesRepository.swift */; };
 		6B40CD732A03EC5D003397A8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40CD722A03EC5D003397A8 /* Utils.swift */; };
+		6B40CD792A0794BF003397A8 /* Config.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B40CD782A0794BF003397A8 /* Config.json */; };
 		6B8908BD29FFB372003E08A1 /* AlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8908BC29FFB372003E08A1 /* AlamofireManager.swift */; };
 		6B8908C129FFB64E003E08A1 /* ArticleApiObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8908C029FFB64E003E08A1 /* ArticleApiObject.swift */; };
 		6B8908C329FFB686003E08A1 /* ArticleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8908C229FFB686003E08A1 /* ArticleResponse.swift */; };
@@ -40,6 +41,7 @@
 		6B1FE64029FE50BB00A7477E /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		6B1FE64329FE52B200A7477E /* ArticlesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesRepository.swift; sourceTree = "<group>"; };
 		6B40CD722A03EC5D003397A8 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		6B40CD782A0794BF003397A8 /* Config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Config.json; sourceTree = "<group>"; };
 		6B8908BC29FFB372003E08A1 /* AlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireManager.swift; sourceTree = "<group>"; };
 		6B8908C029FFB64E003E08A1 /* ArticleApiObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleApiObject.swift; sourceTree = "<group>"; };
 		6B8908C229FFB686003E08A1 /* ArticleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleResponse.swift; sourceTree = "<group>"; };
@@ -106,7 +108,13 @@
 		6B40CD712A03EC47003397A8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6BD3F3F429EC275F007C4652 /* Dispatcher.xcdatamodeld */,
+				6BD3F3F729EC2760007C4652 /* Assets.xcassets */,
+				6BD3F3EB29EC275F007C4652 /* AppDelegate.swift */,
+				6BD3F3ED29EC275F007C4652 /* SceneDelegate.swift */,
+				6BD3F3FC29EC2760007C4652 /* Info.plist */,
 				6B40CD722A03EC5D003397A8 /* Utils.swift */,
+				6B40CD782A0794BF003397A8 /* Config.json */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -203,12 +211,7 @@
 				6B95EF4729FAA8D10014C6EF /* Networking */,
 				6B95EF1F29F0067D0014C6EF /* Models */,
 				6BD3F42529ED42E5007C4652 /* Controllers */,
-				6BD3F3EB29EC275F007C4652 /* AppDelegate.swift */,
-				6BD3F3ED29EC275F007C4652 /* SceneDelegate.swift */,
 				6B95EF2429F018E80014C6EF /* Views */,
-				6BD3F3F729EC2760007C4652 /* Assets.xcassets */,
-				6BD3F3FC29EC2760007C4652 /* Info.plist */,
-				6BD3F3F429EC275F007C4652 /* Dispatcher.xcdatamodeld */,
 			);
 			path = Dispatcher;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BD3F3F829EC2760007C4652 /* Assets.xcassets in Resources */,
+				6B40CD792A0794BF003397A8 /* Config.json in Resources */,
 				6B95EF2829F019360014C6EF /* ArticleCell.xib in Resources */,
 				6BD3F3F329EC275F007C4652 /* Main.storyboard in Resources */,
 			);
@@ -509,7 +513,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Dispatcher/Info.plist;
+				INFOPLIST_FILE = "Dispatcher/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -537,7 +541,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Dispatcher/Info.plist;
+				INFOPLIST_FILE = "Dispatcher/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -26,18 +26,18 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="149" id="xto-6U-Lol"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Auther of the article" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3B-Jx-3Bv">
-                        <rect key="frame" x="30" y="261" width="290" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auther of the article" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3B-Jx-3Bv">
+                        <rect key="frame" x="30" y="251" width="290" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="290" id="hD9-th-QDh"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="mKA-sN-tBw"/>
+                            <constraint firstAttribute="height" constant="30" id="mKA-sN-tBw"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" name="labelsTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Title of the article" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPh-UF-4tX">
-                        <rect key="frame" x="30" y="190" width="290" height="63"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title of the article" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPh-UF-4tX">
+                        <rect key="frame" x="30" y="190" width="290" height="53"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="290" id="7PU-qz-kIH"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Ohl-6k-cSr"/>

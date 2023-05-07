@@ -10,26 +10,17 @@ import Foundation
 class ArticlesRepository {
 
     let alamofireManager = AlamofireManager()
-    var articles: [Article] = []
     
-    func getData(completionHandler: @escaping (_ articles: [Article], _ errorMsg: String?) -> Void) {
-        let request = Request(baseUrl: APIConstants.newscatcherURL, headers: ["x-api-key": APIConstants.APIkey], parameters: ["countries" : "IL"], method: .get)
+    func getArticlesFromApi(completionHandler: @escaping (_ articles: [Article], _ errorMsg: String?) -> Void) {
+        let request = Request(baseUrl: APIConstants.newscatcherURL, parameters: ["countries" : "IL"], method: .get)
         alamofireManager.sendRequest(request) { (result: Result<ArticleApiObject, Error>) in
             switch result {
             case .success(let dataResult):
+                var articles: [Article] = []
                 for article in dataResult.articles {
                     if(article.language == "en") {
-                        let article = Article(
-                            id: article.id,
-                            title: article.title,
-                            summary: article.summary,
-                            author: article.author, topic: [article.topic],
-                            imageURL: article.media,
-                            language: article.language,
-                            date: article.publishedDate
-                        )
-                        self.articles.append(article)
-                        completionHandler(self.articles, nil)
+                        articles.append(self.buildArticleFromArticleResponse(article))
+                        completionHandler(articles, nil)
                     }
                 }
             case .failure(let error):
@@ -37,6 +28,23 @@ class ArticlesRepository {
             }
         }
     }
+    
+    private func buildArticleFromArticleResponse(_ apiAtricle :ArticleResponse) -> Article {
+        let article = Article(
+            id: apiAtricle.id,
+            title: apiAtricle.title,
+            summary: apiAtricle.summary,
+            author: apiAtricle.author,
+            topic: [apiAtricle.topic],
+            imageURL: apiAtricle.media,
+            language: apiAtricle.language,
+            date: apiAtricle.publishedDate
+        )
+        
+        return article
+    }
+    
+   
 }
 
 

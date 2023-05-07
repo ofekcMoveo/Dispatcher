@@ -8,6 +8,15 @@
 import Foundation
 
 struct AppConstants {
+    static let TABLE_ROW_HEIGHT = 40
+    
+}
+
+struct TableCellsIdentifiers {
     static let articleCellIdentifier = "articleCell"
-    static articleCellNibName = "ArticleCell"
+}
+
+struct NibNames {
+    static let articleCellNibName = "ArticleCell"
+    
 }
