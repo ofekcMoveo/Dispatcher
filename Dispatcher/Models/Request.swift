@@ -10,14 +10,13 @@ import Alamofire
 
 struct Request {
     var baseUrl: String
-    var headers: HTTPHeaders
+    var headers: HTTPHeaders = ["x-api-key": APIConstants.APIkey]
     var parameters: [String: Any]
     var method: HTTPMethod
     var urlWithParams: String = ""
     
-    init(baseUrl: String, headers: HTTPHeaders, parameters: [String : Any], method: HTTPMethod) {
+    init(baseUrl: String, parameters: [String : Any], method: HTTPMethod) {
         self.baseUrl = baseUrl
-        self.headers = headers
         self.parameters = parameters
         self.method = method
         

@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 class AlamofireManager {
-
+    
     func sendRequest<T:Decodable>(_ request: Request, completionHandler: @escaping (Result<T, Error>) -> Void) {
         if let encoded = request.urlWithParams.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),let url = URL(string: encoded) {
             AF.request(url ,method: request.method, headers: request.headers)
@@ -20,6 +20,7 @@ class AlamofireManager {
                     case .failure(let error):
                         completionHandler(.failure(error))
                     }
+
                 }
             }
         }

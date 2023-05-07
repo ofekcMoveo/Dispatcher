@@ -22,14 +22,16 @@ class HomepageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        
-        articlesTableView.rowHeight = 450
+        setupTableView()
+        configureActivityIndicator()
+        getArticles()
+    }
+    
+    private func setupTableView() {
         articlesTableView.dataSource = self
         articlesTableView.delegate = self
-        
-        articlesTableView.register(UINib(nibName: AppConstants.articleCellNibName, bundle: nil), forCellReuseIdentifier: AppConstants.articleCellIdentifier)
-        configureActivityIndicator()
-        fetchArticles()
+        articlesTableView.rowHeight = 450
+        articlesTableView.register(UINib(nibName: NibNames.articleCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.articleCellIdentifier)
     }
     
     private func configureActivityIndicator() {
@@ -38,16 +40,15 @@ class HomepageViewController: UIViewController {
         homepageView.addSubview(activityIndicator)
     }
     
-    private func fetchArticles() {
+    private func getArticles() {
         self.activityIndicator.startAnimating()
-        homepageViewModel.getTopArticlesFromAPI(pageNumber: currentPage, completionHandler: { errorMsg in
+
+        homepageViewModel.getArticlesToDisplay(completionHandler: { errorMsg in
+            self.activityIndicator.stopAnimating()
             if(errorMsg != nil) {
-                self.present(Utils.showErrorAlert(errorMsg!),animated: true, completion: nil)
-                self.activityIndicator.stopAnimating()
+                self.present(createErrorAlert(errorMsg!), animated: true, completion: nil)
             } else {
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    self.currentPage += 1
                     self.articlesTableView.reloadData()
                 }
             }
@@ -75,9 +76,9 @@ extension HomepageViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let currentArticle = homepageViewModel.currentArticle(index: indexPath.row)
+        let currentArticle = homepageViewModel.getArticleByIndex(index: indexPath.row)
         
-        if let cell = (tableView.dequeueReusableCell(withIdentifier: AppConstants.articleCellIdentifier, for: indexPath) as? ArticleCell) {
+        if let cell = (tableView.dequeueReusableCell(withIdentifier: TableCellsIdentifiers.articleCellIdentifier, for: indexPath) as? ArticleCell) {
             cell.id = currentArticle.id
             cell.autherLabel.text = currentArticle.author
             cell.titleLabel.text = currentArticle.title
@@ -127,7 +128,7 @@ extension HomepageViewController: UITableViewDataSource {
       }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return CGFloat(AppConstants.TABLE_ROW_HEIGHT)
     }
 }
 
