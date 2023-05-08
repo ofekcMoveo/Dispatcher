@@ -15,7 +15,7 @@ class HomepageViewController: UIViewController {
     @IBOutlet weak var articlesTableView: UITableView!
     @IBOutlet var homepageView: UIView!
     
-    let homepageViewModel = HomepageViewModel()
+    let homepageViewModel = HomepageViewModel.shared
     let activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {

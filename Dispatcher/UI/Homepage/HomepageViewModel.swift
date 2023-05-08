@@ -10,10 +10,14 @@ import UIKit
 
 class HomepageViewModel {
     
+    static let shared = HomepageViewModel()
+    
     var articlesToDisplay: [Article] = []
     var totalResultsPages = 1
     var currentPage = 1
     var isPaginating = false
+    
+    private init () {}
      
     func getArticlesToDisplay(completionHandler: @escaping (_ errorMsg: String?) -> Void) {
         if(isPaginating == false) {
