@@ -21,14 +21,13 @@ class SearchResultsScreenViewController: UIViewController {
     let activityIndicator = UIActivityIndicatorView()
     var searchKeyWords: String = ""
     var gotResults = false
-    var currentPage = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         searchResultsTableView.delegate = self
         searchResultsTableView.dataSource = self
-        searchResultsTableView.register(UINib(nibName: AppConstants.articleCellNibName, bundle: nil), forCellReuseIdentifier: AppConstants.articleCellIdentifier)
+        searchResultsTableView.register(UINib(nibName: NibNames.articleCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.articleCellIdentifier)
         
         noResultsView.isHidden = true
         searchKeyWordsLabel.text = (searchKeyWords)
@@ -41,20 +40,20 @@ class SearchResultsScreenViewController: UIViewController {
     }
     
     private func configureActivityIndicator() {
-            activityIndicator.style = .large
-            activityIndicator.center = searchResultsView.center
+        activityIndicator.style = .large
+        activityIndicator.center = searchResultsView.center
         searchResultsView.addSubview(activityIndicator)
     }
     
     private func fetchArticlesBySearchKeywords() {
         self.activityIndicator.startAnimating()
-        searchViewModel.getArticlesFromAPIBySearch(searchKeyWords, pageNumber: currentPage, completionHandler: { errorMsg in
+        searchViewModel.getArticlesFromAPIBySearch(searchKeyWords, completionHandler: { errorMsg in
             if(errorMsg != nil) {
                 self.activityIndicator.stopAnimating()
                 if(errorMsg == AppConstants.noArticlesFoundError) {
                     self.noResultsView.isHidden = false
                 } else {
-                    self.present(Utils.showErrorAlert(errorMsg!),animated: true, completion: nil)
+                    self.present(createErrorAlert(errorMsg!),animated: true, completion: nil)
                 }
             } else {
                 DispatchQueue.main.async {
@@ -80,16 +79,16 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let currentArticle = searchViewModel.currentArticle(index: indexPath.row)
+        let currentArticle = searchViewModel.getArticleByIndex(index: indexPath.row)
         
-        if let cell = (tableView.dequeueReusableCell(withIdentifier: AppConstants.articleCellIdentifier, for: indexPath) as? ArticleCell) {
+        if let cell = (tableView.dequeueReusableCell(withIdentifier: TableCellsIdentifiers.articleCellIdentifier, for: indexPath) as? ArticleCell) {
             cell.id = currentArticle.id
             cell.autherLabel.text = currentArticle.author
             cell.titleLabel.text = currentArticle.title
             cell.subTitleLabel.text = currentArticle.summary
             cell.tagLabel.text = currentArticle.topic.first
-            cell.dateLabel.text = Utils.formatDate(currentArticle.date)
-            cell.articleImage.image = Utils.loadImageFromUrl(currentArticle.imageURL)
+            cell.dateLabel.text = formatDate(currentArticle.date)
+            cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
             
             let numberOfTags = currentArticle.topic.count - 1
             if(numberOfTags > 0) {
@@ -109,8 +108,7 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == (searchViewModel.articlesToDisplay.count - 2) {
-            if (currentPage < searchViewModel.totalResultsPages) {
-                currentPage += 1
+            if (searchViewModel.currentPage < searchViewModel.totalResultsPages) {
                 fetchArticlesBySearchKeywords()
             }
         } 

@@ -8,8 +8,8 @@
 import Foundation
 
 struct APIConstants {
-    static let latestHeadlinesNewscatcherURL = "https://api.newscatcherapi.com/v2/latest_headlines"
-    static let searchArticlesNewscatcherURL = "https://api.newscatcherapi.com/v2/search"
-    static let APIkey = "pxIuyKmcbGplzZfNRXbSQOKltrJ7Zgi4gHsvdWoM43g"
-    static let ARTICLES_TO_FETCH_AMOUNT = 12
+    static var apiKey: String = ""
+    static let latestHeadlinesNewscatcherURL = "https://api.newscatcherapi.com/v2"
+    static let searchArticlesNewscatcherURL = "https://api.newscatcherapi.com/v2"
+    static let articlesPageSize = 12
 }

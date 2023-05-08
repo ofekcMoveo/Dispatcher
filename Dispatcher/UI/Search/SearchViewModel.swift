@@ -12,16 +12,18 @@ class SearchViewModel {
     var latestSearches: [String] = []
     var totalResultsPages = 1
     var isPaginating = false
+    var currentPage = 1
     
-    func getArticlesFromAPIBySearch(_ searchKeyWords: String, pageNumber: Int, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
+    func getArticlesFromAPIBySearch(_ searchKeyWords: String, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
         if (isPaginating == false) {
             isPaginating = true
-            AppConstants.articlesRepository.getArticlesByKeywords(searchKeyWords, pageNumber: pageNumber, completionHandler: { articles, totalPages, errorMsg in
+            AppConstants.articlesRepository.getArticlesByUserSearchWords(searchKeyWords, pageNumber: currentPage, completionHandler: { articles, totalPages, errorMsg in
                 if (errorMsg != nil) {
                     completionHandler(errorMsg)
                 } else {
                     self.articlesToDisplay = articles
                     self.totalResultsPages = totalPages
+                    self.currentPage += 1
                     self.isPaginating = false
                     completionHandler(nil)
                 }
@@ -33,34 +35,34 @@ class SearchViewModel {
         return articlesToDisplay.count
     }
     
-    func currentArticle(index: Int) -> Article {
+    func getArticleByIndex(index: Int) -> Article {
         return articlesToDisplay[index]
     }
     
     func fetchLatestSearchs() {
-        latestSearches = (AppConstants.defaults.array(forKey: AppConstants.latestSearchesDefualtsKey) as? [String]) ?? []
+        latestSearches = UserDefaultsManager.fetchLatestSearchs()
     }
 
     func addNewSearch(_ currentSearch: String) {
         if let index = latestSearches.firstIndex(of: currentSearch) {
             latestSearches.remove(at: index)
-        } else if (latestSearches.count == AppConstants.LATEST_SEARCHES_AMOUNT) {
+        } else if (latestSearches.count == AppConstants.latestSearchesAmount) {
             latestSearches.removeFirst()
         }
 
         latestSearches.append(currentSearch)
-        AppConstants.defaults.set(latestSearches, forKey: AppConstants.latestSearchesDefualtsKey)
+        UserDefaultsManager.saveSearches(latestSearches)
     }
 
     func removeSearch(_ currentSearch: String) {
         if let index = latestSearches.firstIndex(of: currentSearch) {
             latestSearches.remove(at: index)
-            AppConstants.defaults.set(latestSearches, forKey: AppConstants.latestSearchesDefualtsKey)
+            UserDefaultsManager.saveSearches(latestSearches)
         }
     }
 
     func removeAllSearches() {
-        AppConstants.defaults.removeObject(forKey: AppConstants.latestSearchesDefualtsKey)
+        UserDefaultsManager.removeSearches()
         latestSearches = []
     }
 }

@@ -22,8 +22,7 @@ class LatestSearchCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.contentView.backgroundColor = UIColor(named: "screenBackgroungColor")
-        removeButton.isHidden = true
+        self.contentView.backgroundColor = UIColor(named: colorsPalleteNames.screenBackgroundColor)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

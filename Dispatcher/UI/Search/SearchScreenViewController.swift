@@ -23,7 +23,7 @@ class SearchScreenViewController: UIViewController {
        
         searchTableView.dataSource = self
         searchTableView.delegate = self
-        searchTableView.register(UINib(nibName: AppConstants.latestSearchCellNibName, bundle: nil), forCellReuseIdentifier: AppConstants.latestSearchesCellIdentifier)
+        searchTableView.register(UINib(nibName: NibNames.latestSearchCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.latestSearchesCellIdentifier)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,11 +33,10 @@ class SearchScreenViewController: UIViewController {
     
     private func customSearchBar() {
         let searchTextField = searchBar.searchTextField
-        searchBar.setImage(UIImage(named: "exit"), for: .clear, state: .normal)
-        
         searchTextField.leftView = nil
         searchTextField.backgroundColor = .white
-
+        
+        searchBar.setImage(UIImage(named: "exit"), for: .clear, state: .normal)
     }
     
     
@@ -51,7 +50,7 @@ class SearchScreenViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == AppConstants.fromLatestSearchToResults) {
+        if (segue.identifier == SegueIdentifiers.fromLatestSearchToResults) {
             let searchResultsVC = segue.destination as? SearchResultsScreenViewController
             searchResultsVC?.searchKeyWords = searchBar.text ?? ""
             searchResultsVC?.searchViewModel = searchScreenViewModel
@@ -70,10 +69,9 @@ extension SearchScreenViewController: UITableViewDataSource {
         let currentSearchIndex = (searchScreenViewModel.latestSearches.count - indexPath.row) - 1
         let search = searchScreenViewModel.latestSearches[currentSearchIndex]
         
-        if let cell = (tableView.dequeueReusableCell(withIdentifier: AppConstants.latestSearchesCellIdentifier, for: indexPath) as? LatestSearchCell) {
+        if let cell = (tableView.dequeueReusableCell(withIdentifier: TableCellsIdentifiers.latestSearchesCellIdentifier, for: indexPath) as? LatestSearchCell) {
             
             cell.searchWordsLabel.text = search
-            cell.removeButton.isHidden = false
             cell.selectionStyle = .none
             
             cell.delegate = self
@@ -87,7 +85,7 @@ extension SearchScreenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectedCell = tableView.cellForRow(at: indexPath) as? LatestSearchCell {
             searchBar.text = selectedCell.searchWordsLabel.text
-            performSegue(withIdentifier: AppConstants.fromLatestSearchToResults, sender: self)
+            performSegue(withIdentifier: SegueIdentifiers.fromLatestSearchToResults, sender: self)
         }
     }
 }
@@ -95,7 +93,7 @@ extension SearchScreenViewController: UITableViewDataSource {
 extension SearchScreenViewController: UITableViewDelegate, UISearchBarDelegate, LatestSearchCellDelegate {
     func searchCellSelected(_ search: String) {
         searchBar.text = search
-        performSegue(withIdentifier: AppConstants.fromLatestSearchToResults, sender: self)
+        performSegue(withIdentifier: SegueIdentifiers.fromLatestSearchToResults, sender: self)
     }
     
     func removeButtonPressed(_ searchToRemove: String) {
@@ -108,7 +106,7 @@ extension SearchScreenViewController: UITableViewDelegate, UISearchBarDelegate, 
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.performSegue(withIdentifier: AppConstants.fromLatestSearchToResults, sender: self)
+        self.performSegue(withIdentifier: SegueIdentifiers.fromLatestSearchToResults, sender: self)
     }
     
     

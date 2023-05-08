@@ -8,17 +8,11 @@
 import Foundation
 
 class ArticlesRepository {
-    //TODO: maybe change to a singleton
     
     let alamofireManager = AlamofireManager()
     
-    func getLatestArticles(pageNumber: Int, completionHandler: @escaping (_ articles: [Article], _ totalPages: Int, _ errorMsg: String?) -> Void) {
-        self.articles = []
-        let request = buildLatestArticlesRequest(pageNumber)
-    }
-    
-    func getArticlesFromApi(completionHandler: @escaping (_ articles: [Article], _ errorMsg: String?) -> Void) {
-        let request = Request(baseUrl: APIConstants.newscatcherURL, parameters: ["countries" : "IL"], method: .get)
+    func getArticlesFromApi(pageNumber: Int, completionHandler: @escaping (_ articles: [Article], _ totalPages: Int, _ errorMsg: String?) -> Void) {
+        let request = buildRequest(nil, pageNumber)
         alamofireManager.sendRequest(request) { (result: Result<ArticleApiObject, Error>) in
             switch result {
             case .success(let dataResult):
@@ -26,7 +20,7 @@ class ArticlesRepository {
                 for article in dataResult.articles {
                     if(article.language == "en") {
                         articles.append(self.buildArticleFromArticleResponse(article))
-                        completionHandler(articles, nil)
+                        completionHandler(articles, dataResult.totalPages, nil)
                     }
                 }
             case .failure(let error):
@@ -35,34 +29,16 @@ class ArticlesRepository {
         }
     }
     
-    private func buildLatestArticlesRequest(_ pageNumber: Int) -> Request {
-        return Request(
-            baseUrl: APIConstants.latestHeadlinesNewscatcherURL,
-            headers: ["x-api-key": APIConstants.APIkey],
-            parameters: ["countries" : "IL", "page_size": APIConstants.ARTICLES_TO_FETCH_AMOUNT, "page" : pageNumber],
-            method: .get)
-    }
-    
-    func getArticlesByKeywords(_ searchKeywords: String, pageNumber: Int, completionHandler: @escaping ( _ articles: [Article], _ totalPages: Int, _ errorMsg: String?) -> Void) {
-        self.articles = []
-        let request = buildSearchArticlesRequest(searchKeywords, pageNumber)
-        
+    func getArticlesByUserSearchWords(_ searchKeywords: String, pageNumber: Int, completionHandler: @escaping ( _ articles: [Article], _ totalPages: Int, _ errorMsg: String?) -> Void) {
+        let request = buildRequest(searchKeywords, pageNumber)
         alamofireManager.sendRequest(request) { (result: Result<ArticleApiObject, Error>) in
             switch result {
             case .success(let dataResult):
+                var articles: [Article] = []
                 for article in dataResult.articles {
                     if(article.language == "en") {
-                        let article = Article(
-                            id: article.id,
-                            title: article.title,
-                            summary: article.summary,
-                            author: article.author,
-                            topic: [article.topic],
-                            imageURL: article.media,
-                            language: article.language,
-                            date: article.publishedDate)
-                        self.articles.append(article)
-                        completionHandler(self.articles, Int(dataResult.totalPages), nil)
+                        articles.append(self.buildArticleFromArticleResponse(article))
+                        completionHandler(articles, Int(dataResult.totalPages), nil)
                     }
                 }
             case .failure(let error):
@@ -70,14 +46,23 @@ class ArticlesRepository {
             }
         }
     }
-}
     
-private func buildSearchArticlesRequest(_ searchKeywords: String, _ pageNumber: Int) -> Request {
-    return Request(
-        baseUrl: APIConstants.searchArticlesNewscatcherURL,
-        headers: ["x-api-key": APIConstants.APIkey],
-        parameters: ["q" : searchKeywords, "countries" : "IL", "page_size" : APIConstants.ARTICLES_TO_FETCH_AMOUNT , "page" : pageNumber],
-        method: .get)
+    private func buildRequest(_ searchKeywords: String? , _ pageNumber: Int) -> Request {
+        if(searchKeywords != nil) {
+            return Request(
+                baseUrl: APIConstants.searchArticlesNewscatcherURL,
+                endpoint: "search",
+                parameters: ["q" : searchKeywords!, "countries" : "IL", "page_size" : APIConstants.articlesPageSize , "page" : pageNumber],
+                method: .get)
+        } else {
+            return Request(
+                baseUrl: APIConstants.latestHeadlinesNewscatcherURL,
+                endpoint: "latest_headlines",
+                parameters: ["countries" : "IL", "page_size": APIConstants.articlesPageSize, "page" : pageNumber],
+                method: .get)
+        }
+        
+    }
 
     private func buildArticleFromArticleResponse(_ apiAtricle :ArticleResponse) -> Article {
         let article = Article(

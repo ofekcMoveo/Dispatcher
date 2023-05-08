@@ -15,7 +15,7 @@ func formatDate(_ date: String) -> String {
     return dateFormatter.string(from: fomattedDate)
 }
 
-static func loadImageFromUrl(_ imageUrl: String) -> UIImage {
+func loadImageFromUrl(_ imageUrl: String) -> UIImage {
     if let url = URL(string: imageUrl) {
         if let data = try? Data(contentsOf: url) {
             if let image = UIImage(data: data) {
@@ -35,6 +35,27 @@ func createErrorAlert(_ msg: String) -> UIAlertController {
     
     alertController.addAction(okAction)
     return alertController
+}
+
+
+func readApiKeyFromConfigFile() -> String {
+    var errorMsg = ""
+    
+    if let path = Bundle.main.path(forResource: "Config", ofType: "json") {
+        do {
+            let jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+            let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableLeaves)
+            if let jsonDict = jsonResult as? [String: Any], let apiKey = jsonDict["api_key"] as? String {
+                return apiKey
+            }
+        } catch {
+            errorMsg = "Error reading API key from Config.json: \(error)"
+        }
+    } else {
+        errorMsg = "Error: Config.json file not found"
+    }
+    
+    return errorMsg
 }
 
 

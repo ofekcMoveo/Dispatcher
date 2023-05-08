@@ -17,7 +17,6 @@ class HomepageViewController: UIViewController {
     
     let homepageViewModel = HomepageViewModel()
     let activityIndicator = UIActivityIndicatorView()
-    var currentPage = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +35,13 @@ class HomepageViewController: UIViewController {
     
     private func configureActivityIndicator() {
         activityIndicator.style = .large
+        //activityIndicator.center = articlesTableView.tableFooterView?.center ?? CGPoint()
+        //articlesTableView.tableFooterView?.addSubview(activityIndicator)
+        
+        
         activityIndicator.center = homepageView.center
         homepageView.addSubview(activityIndicator)
+
     }
     
     private func getArticles() {
@@ -79,25 +83,26 @@ extension HomepageViewController: UITableViewDataSource {
         let currentArticle = homepageViewModel.getArticleByIndex(index: indexPath.row)
         
         if let cell = (tableView.dequeueReusableCell(withIdentifier: TableCellsIdentifiers.articleCellIdentifier, for: indexPath) as? ArticleCell) {
-            cell.id = currentArticle.id
-            cell.autherLabel.text = currentArticle.author
-            cell.titleLabel.text = currentArticle.title
-            cell.subTitleLabel.text = currentArticle.summary
-            cell.tagLabel.text = currentArticle.topic.first
-            cell.dateLabel.text = Utils.formatDate(currentArticle.date)
-            cell.articleImage.image = Utils.loadImageFromUrl(currentArticle.imageURL)
-            
-            let numberOfTags = currentArticle.topic.count - 1
-            if(numberOfTags > 0) {
-                cell.moreTagsLabel.text = "+ \(numberOfTags)"
-            } else {
-                cell.moreTagsLabel.text = cell.tagLabel.text
-                cell.tagLabel.isHidden = true
+            DispatchQueue.main.async {
+                cell.id = currentArticle.id
+                cell.autherLabel.text = currentArticle.author
+                cell.titleLabel.text = currentArticle.title
+                cell.subTitleLabel.text = currentArticle.summary
+                cell.tagLabel.text = currentArticle.topic.first
+                cell.dateLabel.text = formatDate(currentArticle.date)
+                cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
+                
+                let numberOfTags = currentArticle.topic.count - 1
+                if(numberOfTags > 0) {
+                    cell.moreTagsLabel.text = "+ \(numberOfTags)"
+                } else {
+                    cell.moreTagsLabel.text = cell.tagLabel.text
+                    cell.tagLabel.isHidden = true
+                }
+                
+                cell.delegate = self
             }
-            
-            cell.delegate = self
             return cell
-            
         } else {
             return UITableViewCell()
         }
@@ -105,19 +110,18 @@ extension HomepageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == (homepageViewModel.articlesToDisplay.count - 2) {
-            if (currentPage < homepageViewModel.totalResultsPages) {
-                currentPage += 1
-                fetchArticles()
+            if (homepageViewModel.currentPage < homepageViewModel.totalResultsPages) {
+                getArticles()
             }
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "screenBackgroundColor")
+        view.backgroundColor = UIColor(named: colorsPalleteNames.screenBackgroundColor)
        
         let label = UILabel()
-        label.text = "Top Headlines in Israel"
+        label.text = AppConstants.topHeadlinesHeaderText
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
         label.frame = CGRect(x: 10, y: 10, width: 250, height: 28)
@@ -128,7 +132,7 @@ extension HomepageViewController: UITableViewDataSource {
       }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(AppConstants.TABLE_ROW_HEIGHT)
+        return CGFloat(AppConstants.tableRowHight)
     }
 }
 
