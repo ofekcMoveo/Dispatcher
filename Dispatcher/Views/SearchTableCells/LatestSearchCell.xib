@@ -54,7 +54,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" name="screenBackgroundColor"/>
             <connections>
-                <outlet property="removeSearchCellButton" destination="4nZ-qa-qrg" id="sUn-p1-eOK"/>
+                <outlet property="removeSearchCellButton" destination="4nZ-qa-qrg" id="g6T-b2-Hji"/>
                 <outlet property="searchWordsLabel" destination="cQI-7r-9Mf" id="ehK-aY-b9u"/>
             </connections>
             <point key="canvasLocation" x="100" y="-13.380281690140846"/>

@@ -72,7 +72,7 @@ extension SearchScreenViewController: UITableViewDataSource {
         
         if let cell = (tableView.dequeueReusableCell(withIdentifier: TableCellsIdentifiers.latestSearchesCellIdentifier, for: indexPath) as? LatestSearchCell) {
             
-            cell.searchWordsLabel.text = search
+            cell.searchWordsLabel.text = search.searchKeyWords
             cell.selectionStyle = .none
             
             cell.delegate = self
@@ -96,8 +96,13 @@ extension SearchScreenViewController: UITableViewDelegate, UISearchBarDelegate, 
     }
     
     func removeButtonPressed(_ searchToRemove: String) {
-        searchScreenViewModel.removeSearch(searchToRemove)
-        searchTableView.reloadData()
+        do {
+            try searchScreenViewModel.removeSearch(searchToRemove)
+            searchTableView.reloadData()
+        } catch (let error) {
+            self.present(createErrorAlert(error.localizedDescription), animated: true, completion: nil)
+        }
+        
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

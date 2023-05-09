@@ -10,12 +10,19 @@ import Foundation
 struct UserDefaultsManager {
     static let defaults = UserDefaults.standard
     
-    static func fetchLatestSearchs() -> [String] {
-        return (defaults.array(forKey: AppConstants.latestSearchesDefualtsKey) as? [String]) ?? []
+    static func fetchLatestSearchs() throws -> [RecentSearch] {
+        let data = defaults.data(forKey: AppConstants.latestSearchesDefualtsKey) ?? Data()
+        do {
+            let decodedSearches = try JSONDecoder().decode([RecentSearch].self, from: data)
+            return decodedSearches
+        }
     }
 
-    static func saveSearches(_ latestSearches: [String]) {
-        defaults.set(latestSearches, forKey: AppConstants.latestSearchesDefualtsKey)
+    static func saveSearches(_ latestSearches: [RecentSearch]) throws {
+        do {
+            let data = try JSONEncoder().encode(latestSearches)
+            defaults.set(data, forKey: AppConstants.latestSearchesDefualtsKey)
+        }
     }
     
     static func removeSearches() {

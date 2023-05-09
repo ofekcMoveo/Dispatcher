@@ -9,7 +9,7 @@ import Foundation
 
 class SearchViewModel {
     var articlesToDisplay: [Article] = []
-    var latestSearches: [String] = []
+    var latestSearches: [RecentSearch] = []
     var totalResultsPages = 1
     var isPaginating = false
     var currentPage = 1
@@ -40,27 +40,33 @@ class SearchViewModel {
     }
     
     func fetchLatestSearchs() throws {
-        latestSearches = UserDefaultsManager.fetchLatestSearchs()
+        try latestSearches = UserDefaultsManager.fetchLatestSearchs()
         if(latestSearches.isEmpty == true) {
             throw AppConstants.userDefaultFetchFailedError
         }
     }
 
-    func addNewSearch(_ currentSearch: String) {
-        if let index = latestSearches.firstIndex(of: currentSearch) {
+    func addNewSearch(_ currentSearch: String) throws {
+        if let index = latestSearches.firstIndex(where: { recentSearch in
+            recentSearch.searchKeyWords == currentSearch
+        }) {
             latestSearches.remove(at: index)
         } else if (latestSearches.count == AppConstants.latestSearchesAmount) {
             latestSearches.removeFirst()
         }
 
-        latestSearches.append(currentSearch)
-        UserDefaultsManager.saveSearches(latestSearches)
+        latestSearches.append(RecentSearch(searchKeyWords: currentSearch))
+        do {
+            try UserDefaultsManager.saveSearches(latestSearches)
+        }
     }
 
-    func removeSearch(_ currentSearch: String) {
-        if let index = latestSearches.firstIndex(of: currentSearch) {
+    func removeSearch(_ currentSearch: String) throws {
+        if let index = latestSearches.firstIndex(where: { recentSearch in
+            recentSearch.searchKeyWords == currentSearch
+        }) {
             latestSearches.remove(at: index)
-            UserDefaultsManager.saveSearches(latestSearches)
+            try UserDefaultsManager.saveSearches(latestSearches)
         }
     }
 

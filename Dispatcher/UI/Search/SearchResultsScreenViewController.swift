@@ -57,8 +57,12 @@ class SearchResultsScreenViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
+                    do {
+                       try self.searchViewModel.addNewSearch(self.searchKeyWords)
+                    } catch (let error) {
+                       self.present(createErrorAlert(error.localizedDescription), animated: true, completion: nil)
+                    }
                     self.activityIndicator.stopAnimating()
-                    self.searchViewModel.addNewSearch(self.searchKeyWords)
                     self.searchResultsTableView.reloadData()
                 }
             }
