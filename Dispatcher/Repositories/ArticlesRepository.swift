@@ -9,6 +9,10 @@ import Foundation
 
 class ArticlesRepository {
     
+    static let shared = ArticlesRepository()
+    
+    private init() {}
+    
     let alamofireManager = AlamofireManager()
     
     func getArticlesFromApi(pageNumber: Int, completionHandler: @escaping (_ articles: [Article], _ totalPages: Int, _ errorMsg: String?) -> Void) {

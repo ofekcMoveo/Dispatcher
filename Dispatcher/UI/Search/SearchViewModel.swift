@@ -17,7 +17,7 @@ class SearchViewModel {
     func getArticlesFromAPIBySearch(_ searchKeyWords: String, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
         if (isPaginating == false) {
             isPaginating = true
-            AppConstants.articlesRepository.getArticlesByUserSearchWords(searchKeyWords, pageNumber: currentPage, completionHandler: { articles, totalPages, errorMsg in
+            ArticlesRepository.shared.getArticlesByUserSearchWords(searchKeyWords, pageNumber: currentPage, completionHandler: { articles, totalPages, errorMsg in
                 if (errorMsg != nil) {
                     completionHandler(errorMsg)
                 } else {
@@ -39,8 +39,11 @@ class SearchViewModel {
         return articlesToDisplay[index]
     }
     
-    func fetchLatestSearchs() {
+    func fetchLatestSearchs() throws {
         latestSearches = UserDefaultsManager.fetchLatestSearchs()
+        if(latestSearches.isEmpty == true) {
+            throw AppConstants.userDefaultFetchFailedError
+        }
     }
 
     func addNewSearch(_ currentSearch: String) {

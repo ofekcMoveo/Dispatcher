@@ -15,7 +15,7 @@ protocol LatestSearchCellDelegate {
 class LatestSearchCell: UITableViewCell {
     
     @IBOutlet weak var searchWordsLabel: UILabel!
-    @IBOutlet weak var removeButton: UIButton!
+    @IBOutlet weak var removeSearchCellButton: UIButton!
     
     var delegate: LatestSearchCellDelegate?
     
@@ -30,7 +30,7 @@ class LatestSearchCell: UITableViewCell {
     }
     
 
-    @IBAction func removeButtonPressed(_ sender: UIButton) {
+    @IBAction func removeSearchCellButtonPressed(_ sender: UIButton) {
         delegate?.removeButtonPressed(searchWordsLabel.text ?? "")
     }
     

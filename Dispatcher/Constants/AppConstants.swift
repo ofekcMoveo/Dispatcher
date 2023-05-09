@@ -8,9 +8,6 @@
 import Foundation
 
 struct AppConstants {
-
-    //MARK: Global instanses
-    static let articlesRepository = ArticlesRepository()
     
     //MARK: Homepage articles table
     static let tableRowHight = 40
@@ -20,8 +17,9 @@ struct AppConstants {
     static let latestSearchesAmount = 10
     static let latestSearchesDefualtsKey = "LatestSearches"
     
-    //MARK: No data error
+    //MARK: error msg
     static let noArticlesFoundError = "Response could not be decoded because of error:\nThe data couldn’t be read because it is missing."
+    static let userDefaultFetchFailedError = "Latest search could not be fetched from User Defaults"
     
 }
 

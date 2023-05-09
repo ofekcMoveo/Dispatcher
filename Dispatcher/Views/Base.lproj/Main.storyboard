@@ -121,7 +121,7 @@
                                                 <color key="baseBackgroundColor" name="secondaryButtonColor"/>
                                             </buttonConfiguration>
                                             <connections>
-                                                <action selector="clearButtonPressed:" destination="F4O-w4-xin" eventType="touchUpInside" id="Zs6-od-6qG"/>
+                                                <action selector="clearAllRecentSearchesButtonPressed:" destination="F4O-w4-xin" eventType="touchUpInside" id="Zs6-od-6qG"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -150,8 +150,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="BRh-Me-3YU"/>
                     <connections>
-                        <outlet property="babkButton" destination="jLt-2f-h4l" id="xIG-hY-6Fg"/>
-                        <outlet property="clearButton" destination="QOV-Hl-RVu" id="auD-Nh-DNh"/>
+                        <outlet property="backButton" destination="jLt-2f-h4l" id="xIG-hY-6Fg"/>
+                        <outlet property="clearAllRecentSearchesButton" destination="QOV-Hl-RVu" id="auD-Nh-DNh"/>
                         <outlet property="searchBar" destination="rXr-qK-guj" id="jGR-eh-13W"/>
                         <outlet property="searchTableView" destination="6lX-Il-2cu" id="dMX-y7-9ZY"/>
                         <segue destination="rxg-Pq-c9G" kind="presentation" identifier="fromLatestSearchToResults" modalPresentationStyle="fullScreen" id="RWA-46-Q6d"/>

@@ -29,6 +29,7 @@
                         <connections>
                             <action selector="removeButtonPressed:" destination="-1" eventType="touchUpInside" id="6Xz-od-YJM"/>
                             <action selector="removeButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="9pJ-yj-Z1s"/>
+                            <action selector="removeSearchCellButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="D4i-c4-sLd"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQI-7r-9Mf">
@@ -53,7 +54,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" name="screenBackgroundColor"/>
             <connections>
-                <outlet property="removeButton" destination="4nZ-qa-qrg" id="sUn-p1-eOK"/>
+                <outlet property="removeSearchCellButton" destination="4nZ-qa-qrg" id="sUn-p1-eOK"/>
                 <outlet property="searchWordsLabel" destination="cQI-7r-9Mf" id="ehK-aY-b9u"/>
             </connections>
             <point key="canvasLocation" x="100" y="-13.380281690140846"/>

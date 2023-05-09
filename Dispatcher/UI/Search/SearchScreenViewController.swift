@@ -10,28 +10,30 @@ import UIKit
 class SearchScreenViewController: UIViewController {
 
     @IBOutlet weak var searchTableView: UITableView!
-    @IBOutlet weak var clearButton: UIButton!
-    @IBOutlet weak var babkButton: UIButton!
+    @IBOutlet weak var clearAllRecentSearchesButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     
     let searchScreenViewModel = SearchViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        customSearchBar()
-       
+        styleSearchBar()
         searchTableView.dataSource = self
         searchTableView.delegate = self
         searchTableView.register(UINib(nibName: NibNames.latestSearchCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.latestSearchesCellIdentifier)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        searchScreenViewModel.fetchLatestSearchs()
-        searchTableView.reloadData()
+        do {
+            try searchScreenViewModel.fetchLatestSearchs()
+            searchTableView.reloadData()
+        } catch (let error) {
+            self.present(createErrorAlert(error.localizedDescription), animated: true, completion: nil)
+        }
     }
     
-    private func customSearchBar() {
+    private func styleSearchBar() {
         let searchTextField = searchBar.searchTextField
         searchTextField.leftView = nil
         searchTextField.backgroundColor = .white
@@ -44,7 +46,7 @@ class SearchScreenViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
-    @IBAction func clearButtonPressed(_ sender: UIButton) {
+    @IBAction func clearAllRecentSearchesButtonPressed(_ sender: UIButton) {
         searchScreenViewModel.removeAllSearches()
         searchTableView.reloadData()
     }
@@ -62,7 +64,6 @@ class SearchScreenViewController: UIViewController {
 extension SearchScreenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchScreenViewModel.latestSearches.count
-        
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -76,10 +77,8 @@ extension SearchScreenViewController: UITableViewDataSource {
             
             cell.delegate = self
             return cell
-      
     }
-        
-        return LatestSearchCell()
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -108,6 +107,4 @@ extension SearchScreenViewController: UITableViewDelegate, UISearchBarDelegate, 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.performSegue(withIdentifier: SegueIdentifiers.fromLatestSearchToResults, sender: self)
     }
-    
-    
 }
