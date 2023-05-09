@@ -10,11 +10,10 @@ import Foundation
 class ArticlesRepository {
     
     static let shared = ArticlesRepository()
-    
-    private init() {}
-    
     let alamofireManager = AlamofireManager()
     
+    private init() {}
+
     func getArticlesFromApi(pageNumber: Int, completionHandler: @escaping (_ articles: [Article], _ totalPages: Int, _ errorMsg: String?) -> Void) {
         let request = buildRequest(nil, pageNumber)
         alamofireManager.sendRequest(request) { (result: Result<ArticleApiObject, Error>) in
@@ -24,9 +23,9 @@ class ArticlesRepository {
                 for article in dataResult.articles {
                     if(article.language == "en") {
                         articles.append(self.buildArticleFromArticleResponse(article))
-                        completionHandler(articles, dataResult.totalPages, nil)
                     }
                 }
+                completionHandler(articles, dataResult.totalPages, nil)
             case .failure(let error):
                 completionHandler([], 0, error.localizedDescription)
             }
@@ -39,12 +38,14 @@ class ArticlesRepository {
             switch result {
             case .success(let dataResult):
                 var articles: [Article] = []
+                let dispatchGroup = DispatchGroup()
                 for article in dataResult.articles {
                     if(article.language == "en") {
                         articles.append(self.buildArticleFromArticleResponse(article))
-                        completionHandler(articles, Int(dataResult.totalPages), nil)
                     }
                 }
+               
+                completionHandler(articles, Int(dataResult.totalPages), nil)
             case .failure(let error):
                 completionHandler([], 0, error.localizedDescription)
             }

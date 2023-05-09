@@ -35,5 +35,6 @@ struct NibNames {
 
 struct SegueIdentifiers {
     static let fromLatestSearchToResults = "fromLatestSearchToResults"
+    static let fromSearchResultsToHomepage = "fromSearchResultsToHomepage"
 }
 

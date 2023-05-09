@@ -70,7 +70,7 @@ class SearchResultsScreenViewController: UIViewController {
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
-        self.dismiss(animated: true)
+       performSegue(withIdentifier: SegueIdentifiers.fromSearchResultsToHomepage, sender: self)
     }
     
 }

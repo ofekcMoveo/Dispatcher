@@ -273,9 +273,11 @@
                         <outlet property="searchKeyWordsLabel" destination="gzN-jx-rNP" id="Fub-LO-r4T"/>
                         <outlet property="searchResultsTableView" destination="4Vn-vu-C8g" id="xtL-TU-TOn"/>
                         <outlet property="searchResultsView" destination="u1g-96-vqQ" id="Rkc-nE-9Lg"/>
+                        <segue destination="DB8-XO-XPI" kind="unwind" identifier="fromSearchResultsToHomepage" unwindAction="unwindSegue:" id="orp-pZ-dSw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkP-bQ-AZc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="DB8-XO-XPI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1063.768115942029" y="-1527.4553571428571"/>
         </scene>
@@ -510,7 +512,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="HeL-DO-qcQ"/>
+        <segue reference="m3G-Z4-Knh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

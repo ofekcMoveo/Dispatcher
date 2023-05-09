@@ -15,7 +15,7 @@ class SearchViewModel {
     var currentPage = 1
     
     func getArticlesFromAPIBySearch(_ searchKeyWords: String, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
-        if (isPaginating == false) {
+        if (isPaginating == false && currentPage <= totalResultsPages) {
             isPaginating = true
             ArticlesRepository.shared.getArticlesByUserSearchWords(searchKeyWords, pageNumber: currentPage, completionHandler: { articles, totalPages, errorMsg in
                 if (errorMsg != nil) {
@@ -40,7 +40,7 @@ class SearchViewModel {
     }
     
     func fetchLatestSearchs() throws {
-        try latestSearches = UserDefaultsManager.fetchLatestSearchs()
+        try latestSearches = SearchRepository.shared.fetchLatestSearchs()
         if(latestSearches.isEmpty == true) {
             throw AppConstants.userDefaultFetchFailedError
         }
@@ -57,7 +57,7 @@ class SearchViewModel {
 
         latestSearches.append(RecentSearch(searchKeyWords: currentSearch))
         do {
-            try UserDefaultsManager.saveSearches(latestSearches)
+            try SearchRepository.shared.saveSearches(latestSearches)
         }
     }
 
@@ -66,12 +66,12 @@ class SearchViewModel {
             recentSearch.searchKeyWords == currentSearch
         }) {
             latestSearches.remove(at: index)
-            try UserDefaultsManager.saveSearches(latestSearches)
+            try SearchRepository.shared.saveSearches(latestSearches)
         }
     }
 
     func removeAllSearches() {
-        UserDefaultsManager.removeSearches()
+        SearchRepository.shared.removeSearches()
         latestSearches = []
     }
 }

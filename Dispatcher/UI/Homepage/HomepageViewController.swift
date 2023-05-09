@@ -35,10 +35,6 @@ class HomepageViewController: UIViewController {
     
     private func configureActivityIndicator() {
         activityIndicator.style = .large
-        //activityIndicator.center = articlesTableView.tableFooterView?.center ?? CGPoint()
-        //articlesTableView.tableFooterView?.addSubview(activityIndicator)
-        
-        
         activityIndicator.center = homepageView.center
         homepageView.addSubview(activityIndicator)
 
@@ -69,6 +65,8 @@ class HomepageViewController: UIViewController {
         
     }
     
+    @IBAction func unwindSegue( _ segue: UIStoryboardSegue) {
+    }
     
 }
 

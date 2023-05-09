@@ -20,7 +20,7 @@ class HomepageViewModel {
     private init () {}
      
     func getArticlesToDisplay(completionHandler: @escaping (_ errorMsg: String?) -> Void) {
-        if(isPaginating == false) {
+        if(isPaginating == false && currentPage <= totalResultsPages) {
             isPaginating = true
             ArticlesRepository.shared.getArticlesFromApi(pageNumber: currentPage) { articles, totalPages,  errorMsg in
                 if (errorMsg != nil) {
