@@ -38,7 +38,6 @@ class ArticlesRepository {
             switch result {
             case .success(let dataResult):
                 var articles: [Article] = []
-                let dispatchGroup = DispatchGroup()
                 for article in dataResult.articles {
                     if(article.language == "en") {
                         articles.append(self.buildArticleFromArticleResponse(article))
