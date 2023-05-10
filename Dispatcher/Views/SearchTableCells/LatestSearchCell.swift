@@ -22,7 +22,7 @@ class LatestSearchCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.contentView.backgroundColor = UIColor(named: colorsPalleteNames.screenBackgroundColor)
+        self.contentView.backgroundColor = UIColor(named: ColorsPalleteNames.screenBackgroundColor)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

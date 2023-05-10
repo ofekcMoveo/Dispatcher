@@ -116,7 +116,7 @@ extension HomepageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor(named: colorsPalleteNames.screenBackgroundColor)
+        view.backgroundColor = UIColor(named: ColorsPalleteNames.screenBackgroundColor)
        
         let label = UILabel()
         label.text = AppConstants.topHeadlinesHeaderText

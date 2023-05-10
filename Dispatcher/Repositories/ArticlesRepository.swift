@@ -21,7 +21,7 @@ class ArticlesRepository {
             case .success(let dataResult):
                 var articles: [Article] = []
                 for article in dataResult.articles {
-                    if(article.language == "en") {
+                    if(article.language == "en" || article.language == "he") {
                         articles.append(self.buildArticleFromArticleResponse(article))
                     }
                 }

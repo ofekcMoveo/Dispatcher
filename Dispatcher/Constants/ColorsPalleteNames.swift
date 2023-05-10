@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct colorsPalleteNames {
+struct ColorsPalleteNames {
     static let backgroundColor = "backgroundColor"
     static let iconsColor = "iconsColor"
     static let labelsTextColor = "labelsTextColor"

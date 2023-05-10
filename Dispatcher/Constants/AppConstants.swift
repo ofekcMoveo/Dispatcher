@@ -21,6 +21,9 @@ struct AppConstants {
     static let noArticlesFoundError = "Response could not be decoded because of error:\nThe data couldn’t be read because it is missing."
     static let userDefaultFetchFailedError = "Latest search could not be fetched from User Defaults"
     
+    //MARK: buttons text
+    static let navigateToDispatchText = "NAVIGATE TO DISPATCH "
+    
 }
 
 struct TableCellsIdentifiers {
