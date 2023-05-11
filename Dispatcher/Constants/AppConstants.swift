@@ -34,10 +34,12 @@ struct TableCellsIdentifiers {
 struct NibNames {
     static let articleCellNibName = "ArticleCell"
     static let latestSearchCellNibName = "LatestSearchCell"
+    static let headerViewNibName = "HeaderView"
 }
 
 struct SegueIdentifiers {
     static let fromLatestSearchToResults = "fromLatestSearchToResults"
     static let fromSearchResultsToHomepage = "fromSearchResultsToHomepage"
+    static let fromHomepageToSearchScreen = "fromHomepageToSearchScreen"
 }
 

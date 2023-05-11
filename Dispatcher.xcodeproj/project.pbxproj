@@ -44,6 +44,8 @@
 		6BDE7C1D2A0A32CF004291D9 /* RecentSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE7C1C2A0A32CF004291D9 /* RecentSearch.swift */; };
 		6BDE7C1F2A0A4B64004291D9 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE7C1E2A0A4B64004291D9 /* SearchRepository.swift */; };
 		6BDE7C232A0A82E4004291D9 /* DispatcherAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE7C222A0A82E4004291D9 /* DispatcherAppButton.swift */; };
+		6BDE7C322A0D7083004291D9 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE7C302A0D7083004291D9 /* HeaderView.swift */; };
+		6BDE7C352A0D8A54004291D9 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BDE7C342A0D8A54004291D9 /* HeaderView.xib */; };
 		7C64A037CD693D1DFCA50EF1 /* Pods_Dispatcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFB85CD9D15FD5FA91D6D4FB /* Pods_Dispatcher.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +90,8 @@
 		6BDE7C1C2A0A32CF004291D9 /* RecentSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearch.swift; sourceTree = "<group>"; };
 		6BDE7C1E2A0A4B64004291D9 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
 		6BDE7C222A0A82E4004291D9 /* DispatcherAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatcherAppButton.swift; sourceTree = "<group>"; };
+		6BDE7C302A0D7083004291D9 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		6BDE7C342A0D8A54004291D9 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		CF2EAED76855AB3CD6A062F8 /* Pods-Dispatcher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dispatcher.release.xcconfig"; path = "Target Support Files/Pods-Dispatcher/Pods-Dispatcher.release.xcconfig"; sourceTree = "<group>"; };
 		EFB85CD9D15FD5FA91D6D4FB /* Pods_Dispatcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dispatcher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -192,6 +196,7 @@
 				6B95EF3D29FA9D240014C6EF /* ArticlesTableCells */,
 				6BD3F3F129EC275F007C4652 /* Main.storyboard */,
 				6B8908E62A016644003E08A1 /* SearchTableCells */,
+				6BDE7C2B2A0CD326004291D9 /* Headers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,6 +300,15 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		6BDE7C2B2A0CD326004291D9 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				6BDE7C302A0D7083004291D9 /* HeaderView.swift */,
+				6BDE7C342A0D8A54004291D9 /* HeaderView.xib */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
 		D812FC9548D88A243343A19F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +384,7 @@
 				6B95EF2829F019360014C6EF /* ArticleCell.xib in Resources */,
 				6B5A9CEF2A07F0F600D0FBE3 /* .gitignore in Resources */,
 				6BD3F3F329EC275F007C4652 /* Main.storyboard in Resources */,
+				6BDE7C352A0D8A54004291D9 /* HeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +440,7 @@
 				6B5A9CEB2A07DF0900D0FBE3 /* AppDelegate.swift in Sources */,
 				6B8908D32A013097003E08A1 /* SearchScreenViewController.swift in Sources */,
 				6BDE7C1D2A0A32CF004291D9 /* RecentSearch.swift in Sources */,
+				6BDE7C322A0D7083004291D9 /* HeaderView.swift in Sources */,
 				6B8908E42A01663A003E08A1 /* LatestSearchCell.swift in Sources */,
 				6B95EF2129F006DF0014C6EF /* Article.swift in Sources */,
 				6B8908BD29FFB372003E08A1 /* AlamofireManager.swift in Sources */,
