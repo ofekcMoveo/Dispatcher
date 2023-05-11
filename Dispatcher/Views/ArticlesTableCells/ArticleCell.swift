@@ -28,7 +28,7 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var favoritesButton: UIButton!
     @IBOutlet weak var articleImage: UIImageView!
     
-    var dispatchButton = DispatcherAppButton()
+    var dispatchButton: DispatcherAppButton?
     var delegate: ArticleCellDelegate?
     var id: String = ""
     
@@ -43,21 +43,28 @@ class ArticleCell: UITableViewCell {
     }
     
     private func setupDispatchButton() {
-        dispatchButton.frame(forAlignmentRect: CGRect(x: 11, y: 397, width: 310, height: 36))
-        dispatchButton.setupPrimaryButtonWithArrow(title: AppConstants.navigateToDispatchText)
-        dispatchButton.addTarget(self, action: #selector(self.navigateToDisptachPressed), for: .touchUpInside)
-        self.contentView.addSubview(dispatchButton)
-        
+        let frame = CGRect(x: 18, y: 397, width: 290, height: 36)
+        dispatchButton = DispatcherAppButton(
+            frame: frame,
+            type: .primary,
+            title: AppConstants.navigateToDispatchText,
+            icon: UIImage(named: "Arrow - Right"),
+            iconPosition: .end
+        )
+
+        dispatchButton!.addTarget(self, action: #selector(navigateToDisptachPressed), for: .touchUpInside)
+        self.contentView.addSubview(dispatchButton!)
         setDispatchButtonConstraints()
     }
     
     private func setDispatchButtonConstraints() {
-        dispatchButton.translatesAutoresizingMaskIntoConstraints = false
+        dispatchButton!.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            dispatchButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 11),
-            dispatchButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -11),
-            dispatchButton.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 10),
-            dispatchButton.heightAnchor.constraint(equalToConstant: 36)
+            dispatchButton!.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18),
+            dispatchButton!.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18),
+            dispatchButton!.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 10),
+            dispatchButton!.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
+            dispatchButton!.heightAnchor.constraint(equalToConstant: 36)
         ])
     }
     
