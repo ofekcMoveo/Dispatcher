@@ -6,26 +6,54 @@
 //
 
 import UIKit
+import Alamofire
 
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var notificationsButton: UIButton!
     @IBOutlet weak var articlesTableView: UITableView!
+    @IBOutlet var homepageView: UIView!
     
-    let articlesToDisplay = Articles().articles
+    let homepageViewModel = HomepageViewModel()
+    let activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         
-        articlesTableView.rowHeight = 450
+        setupTableView()
+        configureActivityIndicator()
+        getArticles()
+    }
+    
+    private func setupTableView() {
         articlesTableView.dataSource = self
         articlesTableView.delegate = self
-        
-        articlesTableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: ArticleCell.articleCellIdentifier)
-        
+        articlesTableView.rowHeight = 450
+        articlesTableView.register(UINib(nibName: NibNames.articleCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.articleCellIdentifier)
     }
+    
+    private func configureActivityIndicator() {
+        activityIndicator.style = .large
+        activityIndicator.center = homepageView.center
+        homepageView.addSubview(activityIndicator)
+    }
+    
+    private func getArticles() {
+        self.activityIndicator.startAnimating()
+        homepageViewModel.getArticlesToDisplay(completionHandler: { errorMsg in
+            self.activityIndicator.stopAnimating()
+            if(errorMsg != nil) {
+                self.present(createErrorAlert(errorMsg!), animated: true, completion: nil)
+            } else {
+                DispatchQueue.main.async {
+                    self.articlesTableView.reloadData()
+                }
+            }
+        })
+    }
+    
     
     
     @IBAction func searchButtonPressed(_ sender: UIButton) {
@@ -40,26 +68,25 @@ class HomeViewController: UIViewController {
     
 }
 
-
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articlesToDisplay.count
+        return homepageViewModel.articlesAmount()
         
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let currentArticle = articlesToDisplay[indexPath.row]
+        let currentArticle = homepageViewModel.getArticleByIndex(index: indexPath.row)
         
-        if let cell = (tableView.dequeueReusableCell(withIdentifier: ArticleCell.articleCellIdentifier, for: indexPath) as? ArticleCell) {
+        if let cell = (tableView.dequeueReusableCell(withIdentifier: TableCellsIdentifiers.articleCellIdentifier, for: indexPath) as? ArticleCell) {
             cell.id = currentArticle.id
-            cell.dateLabel.text = currentArticle.date
-            cell.autherLabel.text = currentArticle.auther
+            cell.autherLabel.text = currentArticle.author
             cell.titleLabel.text = currentArticle.title
-            cell.subTitleLabel.text = currentArticle.subTitle
-            cell.tagLabel.text = currentArticle.tags.first
-            
-            let numberOfTags = currentArticle.tags.count - 1
+            cell.subTitleLabel.text = currentArticle.summary
+            cell.tagLabel.text = currentArticle.topic.first
+            cell.dateLabel.text = formatDate(currentArticle.date)
+
+            let numberOfTags = currentArticle.topic.count - 1
             if(numberOfTags > 0) {
                 cell.moreTagsLabel.text = "+ \(numberOfTags)"
             } else {
@@ -91,9 +118,8 @@ extension HomeViewController: UITableViewDataSource {
       }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return CGFloat(AppConstants.TABLE_ROW_HEIGHT)
     }
-    
 }
 
 extension HomeViewController: ArticleCellDelegate, UITableViewDelegate {

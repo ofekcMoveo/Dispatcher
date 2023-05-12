@@ -8,11 +8,14 @@
 import Foundation
 
 struct Article {
+    
     let id: String
     let title: String
-    let subTitle: String
-    let auther: String
-    let tags: [String]
-    let date: String
+    let summary: String
+    let author: String
+    let topic: [String]
     let imageURL: String
+    let language: String?
+    let date: String
+ 
 }

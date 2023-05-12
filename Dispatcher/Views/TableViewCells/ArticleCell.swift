@@ -19,8 +19,6 @@ protocol ArticleCellDelegate {
 
 class ArticleCell: UITableViewCell {
     
-    static let articleCellIdentifier = "articleCell"
-    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tagLabel: UILabel!
