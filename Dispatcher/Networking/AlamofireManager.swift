@@ -20,10 +20,11 @@ class AlamofireManager {
                     case .failure(let error):
                         completionHandler(.failure(error))
                     }
-
-                }
-            }
+                } 
+        } else {
+            completionHandler(Result.failure(Errors.encodingError))
         }
+    }
 }
 
 

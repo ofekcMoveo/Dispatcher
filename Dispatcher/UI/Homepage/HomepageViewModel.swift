@@ -19,18 +19,18 @@ class HomepageViewModel {
     
     private init () {}
      
-    func getArticlesToDisplay(completionHandler: @escaping (_ errorMsg: String?) -> Void) {
-        if(isPaginating == false && currentPage <= totalResultsPages) {
+    func getArticlesToDisplay(completionHandler: @escaping (_ errorMsg: String?, _ numberOfNewItems: Int) -> Void) {
+        if(!isPaginating && currentPage <= totalResultsPages) {
             isPaginating = true
             ArticlesRepository.shared.getArticlesFromApi(pageNumber: currentPage) { articles, totalPages,  errorMsg in
+                self.isPaginating = false
                 if (errorMsg != nil) {
-                    completionHandler(errorMsg!)
+                    completionHandler(errorMsg!, 0)
                 } else {
                     self.articlesToDisplay.append(contentsOf: articles)
                     self.totalResultsPages = totalPages
                     self.currentPage += 1
-                    self.isPaginating = false
-                    completionHandler(nil)
+                    completionHandler(nil, articles.count)
                 }
             }
         }

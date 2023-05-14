@@ -14,18 +14,18 @@ class SearchViewModel {
     var isPaginating = false
     var currentPage = 1
     
-    func getArticlesFromAPIBySearch(_ searchKeyWords: String, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
-        if (isPaginating == false && currentPage <= totalResultsPages) {
+    func getArticlesFromAPIBySearch(_ searchKeyWords: String, completionHandler: @escaping (_ errorMsg: String?, _ numberOfNewItems: Int) -> Void) {
+        if (!isPaginating && currentPage <= totalResultsPages) {
             isPaginating = true
-            ArticlesRepository.shared.getArticlesByUserSearchWords(searchKeyWords, pageNumber: currentPage, completionHandler: { articles, totalPages, errorMsg in
+            ArticlesRepository.shared.getArticlesFromApi(searchKeyWords, pageNumber: currentPage, completionHandler: { articles, totalPages, errorMsg in
+                self.isPaginating = false
                 if (errorMsg != nil) {
-                    completionHandler(errorMsg)
+                    completionHandler(errorMsg, 0)
                 } else {
                     self.articlesToDisplay = articles
                     self.totalResultsPages = totalPages
                     self.currentPage += 1
-                    self.isPaginating = false
-                    completionHandler(nil)
+                    completionHandler(nil, articles.count)
                 }
             })
         }
@@ -42,7 +42,7 @@ class SearchViewModel {
     func fetchLatestSearchs() throws {
         try latestSearches = SearchRepository.shared.fetchLatestSearchs()
         if(latestSearches.isEmpty == true) {
-            throw AppConstants.userDefaultFetchFailedError
+            throw Errors.userDefaultFetchFailedError
         }
     }
 

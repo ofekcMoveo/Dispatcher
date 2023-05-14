@@ -35,7 +35,7 @@ class SearchResultsScreenViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        fetchArticlesBySearchKeywords()
+        getArticlesBySearchKeywords()
         searchResultsTableView.reloadData()
     }
     
@@ -45,12 +45,12 @@ class SearchResultsScreenViewController: UIViewController {
         searchResultsView.addSubview(activityIndicator)
     }
     
-    private func fetchArticlesBySearchKeywords() {
+    private func getArticlesBySearchKeywords() {
         self.activityIndicator.startAnimating()
-        searchViewModel.getArticlesFromAPIBySearch(searchKeyWords, completionHandler: { errorMsg in
+        searchViewModel.getArticlesFromAPIBySearch(searchKeyWords, completionHandler: { errorMsg, numberOfNewItems in
             if(errorMsg != nil) {
                 self.activityIndicator.stopAnimating()
-                if(errorMsg == AppConstants.noArticlesFoundError) {
+                if(errorMsg == Errors.noArticlesFoundError.rawValue) {
                     self.noResultsView.isHidden = false
                 } else {
                     self.present(createErrorAlert(errorMsg!),animated: true, completion: nil)
@@ -63,10 +63,18 @@ class SearchResultsScreenViewController: UIViewController {
                        self.present(createErrorAlert(error.localizedDescription), animated: true, completion: nil)
                     }
                     self.activityIndicator.stopAnimating()
-                    self.searchResultsTableView.reloadData()
+                    let indexPathForNewRows = self.buildIndexPathForNewRows(numberOfNewItems: numberOfNewItems)
+                    self.searchResultsTableView.insertRows(at: indexPathForNewRows, with: .automatic)
+                
                 }
             }
         })
+    }
+    
+    func buildIndexPathForNewRows(numberOfNewItems: Int) -> [IndexPath] {
+        
+        let numberOfRows = self.searchResultsTableView.numberOfRows(inSection: 0)
+        return (numberOfRows...(numberOfRows + numberOfNewItems - 1)).map { IndexPath(row: $0, section: 0) }
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
@@ -113,7 +121,7 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == (searchViewModel.articlesToDisplay.count - 2) {
             if (searchViewModel.currentPage < searchViewModel.totalResultsPages) {
-                fetchArticlesBySearchKeywords()
+                getArticlesBySearchKeywords()
             }
         } 
     }

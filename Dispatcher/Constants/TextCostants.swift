@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct TextCostants {
+    static let topHeadlinesHeaderText = "Top Headlines in Israel"
+}
