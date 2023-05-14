@@ -7,6 +7,7 @@
 
 import Foundation
 
-extension String: LocalizedError {
-    public var errorDescription: String? {return self}
+enum Errors: Error {
+    case encodingError
+    case decodingError
 }
