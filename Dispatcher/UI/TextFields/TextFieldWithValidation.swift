@@ -62,23 +62,14 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         self.styleTextFieldPlaceHolder(placeholderText: TextCostants.passwordTextFieldPlaceholder, fontColor: UIColor(named: ColorsPalleteNames.labelsTextColor))
         self.isSecureTextEntry = true
         setIsSecurePasswordIcon()
-        addGestureRecognizerToTextFieldIcon()
     }
     
     private func setReEnterPasswordTextField() {
         self.styleTextFieldPlaceHolder(placeholderText: TextCostants.reEnterPasswordTextFieldPlaceholder, fontColor: UIColor(named: ColorsPalleteNames.labelsTextColor))
         self.isSecureTextEntry = true
         setIsSecurePasswordIcon()
-        addGestureRecognizerToTextFieldIcon()
-        
     }
 
-    private func addGestureRecognizerToTextFieldIcon() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showOrHidePasswordPressed))
-        self.rightView?.isUserInteractionEnabled = true
-        self.rightView?.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
     private func setIsSecurePasswordIcon() {
         let image = (self.isSecureTextEntry ? UIImage(named: "hideText") : UIImage(named: "showText")) ?? UIImage()
         
@@ -152,8 +143,6 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         } else {
             validationDelegate?.handleReEnterPasswordInput(password: passwordToCompareTo, error: nil)
         }
-            
     }
-
 }
 

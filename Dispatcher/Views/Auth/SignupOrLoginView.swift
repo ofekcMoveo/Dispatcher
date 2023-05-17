@@ -40,7 +40,6 @@ class SignupOrLoginView: UIView {
         Bundle.main.loadNibNamed(NibNames.signupOrLoginViewNibName, owner: self)
         addSubview(contentView)
         contentView.frame = self.frame
-        
         setupUIItems()
     }
         
@@ -52,7 +51,6 @@ class SignupOrLoginView: UIView {
         Bundle.main.loadNibNamed(NibNames.signupOrLoginViewNibName, owner: self)
         addSubview(contentView)
         contentView.frame = self.frame
-        
         setupUIItems()
     }
     
@@ -153,6 +151,7 @@ class SignupOrLoginView: UIView {
             setLoginView()
         }
         
+        resetView()
         setAdditionalButtonsSettings()
     }
     
@@ -168,6 +167,27 @@ class SignupOrLoginView: UIView {
         secondaryButton = DispatcherAppButton(frame: CGRect(x: 0, y: 0, width: contentView.frame.width*0.8, height: 36), type: .secondary, title: AuthMode.Login.rawValue.uppercased(), cornerRadius: 5)
         reEnterPasswordTextField?.isHidden = false
         reEnterPasswordErrorLabel.isHidden = false
+    }
+    
+    private func resetView() {
+        emailTextField?.styleTextFieldPlaceHolder(placeholderText: TextCostants.emailTextFieldPlaceholder, fontColor: UIColor(named: ColorsPalleteNames.labelsTextColor))
+        emailTextField?.textColor = UIColor(named: ColorsPalleteNames.labelsTextColor)
+        emailTextField?.text = nil
+        emailTextField?.layer.borderWidth = 0
+        emailErrorLabel.text = ""
+        
+        passwordTextField?.styleTextFieldPlaceHolder(placeholderText: TextCostants.passwordTextFieldPlaceholder, fontColor: UIColor(named: ColorsPalleteNames.labelsTextColor))
+        passwordTextField?.textColor = UIColor(named: ColorsPalleteNames.labelsTextColor)
+        passwordTextField?.text = nil
+        passwordTextField?.layer.borderWidth = 0
+        passwordErrorLabel.text = ""
+
+        reEnterPasswordTextField?.styleTextFieldPlaceHolder(placeholderText: TextCostants.reEnterPasswordTextFieldPlaceholder, fontColor: UIColor(named: ColorsPalleteNames.labelsTextColor))
+        reEnterPasswordTextField?.textColor = UIColor(named: ColorsPalleteNames.labelsTextColor)
+        reEnterPasswordTextField?.text = nil
+        reEnterPasswordTextField?.layer.borderWidth = 0
+        reEnterPasswordTextField?.text = ""
+        reEnterPasswordErrorLabel.text = ""
     }
     
     private func setAdditionalButtonsSettings() {
@@ -225,7 +245,6 @@ class SignupOrLoginView: UIView {
         } else {
             authMode = AuthMode.Login
         }
-        
         setViewItemsByAuthMode()
     }
     
@@ -260,9 +279,7 @@ extension SignupOrLoginView: TextFieldWithValidationDelegate {
             } else {
                 validatedPassword = password
             }
-            
         }
-        
     }
     
     func handleReEnterPasswordInput(password: String?, error: UserInputErrors?) {

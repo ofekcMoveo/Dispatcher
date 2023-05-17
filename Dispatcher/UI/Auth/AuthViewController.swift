@@ -8,7 +8,7 @@
 import UIKit
 
 class AuthViewController: UIViewController, SignupOrLoginDelegate{
-    
+
     var authViewModel = AuthViewModel()
     var logoHeader: HeaderView?
     var signupOrLoginView: SignupOrLoginView?
@@ -38,6 +38,7 @@ class AuthViewController: UIViewController, SignupOrLoginDelegate{
                 logoHeader.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
                 logoHeader.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.45)
             ])
+        }
         if let signupOrLoginView{
             signupOrLoginView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
@@ -46,7 +47,6 @@ class AuthViewController: UIViewController, SignupOrLoginDelegate{
                 signupOrLoginView.bottomAnchor.constraint(equalTo:  self.view.bottomAnchor),
                 signupOrLoginView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.55)
             ])
-        }
         }
     }
     
