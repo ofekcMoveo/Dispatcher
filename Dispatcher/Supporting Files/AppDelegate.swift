@@ -15,12 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        let filePath = Bundle.main.path(forResource: "GoogleService-Info-Dev", ofType: "plist")
-        guard let fileopts = FirebaseOptions(contentsOfFile: filePath!)
-          else { assert(false, "Couldn't load config file") }
-        FirebaseApp.configure(options: fileopts)
-        
+        loadFirebaseEnvironment()
+
         let response = readApiKeyFromConfigFile()
         if(response.contains("Error")) {
             fatalError(response)
@@ -30,6 +26,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func loadFirebaseEnvironment() {
+        #if DEBUG
+        let firebaseConfig = Bundle.main.path(forResource: FirebaseConfigFilesNames.devEnvironmentName, ofType: "plist")
+        #else
+        let firebaseConfig = Bundle.main.path(forResource: FirebaseConfigFilesNames.prodEnvironmentName, ofType: "plist")
+        #endif
+
+        guard let filePath = firebaseConfig,
+              let fileopts = FirebaseOptions(contentsOfFile: filePath) else {
+            fatalError(FirebaseErrors.firebaseLoadConfigFileError.errorDescription ?? "")
+        }
+
+        FirebaseApp.configure(options: fileopts)
+            }
 
     // MARK: UISceneSession Lifecycle
 

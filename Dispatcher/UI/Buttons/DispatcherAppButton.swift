@@ -51,9 +51,14 @@ class DispatcherAppButton: UIButton {
     private func setButtonIcon() {
         if(icon != nil) {
             self.setImage(icon, for: .normal)
+            self.imageView?.tintColor = .white
+            self.adjustsImageWhenHighlighted = false
             if(iconPosition == Position.end) {
                 self.semanticContentAttribute = .forceRightToLeft
+                self.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
             }
+            
+            
         }
     }
 

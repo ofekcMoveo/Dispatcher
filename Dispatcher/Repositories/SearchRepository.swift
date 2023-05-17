@@ -9,10 +9,7 @@ import Foundation
 
 class SearchRepository {
     
-    static let shared = SearchRepository()
     let userDefaultsManager = UserDefaultsManager()
-    
-    private init() {}
     
     func saveSearches(_ latestSearches: [RecentSearch]) throws {
         do {

@@ -14,9 +14,9 @@ enum TextFieldType {
 }
 
 protocol TextFieldWithValidationDelegate {
-    func handleEmailInput(email: String?, error: Errors?)
-    func handlePasswordInput(password: String?, error: Errors?)
-    func handleReEnterPasswordInput(password: String?, error: Errors?)
+    func handleEmailInput(email: String?, error: UserInputErrors?)
+    func handlePasswordInput(password: String?, error: UserInputErrors?)
+    func handleReEnterPasswordInput(password: String?, error: UserInputErrors?)
 }
 
 class TextFieldWithValidation : UITextField, UITextFieldDelegate {
@@ -29,7 +29,6 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         super.init(frame: frame)
         self.delegate = self
         styleTextField()
-        self.backgroundColor = .white
         setTextFieldByType()
     }
     
@@ -40,6 +39,8 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     private func styleTextField() {
         self.borderStyle = .roundedRect
         self.layer.borderColor = UIColor(named: ColorsPalleteNames.secondaryButtonColor)?.cgColor
+        self.backgroundColor = .white
+        self.returnKeyType = .done
     }
     
     private func setTextFieldByType() {
@@ -96,6 +97,7 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     
     func styleErrorTextField() {
         self.textColor = .red
+        self.styleTextFieldPlaceHolder(placeholderText: self.placeholder ?? "", fontColor: .red)
         self.layer.borderColor = UIColor.red.cgColor
         self.layer.borderWidth = 0.5
     }
@@ -120,7 +122,7 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
             comparePassword(userInput: self.text)
         }
            return true
-       }
+    }
     
     //MARK: Input validation funcs
 
@@ -130,7 +132,7 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         if(emailPredicate.evaluate(with: userInput)){
             validationDelegate?.handleEmailInput(email: userInput, error: nil)
         } else {
-            validationDelegate?.handleEmailInput(email: nil, error: Errors.invalidEmail)
+            validationDelegate?.handleEmailInput(email: nil, error: UserInputErrors.invalidEmailError)
         }
     }
     
@@ -140,13 +142,13 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         if(passwordPredicate.evaluate(with: userInput)) {
             validationDelegate?.handlePasswordInput(password: userInput, error: nil)
         } else {
-            validationDelegate?.handlePasswordInput(password: nil, error: Errors.invalidPassword)
+            validationDelegate?.handlePasswordInput(password: nil, error: UserInputErrors.invalidPasswordError)
         }
     }
     
     private func comparePassword(userInput: String?) {
         if (userInput != passwordToCompareTo) {
-            validationDelegate?.handleReEnterPasswordInput(password: nil, error: Errors.passwordsNotMatch)
+            validationDelegate?.handleReEnterPasswordInput(password: nil, error: UserInputErrors.passwordsNotMatchError)
         } else {
             validationDelegate?.handleReEnterPasswordInput(password: passwordToCompareTo, error: nil)
         }

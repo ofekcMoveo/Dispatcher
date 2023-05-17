@@ -113,11 +113,13 @@ class SignupOrLoginView: UIView {
         }
     }
 
-    
     private func setErrorLabels() {
         emailErrorLabel.font = UIFont.systemFont(ofSize: 12)
         passwordErrorLabel.font = UIFont.systemFont(ofSize: 12)
         reEnterPasswordErrorLabel.font = UIFont.systemFont(ofSize: 12)
+        
+        passwordErrorLabel.numberOfLines = 0
+        passwordErrorLabel.lineBreakMode = .byWordWrapping
         
         contentView.addSubview(emailErrorLabel)
         contentView.addSubview(passwordErrorLabel)
@@ -197,7 +199,7 @@ class SignupOrLoginView: UIView {
        }
     }
     
-    private func setErrorLabel(label: UILabel, error: String) {
+    private func styleErrorLabel(label: UILabel, error: String) {
         label.text = error
         label.textColor = .red
         label.isHidden = false
@@ -207,12 +209,10 @@ class SignupOrLoginView: UIView {
         if (validatedEmail == "" || validatedPassword == "") {
             if (validatedEmail == "") {
                 emailTextField?.styleErrorTextField()
-                emailErrorLabel.text = Errors.invalidEmail.errorDescription
-                emailErrorLabel.isHidden = false
+                styleErrorLabel(label: emailErrorLabel, error: UserInputErrors.invalidEmailError.errorDescription ?? "")
             } else if (validatedPassword == "") {
                 passwordTextField?.styleErrorTextField()
-                passwordErrorLabel.text = Errors.invalidEmail.errorDescription
-                passwordErrorLabel.isHidden = false
+                styleErrorLabel(label: passwordErrorLabel, error: UserInputErrors.invalidPasswordError.errorDescription ?? "")
             }
         } else {
             delegate?.signupOrLoginPressed(authMode: authMode, email: validatedEmail, password: validatedPassword)
@@ -229,9 +229,9 @@ class SignupOrLoginView: UIView {
         setViewItemsByAuthMode()
     }
     
-    private func handleInput(editedtextField: TextFieldWithValidation?, errorlabel: UILabel, error: Errors?) {
+    private func handleInput(editedtextField: TextFieldWithValidation?, errorlabel: UILabel, error: UserInputErrors?) {
         if (error != nil) {
-            setErrorLabel(label: errorlabel, error: error?.errorDescription ?? "")
+            styleErrorLabel(label: errorlabel, error: error?.errorDescription ?? "")
             errorlabel.isHidden = false
             editedtextField?.styleErrorTextField()
         } else {
@@ -243,7 +243,7 @@ class SignupOrLoginView: UIView {
 
 extension SignupOrLoginView: TextFieldWithValidationDelegate {
 
-    func handleEmailInput(email: String?, error: Errors?) {
+    func handleEmailInput(email: String?, error: UserInputErrors?) {
         handleInput(editedtextField: emailTextField, errorlabel: emailErrorLabel, error: error)
         
         if let email {
@@ -251,16 +251,21 @@ extension SignupOrLoginView: TextFieldWithValidationDelegate {
         }
     }
     
-    func handlePasswordInput(password: String?, error: Errors?) {
+    func handlePasswordInput(password: String?, error: UserInputErrors?) {
         handleInput(editedtextField: passwordTextField, errorlabel: passwordErrorLabel, error: error)
         
         if let password {
-            reEnterPasswordTextField?.passwordToCompareTo = "\(password)"
+            if(authMode == AuthMode.Signup) {
+                reEnterPasswordTextField?.passwordToCompareTo = "\(password)"
+            } else {
+                validatedPassword = password
+            }
+            
         }
         
     }
     
-    func handleReEnterPasswordInput(password: String?, error: Errors?) {
+    func handleReEnterPasswordInput(password: String?, error: UserInputErrors?) {
         handleInput(editedtextField: reEnterPasswordTextField, errorlabel: reEnterPasswordErrorLabel, error: error)
         validatedPassword = password ?? ""
     }

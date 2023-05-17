@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AuthViewController: UIViewController {
+class AuthViewController: UIViewController, SignupOrLoginDelegate{
     
     var authViewModel = AuthViewModel()
     var logoHeader: HeaderView?
@@ -49,9 +49,7 @@ class AuthViewController: UIViewController {
         }
         }
     }
-}
-
-extension AuthViewController: SignupOrLoginDelegate {
+    
     func signupOrLoginPressed(authMode: AuthMode, email: String, password: String) {
         authViewModel.authenticateUser(authMode: authMode, email: email, password: password, completionHandler: { errorMsg in
             if(errorMsg != nil) {
@@ -62,3 +60,4 @@ extension AuthViewController: SignupOrLoginDelegate {
         })
     }
 }
+
