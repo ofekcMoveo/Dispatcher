@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let filePath = Bundle.main.path(forResource: "GoogleService-Info-Dev", ofType: "plist")
+        guard let fileopts = FirebaseOptions(contentsOfFile: filePath!)
+          else { assert(false, "Couldn't load config file") }
+        FirebaseApp.configure(options: fileopts)
+        
         let response = readApiKeyFromConfigFile()
         if(response.contains("Error")) {
             fatalError(response)

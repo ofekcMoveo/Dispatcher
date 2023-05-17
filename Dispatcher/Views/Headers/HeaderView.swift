@@ -17,6 +17,7 @@ class HeaderView: UIView {
         case mainHeader
         case backHeader
         case approveOrDenyHeader
+        case logoHeader
     }
 
     @IBOutlet weak var contentView: UIView!
@@ -52,7 +53,7 @@ class HeaderView: UIView {
     }
     
     private func commonInit() {
-        let nib = UINib(nibName: "HeaderView", bundle: Bundle(for: type(of: self)))
+        let nib = UINib(nibName: NibNames.headerViewNibName, bundle: Bundle(for: type(of: self)))
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
@@ -71,6 +72,8 @@ class HeaderView: UIView {
             setupBackHeader()
         case HeaderType.approveOrDenyHeader:
             setupApproveOrDenyHeader()
+        case .logoHeader:
+            setupLogoHeader()
         }
     }
         
@@ -92,6 +95,20 @@ class HeaderView: UIView {
     
     private func setupApproveOrDenyHeader() {
         
+    }
+    
+    private func setupLogoHeader() {
+        logoImageView.isHidden = false
+        
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            logoImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5),
+            logoImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1)
+        ])
+        
+        searchButton.isHidden = true
+        notificationsButton.isHidden = true
+        backButton.isHidden = true
     }
     
     @IBAction func searchButtonPressed(_ sender: UIButton) {

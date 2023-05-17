@@ -35,11 +35,14 @@ struct NibNames {
     static let articleCellNibName = "ArticleCell"
     static let latestSearchCellNibName = "LatestSearchCell"
     static let headerViewNibName = "HeaderView"
+    static let signupOrLoginViewNibName = "SignupOrLoginView"
+    static let validatableTextFieldWithErrorlabelView = "ValidatableTextFieldWithErrorlabelView"
 }
 
 struct SegueIdentifiers {
     static let fromLatestSearchToResults = "fromLatestSearchToResults"
     static let fromSearchResultsToHomepage = "fromSearchResultsToHomepage"
     static let fromHomepageToSearchScreen = "fromHomepageToSearchScreen"
+    static let fromAuthToTabBar = "fromAuthToTabBar"
 }
 

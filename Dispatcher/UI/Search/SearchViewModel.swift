@@ -42,7 +42,7 @@ class SearchViewModel {
     func fetchLatestSearchs() throws {
         try latestSearches = SearchRepository.shared.fetchLatestSearchs()
         if(latestSearches.isEmpty == true) {
-            throw AppConstants.userDefaultFetchFailedError
+            throw Errors.userDefaultFetchFailedError
         }
     }
 

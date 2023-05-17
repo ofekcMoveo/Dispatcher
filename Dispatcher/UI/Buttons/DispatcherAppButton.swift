@@ -8,12 +8,6 @@
 import UIKit
 
 class DispatcherAppButton: UIButton {
-    
-    enum Position: String {
-        case start
-        case end
-    }
-
     enum ButtonType: String {
         case primary
         case secondary
@@ -24,13 +18,14 @@ class DispatcherAppButton: UIButton {
     var iconPosition: Position
     var title: String
     
-    init(frame: CGRect, type: ButtonType, title: String, icon: UIImage? = nil, iconPosition: Position? = nil) {
+    init(frame: CGRect, type: ButtonType, title: String, icon: UIImage? = nil, iconPosition: Position? = nil, cornerRadius: CGFloat = 20) {
         self.type = type
         self.title = title
         self.icon = icon
         self.iconPosition = iconPosition ?? Position.start
         
         super.init(frame: frame)
+        self.layer.cornerRadius = cornerRadius
         
         setButtonStyleByType()
         setButtonIcon()
