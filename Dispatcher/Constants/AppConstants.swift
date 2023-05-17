@@ -46,3 +46,8 @@ struct SegueIdentifiers {
     static let fromAuthToTabBar = "fromAuthToTabBar"
 }
 
+struct FirebaseConfigFilesNames {
+    static let devEnvironmentName = "GoogleService-Info - Dev"
+    static let prodEnvironmentName = "GoogleService-Info - Prod"
+}
+
