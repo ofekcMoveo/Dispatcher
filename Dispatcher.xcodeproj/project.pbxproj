@@ -40,7 +40,6 @@
 		6BD3F45129EDAA05007C4652 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD3F45029EDAA05007C4652 /* ProfileViewController.swift */; };
 		6BD3F45329EDAA1C007C4652 /* HomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD3F45229EDAA1C007C4652 /* HomepageViewController.swift */; };
 		6BD3F45529EDAA51007C4652 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD3F45429EDAA51007C4652 /* FavoritesViewController.swift */; };
-		6BDE7C1B2A0A2D2C004291D9 /* StringErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE7C1A2A0A2D2C004291D9 /* StringErrorExtension.swift */; };
 		6BDE7C1D2A0A32CF004291D9 /* RecentSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE7C1C2A0A32CF004291D9 /* RecentSearch.swift */; };
 		6BDE7C1F2A0A4B64004291D9 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE7C1E2A0A4B64004291D9 /* SearchRepository.swift */; };
 		6BDE7C232A0A82E4004291D9 /* DispatcherAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE7C222A0A82E4004291D9 /* DispatcherAppButton.swift */; };
@@ -86,7 +85,6 @@
 		6BD3F45029EDAA05007C4652 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6BD3F45229EDAA1C007C4652 /* HomepageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		6BD3F45429EDAA51007C4652 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
-		6BDE7C1A2A0A2D2C004291D9 /* StringErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringErrorExtension.swift; sourceTree = "<group>"; };
 		6BDE7C1C2A0A32CF004291D9 /* RecentSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearch.swift; sourceTree = "<group>"; };
 		6BDE7C1E2A0A4B64004291D9 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
 		6BDE7C222A0A82E4004291D9 /* DispatcherAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatcherAppButton.swift; sourceTree = "<group>"; };
@@ -145,7 +143,6 @@
 				6BD3F3FC29EC2760007C4652 /* Info.plist */,
 				6B40CD722A03EC5D003397A8 /* Utils.swift */,
 				6B40CD782A0794BF003397A8 /* Config.json */,
-				6BDE7C1A2A0A2D2C004291D9 /* StringErrorExtension.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -449,7 +446,6 @@
 				6BDE7C232A0A82E4004291D9 /* DispatcherAppButton.swift in Sources */,
 				6BD3F3F629EC275F007C4652 /* Dispatcher.xcdatamodeld in Sources */,
 				6BD3F45529EDAA51007C4652 /* FavoritesViewController.swift in Sources */,
-				6BDE7C1B2A0A2D2C004291D9 /* StringErrorExtension.swift in Sources */,
 				6B95EF4329FA9DCF0014C6EF /* HomepageViewModel.swift in Sources */,
 				6B8908C729FFC157003E08A1 /* Request.swift in Sources */,
 				6B1FE63F29FE42FA00A7477E /* APIConstants.swift in Sources */,

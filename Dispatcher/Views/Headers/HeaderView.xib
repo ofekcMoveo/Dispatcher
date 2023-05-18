@@ -24,14 +24,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoIcon" translatesAutoresizingMaskIntoConstraints="NO" id="CdJ-ni-MkI">
-                    <rect key="frame" x="10" y="17.666666666666671" width="60" height="60"/>
+                    <rect key="frame" x="9.9999999999999964" y="30" width="63.666666666666657" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="T4j-Of-t81"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="XcO-BE-lyw"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fk3-7d-hi9">
-                    <rect key="frame" x="322" y="22.666666666666671" width="30" height="50"/>
+                    <rect key="frame" x="322" y="40" width="30" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="30" id="6Ku-Y1-B0G"/>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="mrm-PH-mlE"/>
@@ -43,7 +43,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E27-yP-G5k">
-                    <rect key="frame" x="355" y="22.666666666666671" width="30" height="50"/>
+                    <rect key="frame" x="355" y="40" width="30" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="30" id="8A1-uO-cBd"/>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="Hh8-1K-jkh"/>
@@ -54,9 +54,8 @@
                         <action selector="notificationsButtenPressed:" destination="-1" eventType="touchUpInside" id="HOv-JD-zv1"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJh-I4-vv9">
-                    <rect key="frame" x="12" y="30" width="72" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJh-I4-vv9">
+                    <rect key="frame" x="10" y="50" width="72" height="35"/>
                     <color key="tintColor" name="secondaryButtonColor"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="Forward" title="Back"/>
@@ -69,11 +68,13 @@
             <color key="backgroundColor" name="backgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="E27-yP-G5k" secondAttribute="trailing" constant="8" id="XMA-Xy-80H"/>
-                <constraint firstItem="fk3-7d-hi9" firstAttribute="centerY" secondItem="WbY-33-lYL" secondAttribute="centerY" id="Xua-8K-xXk"/>
-                <constraint firstItem="CdJ-ni-MkI" firstAttribute="centerY" secondItem="WbY-33-lYL" secondAttribute="centerY" id="ZCR-FZ-7ak"/>
-                <constraint firstItem="E27-yP-G5k" firstAttribute="centerY" secondItem="WbY-33-lYL" secondAttribute="centerY" id="ZJs-Yi-Nf7"/>
+                <constraint firstAttribute="bottom" secondItem="E27-yP-G5k" secondAttribute="bottom" constant="5" id="YLh-cD-CHx"/>
                 <constraint firstItem="CdJ-ni-MkI" firstAttribute="leading" secondItem="WbY-33-lYL" secondAttribute="leading" constant="10" id="bbt-ds-MGf"/>
+                <constraint firstAttribute="bottom" secondItem="CdJ-ni-MkI" secondAttribute="bottom" constant="5" id="izv-yI-dsC"/>
+                <constraint firstItem="gJh-I4-vv9" firstAttribute="leading" secondItem="WbY-33-lYL" secondAttribute="leading" constant="10" id="jYe-6f-WRn"/>
                 <constraint firstItem="E27-yP-G5k" firstAttribute="leading" secondItem="fk3-7d-hi9" secondAttribute="trailing" constant="3" id="kOI-oX-nuk"/>
+                <constraint firstAttribute="bottom" secondItem="gJh-I4-vv9" secondAttribute="bottom" constant="10" id="vwL-eT-UsG"/>
+                <constraint firstAttribute="bottom" secondItem="fk3-7d-hi9" secondAttribute="bottom" constant="5" id="waW-ce-DgR"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="12.977099236641221" y="13.732394366197184"/>
@@ -81,7 +82,7 @@
     </objects>
     <resources>
         <image name="Forward" width="10" height="18"/>
-        <image name="logoIcon" width="40" height="32"/>
+        <image name="logoIcon" width="63.666667938232422" height="59.333332061767578"/>
         <image name="notificationsIcon" width="16" height="20"/>
         <image name="searchIconLight" width="20" height="20"/>
         <namedColor name="backgroundColor">

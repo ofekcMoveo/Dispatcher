@@ -14,7 +14,7 @@ class SearchViewModel {
     var isPaginating = false
     var currentPage = 1
     
-    func getArticlesFromAPIBySearch(_ searchKeyWords: String, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
+    func getArticlesFromAPIBySearch(searchKeyWords: String, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
         if (isPaginating == false && currentPage <= totalResultsPages) {
             isPaginating = true
             ArticlesRepository.shared.getArticlesByUserSearchWords(searchKeyWords, pageNumber: currentPage, completionHandler: { articles, totalPages, errorMsg in
@@ -42,7 +42,7 @@ class SearchViewModel {
     func fetchLatestSearchs() throws {
         try latestSearches = SearchRepository.shared.fetchLatestSearchs()
         if(latestSearches.isEmpty == true) {
-            throw AppConstants.userDefaultFetchFailedError
+            //throw AppConstants.userDefaultFetchFailedError
         }
     }
 

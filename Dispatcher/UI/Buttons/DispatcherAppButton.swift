@@ -7,13 +7,17 @@
 
 import UIKit
 
+protocol DispatcherAppButtonDelegate {
+    func buttonPressed()
+}
+
 class DispatcherAppButton: UIButton {
     
     enum Position: String {
         case start
         case end
     }
-
+    
     enum ButtonType: String {
         case primary
         case secondary
@@ -23,6 +27,7 @@ class DispatcherAppButton: UIButton {
     var icon: UIImage?
     var iconPosition: Position
     var title: String
+    var delegate: DispatcherAppButtonDelegate?
     
     init(frame: CGRect, type: ButtonType, title: String, icon: UIImage? = nil, iconPosition: Position? = nil) {
         self.type = type
@@ -35,6 +40,7 @@ class DispatcherAppButton: UIButton {
         setButtonStyleByType()
         setButtonIcon()
         
+        self.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         self.layer.cornerRadius = 20
         self.setTitle(title, for: .normal)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
@@ -42,6 +48,10 @@ class DispatcherAppButton: UIButton {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func buttonPressed() {
+        delegate?.buttonPressed()
     }
     
     private func setButtonStyleByType() {
@@ -71,5 +81,7 @@ class DispatcherAppButton: UIButton {
         self.backgroundColor = UIColor(named: ColorsPalleteNames.secondaryButtonColor)
         self.setTitleColor(UIColor(named: ColorsPalleteNames.labelsTextColor), for: .normal)
     }
+    
+    
 
 }

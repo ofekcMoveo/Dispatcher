@@ -12,36 +12,22 @@ class HomepageViewController: UIViewController {
 
     @IBOutlet weak var articlesTableView: UITableView!
     @IBOutlet var homepageView: UIView!
+    @IBOutlet weak var headerView: HeaderView!
     
     let homepageViewModel = HomepageViewModel.shared
     let activityIndicator = UIActivityIndicatorView()
-    var headerView: HeaderView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        
-        headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: homepageView.frame.width, height: 95), headerType: .mainHeader)
-        homepageView.addSubview(headerView ?? UIView())
-        setHeaderViewConstraints()
+        headerView?.delegate = self
+    
         setupTableView()
         configureActivityIndicator()
         getArticles()
     }
-    
-    private func setHeaderViewConstraints() {
-        headerView!.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            headerView!.leadingAnchor.constraint(equalTo: homepageView.leadingAnchor, constant: 0),
-            headerView!.trailingAnchor.constraint(equalTo: homepageView.trailingAnchor, constant: 0),
-            headerView!.topAnchor.constraint(equalTo: homepageView.topAnchor, constant: 0),
-            headerView!.bottomAnchor.constraint(equalTo: articlesTableView.topAnchor, constant: 0),
-            headerView!.heightAnchor.constraint(lessThanOrEqualToConstant: 95)
-        ])
-    }
-    
+
     private func setupTableView() {
-        headerView?.delegate = self
         articlesTableView.dataSource = self
         articlesTableView.delegate = self
         articlesTableView.rowHeight = 450

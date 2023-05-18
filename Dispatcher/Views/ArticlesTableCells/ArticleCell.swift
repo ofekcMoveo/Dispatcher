@@ -17,8 +17,7 @@ protocol ArticleCellDelegate {
 
 //MARK: - ArticleCell class
 
-class ArticleCell: UITableViewCell {
-    
+class ArticleCell: UITableViewCell, DispatcherAppButtonDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tagLabel: UILabel!
@@ -52,7 +51,7 @@ class ArticleCell: UITableViewCell {
             iconPosition: .end
         )
 
-        dispatchButton!.addTarget(self, action: #selector(navigateToDisptachPressed), for: .touchUpInside)
+        dispatchButton?.delegate = self
         self.contentView.addSubview(dispatchButton!)
         setDispatchButtonConstraints()
     }
@@ -105,8 +104,8 @@ class ArticleCell: UITableViewCell {
     @IBAction func favoritesButtonPressed(_ sender: UIButton) {
         delegate?.favoritesButtonPressed(id)
     }
-    
-    @objc func navigateToDisptachPressed() {
+
+    func buttonPressed() {
         delegate?.navigateButtonPressed(id)
     }
 }
