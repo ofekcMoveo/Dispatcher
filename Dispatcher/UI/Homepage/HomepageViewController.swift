@@ -8,20 +8,19 @@
 import UIKit
 import Alamofire
 
-class HomeViewController: UIViewController {
+class HomepageViewController: UIViewController {
     
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var notificationsButton: UIButton!
     @IBOutlet weak var articlesTableView: UITableView!
     @IBOutlet var homepageView: UIView!
     
-    let homepageViewModel = HomepageViewModel()
+    let homepageViewModel = HomepageViewModel.shared
     let activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        
         setupTableView()
         configureActivityIndicator()
         getArticles()
@@ -38,44 +37,43 @@ class HomeViewController: UIViewController {
         activityIndicator.style = .large
         activityIndicator.center = homepageView.center
         homepageView.addSubview(activityIndicator)
+
     }
     
     private func getArticles() {
         self.activityIndicator.startAnimating()
-        homepageViewModel.getArticlesToDisplay(completionHandler: { errorMsg in
+
+        homepageViewModel.getArticlesToDisplay(completionHandler: { errorMsg, numberOfNewItems in
             self.activityIndicator.stopAnimating()
             if(errorMsg != nil) {
                 self.present(createErrorAlert(errorMsg!), animated: true, completion: nil)
             } else {
                 DispatchQueue.main.async {
-                    self.articlesTableView.reloadData()
+                    let indexPathForNewRows = self.buildIndexPathForNewRows(numberOfNewItems: numberOfNewItems)
+                    self.articlesTableView.insertRows(at: indexPathForNewRows, with: .automatic)
                 }
             }
         })
     }
     
-    
-    
-    @IBAction func searchButtonPressed(_ sender: UIButton) {
+    private func buildIndexPathForNewRows(numberOfNewItems: Int) -> [IndexPath] {
+        
+        let numberOfRows = self.articlesTableView.numberOfRows(inSection: 0)
+        return (numberOfRows...(numberOfRows + numberOfNewItems - 1)).map { IndexPath(row: $0, section: 0) }
     }
     
-    
-    @IBAction func notificationsButtonPressed(_ sender: UIButton) {
-        
-        
+    @IBAction func unwindSegue( _ segue: UIStoryboardSegue) {
     }
-    
     
 }
 
-extension HomeViewController: UITableViewDataSource {
+extension HomepageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return homepageViewModel.articlesAmount()
         
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let currentArticle = homepageViewModel.getArticleByIndex(index: indexPath.row)
         
         if let cell = (tableView.dequeueReusableCell(withIdentifier: TableCellsIdentifiers.articleCellIdentifier, for: indexPath) as? ArticleCell) {
@@ -85,7 +83,8 @@ extension HomeViewController: UITableViewDataSource {
             cell.subTitleLabel.text = currentArticle.summary
             cell.tagLabel.text = currentArticle.topic.first
             cell.dateLabel.text = formatDate(currentArticle.date)
-
+            cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
+            
             let numberOfTags = currentArticle.topic.count - 1
             if(numberOfTags > 0) {
                 cell.moreTagsLabel.text = "+ \(numberOfTags)"
@@ -95,19 +94,27 @@ extension HomeViewController: UITableViewDataSource {
             }
             
             cell.delegate = self
+        
             return cell
-            
         } else {
             return UITableViewCell()
         }
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == (homepageViewModel.articlesToDisplay.count - 2) {
+            if (homepageViewModel.currentPage < homepageViewModel.totalResultsPages) {
+                getArticles()
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "screenBackgroundColor")
+        view.backgroundColor = UIColor(named: colorsPalleteNames.screenBackgroundColor)
        
         let label = UILabel()
-        label.text = "Top Headlines in Israel"
+        label.text = TextCostants.topHeadlinesHeaderText
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
         label.frame = CGRect(x: 10, y: 10, width: 250, height: 28)
@@ -118,11 +125,11 @@ extension HomeViewController: UITableViewDataSource {
       }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(AppConstants.TABLE_ROW_HEIGHT)
+        return CGFloat(AppConstants.tableRowHight)
     }
 }
 
-extension HomeViewController: ArticleCellDelegate, UITableViewDelegate {
+extension HomepageViewController: ArticleCellDelegate, UITableViewDelegate {
     func navigateButtonPressed(_ articleID: String) {
         print(articleID)
     }

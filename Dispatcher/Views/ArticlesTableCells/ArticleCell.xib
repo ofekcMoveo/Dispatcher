@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -37,7 +38,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title of the article" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPh-UF-4tX">
-                        <rect key="frame" x="30" y="190" width="290" height="53"/>
+                        <rect key="frame" x="30" y="186" width="290" height="67"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="290" id="7PU-qz-kIH"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Ohl-6k-cSr"/>
@@ -136,7 +137,7 @@
                     <constraint firstItem="i7E-aE-eX7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="TtW-wo-68G"/>
                     <constraint firstItem="i7E-aE-eX7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YBA-gE-uhi"/>
                     <constraint firstItem="Y7h-Ti-VcG" firstAttribute="leading" secondItem="1sy-Op-M7i" secondAttribute="trailing" constant="10" id="fzi-ec-RIZ"/>
-                    <constraint firstItem="ZPh-UF-4tX" firstAttribute="top" secondItem="rDQ-KI-Y9E" secondAttribute="bottom" constant="12" id="j9T-aj-kKv"/>
+                    <constraint firstItem="ZPh-UF-4tX" firstAttribute="top" secondItem="rDQ-KI-Y9E" secondAttribute="bottom" constant="8" id="j9T-aj-kKv"/>
                     <constraint firstAttribute="trailing" secondItem="Y7h-Ti-VcG" secondAttribute="trailing" constant="10" id="n8s-sb-8vk"/>
                     <constraint firstAttribute="trailing" secondItem="i7E-aE-eX7" secondAttribute="trailing" id="nnj-jK-2bQ"/>
                     <constraint firstItem="rDQ-KI-Y9E" firstAttribute="top" secondItem="i7E-aE-eX7" secondAttribute="bottom" constant="7" id="sie-Rp-JGy"/>
@@ -150,6 +151,7 @@
             <color key="backgroundColor" name="screenBackgroundColor"/>
             <edgeInsets key="layoutMargins" top="10" left="10" bottom="10" right="10"/>
             <connections>
+                <outlet property="articleImage" destination="i7E-aE-eX7" id="oXB-cL-nJj"/>
                 <outlet property="autherLabel" destination="y3B-Jx-3Bv" id="vU3-1u-zTW"/>
                 <outlet property="dateLabel" destination="rDQ-KI-Y9E" id="es4-79-lvk"/>
                 <outlet property="dispatchButton" destination="kcc-RH-J3T" id="S1x-X9-mYc"/>

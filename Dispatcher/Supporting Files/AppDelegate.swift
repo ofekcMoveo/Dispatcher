@@ -14,6 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let apiKeyValue = readApiKeyFromConfigFile()
+        if(apiKeyValue.contains("Error")) {
+            fatalError(apiKeyValue)
+        } else {
+            APIConstants.apiKey = apiKeyValue
+        }
+        
         return true
     }
 
