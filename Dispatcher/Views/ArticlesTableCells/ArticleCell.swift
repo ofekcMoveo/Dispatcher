@@ -17,20 +17,19 @@ protocol ArticleCellDelegate {
 
 //MARK: - ArticleCell class
 
-class ArticleCell: UITableViewCell {
-    
+class ArticleCell: UITableViewCell, DispatcherAppButtonDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var autherLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
-    @IBOutlet weak var dispatchButton: UIButton!
     @IBOutlet weak var moreTagsLabel: UILabel!
     @IBOutlet weak var favoritesButton: UIButton!
+    @IBOutlet weak var articleImage: UIImageView!
     
+    var dispatchButton: DispatcherAppButton?
     var delegate: ArticleCellDelegate?
     var id: String = ""
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,25 +37,48 @@ class ArticleCell: UITableViewCell {
         setCellMarginsAndBorder()
         setTextColorForCellElements()
         setCornerRadiusForCellElements()
-        
         favoritesButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        setupDispatchButton()
+    }
+    
+    private func setupDispatchButton() {
+        let frame = CGRect(x: 18, y: 397, width: 290, height: 36)
+        dispatchButton = DispatcherAppButton(
+            frame: frame,
+            type: .primary,
+            title: AppConstants.navigateToDispatchText,
+            icon: UIImage(named: "Arrow - Right"),
+            iconPosition: .end
+        )
+
+        dispatchButton?.delegate = self
+        self.contentView.addSubview(dispatchButton!)
+        setDispatchButtonConstraints()
+    }
+    
+    private func setDispatchButtonConstraints() {
+        dispatchButton!.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dispatchButton!.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18),
+            dispatchButton!.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18),
+            dispatchButton!.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 10),
+            dispatchButton!.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
+            dispatchButton!.heightAnchor.constraint(equalToConstant: 36)
+        ])
     }
     
     private func setCornerRadiusForCellElements() {
         tagLabel.layer.cornerRadius = 10
         moreTagsLabel.layer.cornerRadius = 10
-        dispatchButton.layer.cornerRadius = 20
         favoritesButton.layer.cornerRadius = favoritesButton.frame.width / 2
     }
     
     private func setTextColorForCellElements() {
-        tagLabel.textColor = UIColor(named: "labelsTextColor")
-        moreTagsLabel.textColor = UIColor(named: "labelsTextColor")
+        tagLabel.textColor = UIColor(named: ColorsPalleteNames.labelsTextColor)
+        moreTagsLabel.textColor = UIColor(named: ColorsPalleteNames.labelsTextColor)
         titleLabel.textColor = .black
-        subTitleLabel.textColor = UIColor(named: "labelsTextColor")
-        dateLabel.textColor = UIColor(named: "labelsTextColor")
-        autherLabel.textColor = UIColor(named: "labelsTextColor")
-        dispatchButton.setTitleColor(.white, for: .normal)
+        subTitleLabel.textColor = UIColor(named: ColorsPalleteNames.labelsTextColor)
+        dateLabel.textColor = UIColor(named: ColorsPalleteNames.labelsTextColor)
     }
     
     private func setCellMarginsAndBorder() {
@@ -78,13 +100,12 @@ class ArticleCell: UITableViewCell {
         let margins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         contentView.frame = contentView.frame.inset(by: margins)
     }
-
-    
-    @IBAction func navigateButtonPressed(_ sender: UIButton) {
-        delegate?.navigateButtonPressed(id)
-    }
     
     @IBAction func favoritesButtonPressed(_ sender: UIButton) {
         delegate?.favoritesButtonPressed(id)
+    }
+
+    func buttonPressed() {
+        delegate?.navigateButtonPressed(id)
     }
 }

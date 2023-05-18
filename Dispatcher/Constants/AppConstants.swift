@@ -8,15 +8,38 @@
 import Foundation
 
 struct AppConstants {
-    static let TABLE_ROW_HEIGHT = 40
+    
+    //MARK: Homepage articles table
+    static let tableRowHight = 40
+    static let topHeadlinesHeaderText = "Top Headlines in Israel"
+    
+    //MARK: Search
+    static let latestSearchesAmount = 10
+    static let latestSearchesDefualtsKey = "LatestSearches"
+    
+    //MARK: error msg
+    static let noArticlesFoundError = "Response could not be decoded because of error:\nThe data couldn’t be read because it is missing."
+    static let userDefaultFetchFailedError = "Latest search could not be fetched from User Defaults"
+    
+    //MARK: buttons text
+    static let navigateToDispatchText = "NAVIGATE TO DISPATCH "
     
 }
 
 struct TableCellsIdentifiers {
     static let articleCellIdentifier = "articleCell"
+    static let latestSearchesCellIdentifier = "latestSearchCell"
 }
 
 struct NibNames {
     static let articleCellNibName = "ArticleCell"
-    
+    static let latestSearchCellNibName = "LatestSearchCell"
+    static let headerViewNibName = "HeaderView"
 }
+
+struct SegueIdentifiers {
+    static let fromLatestSearchToResults = "fromLatestSearchToResults"
+    static let fromSearchResultsToHomepage = "fromSearchResultsToHomepage"
+    static let fromHomepageToSearchScreen = "fromHomepageToSearchScreen"
+}
+
