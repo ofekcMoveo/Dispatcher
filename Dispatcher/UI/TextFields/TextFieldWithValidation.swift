@@ -56,6 +56,7 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     
     private func setEmailTextField() {
         self.styleTextFieldPlaceHolder(placeholderText: TextCostants.emailTextFieldPlaceholder, fontColor: UIColor(named: ColorsPalleteNames.labelsTextColor))
+        self.textContentType = .emailAddress
     }
     
     private func setPasswordTextField() {

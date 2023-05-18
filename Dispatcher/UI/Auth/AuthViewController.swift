@@ -18,7 +18,7 @@ class AuthViewController: UIViewController, SignupOrLoginDelegate{
         
         let screenHeight = UIScreen.main.bounds.height
         let screenWidth = UIScreen.main.bounds.width
-        
+                
         logoHeader = HeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight * 0.45), headerType: .logoHeader)
         self.view.addSubview(logoHeader ?? UIView())
         
