@@ -7,13 +7,18 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             uuid = "06220B6C-3E41-4726-AFF6-D72DF7547B1F"
+=======
+            uuid = "656EC54D-AA32-408D-BD9C-62DF6DF30A3F"
+>>>>>>> 6f895fa25e128bde74b4799b22f38d3d8b249ec4
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dispatcher/Views/ArticlesTableCells/ArticleCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "109"
             endingLineNumber = "109"
             landmarkName = "navigateToDisptachPressed()"
@@ -65,6 +70,11 @@
             startingLineNumber = "94"
             endingLineNumber = "94"
             landmarkName = "finishEditingText(_:)"
+=======
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "getArticlesToDisplay(completionHandler:)"
+>>>>>>> 6f895fa25e128bde74b4799b22f38d3d8b249ec4
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

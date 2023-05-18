@@ -5,8 +5,9 @@ target 'Dispatcher' do
 
   # Pods for Dispatcher
   pod 'Alamofire', '~> 5.6.4'
-
-
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
+  
   end
 
 
