@@ -58,18 +58,25 @@ class HomepageViewController: UIViewController {
     private func getArticles() {
         self.activityIndicator.startAnimating()
 
-        homepageViewModel.getArticlesToDisplay(completionHandler: { errorMsg in
+        homepageViewModel.getArticlesToDisplay(completionHandler: { errorMsg, numberOfNewItems in
             self.activityIndicator.stopAnimating()
             if(errorMsg != nil) {
                 self.present(createErrorAlert(errorMsg!), animated: true, completion: nil)
             } else {
                 DispatchQueue.main.async {
-                    self.articlesTableView.reloadData()
+                    let indexPathForNewRows = self.buildIndexPathForNewRows(numberOfNewItems: numberOfNewItems)
+                    self.articlesTableView.insertRows(at: indexPathForNewRows, with: .automatic)
                 }
             }
         })
     }
-    
+
+    private func buildIndexPathForNewRows(numberOfNewItems: Int) -> [IndexPath] {
+        
+        let numberOfRows = self.articlesTableView.numberOfRows(inSection: 0)
+        return (numberOfRows...(numberOfRows + numberOfNewItems - 1)).map { IndexPath(row: $0, section: 0) }
+    }
+
     @IBAction func unwindSegue( _ segue: UIStoryboardSegue) {
     }
     
@@ -82,29 +89,27 @@ extension HomepageViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let currentArticle = homepageViewModel.getArticleByIndex(index: indexPath.row)
         
         if let cell = (tableView.dequeueReusableCell(withIdentifier: TableCellsIdentifiers.articleCellIdentifier, for: indexPath) as? ArticleCell) {
-            DispatchQueue.main.async {
-                cell.id = currentArticle.id
-                cell.autherLabel.text = currentArticle.author
-                cell.titleLabel.text = currentArticle.title
-                cell.subTitleLabel.text = currentArticle.summary
-                cell.tagLabel.text = currentArticle.topic.first
-                cell.dateLabel.text = formatDate(currentArticle.date)
-                cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
-                
-                let numberOfTags = currentArticle.topic.count - 1
-                if(numberOfTags > 0) {
-                    cell.moreTagsLabel.text = "+ \(numberOfTags)"
-                } else {
-                    cell.moreTagsLabel.text = cell.tagLabel.text
-                    cell.tagLabel.isHidden = true
-                }
-                
-                cell.delegate = self
+            cell.id = currentArticle.id
+            cell.autherLabel.text = currentArticle.author
+            cell.titleLabel.text = currentArticle.title
+            cell.subTitleLabel.text = currentArticle.summary
+            cell.tagLabel.text = currentArticle.topic.first
+            cell.dateLabel.text = formatDate(currentArticle.date)
+            cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
+            
+            let numberOfTags = currentArticle.topic.count - 1
+            if(numberOfTags > 0) {
+                cell.moreTagsLabel.text = "+ \(numberOfTags)"
+            } else {
+                cell.moreTagsLabel.text = cell.tagLabel.text
+                cell.tagLabel.isHidden = true
             }
+            
+            cell.delegate = self
+        
             return cell
         } else {
             return UITableViewCell()
@@ -124,7 +129,7 @@ extension HomepageViewController: UITableViewDataSource {
         view.backgroundColor = UIColor(named: ColorsPalleteNames.screenBackgroundColor)
        
         let label = UILabel()
-        label.text = AppConstants.topHeadlinesHeaderText
+        label.text = TextCostants.topHeadlinesHeaderText
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
         label.frame = CGRect(x: 10, y: 10, width: 250, height: 28)
@@ -155,6 +160,4 @@ extension HomepageViewController: ArticleCellDelegate, UITableViewDelegate, Head
     func favoritesButtonPressed(_ articleID: String) {
         
     }
-    
-    
 }

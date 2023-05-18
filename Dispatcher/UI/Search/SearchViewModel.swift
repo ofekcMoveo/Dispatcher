@@ -8,25 +8,26 @@
 import Foundation
 
 class SearchViewModel {
-    var searchRepository = SearchRepository()
+
+    let searchRepository = SearchRepository()
     var articlesToDisplay: [Article] = []
     var latestSearches: [RecentSearch] = []
     var totalResultsPages = 1
     var isPaginating = false
     var currentPage = 1
     
-    func getArticlesFromAPIBySearch(_ searchKeyWords: String, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
-        if (isPaginating == false && currentPage <= totalResultsPages) {
+    func getArticlesFromAPIBySearch(searchKeyWords: String, completionHandler: @escaping (_ errorMsg: String?, _ numberOfNewItems: Int) -> Void) {
+        if (!isPaginating && currentPage <= totalResultsPages) {
             isPaginating = true
-            ArticlesRepository.shared.getArticlesByUserSearchWords(searchKeyWords, pageNumber: currentPage, completionHandler: { articles, totalPages, errorMsg in
+            ArticlesRepository.shared.getArticlesFromApi(searchKeywords: searchKeyWords, pageNumber: currentPage, completionHandler: { articles, totalPages, errorMsg in
+                self.isPaginating = false
                 if (errorMsg != nil) {
-                    completionHandler(errorMsg)
+                    completionHandler(errorMsg, 0)
                 } else {
                     self.articlesToDisplay = articles
                     self.totalResultsPages = totalPages
                     self.currentPage += 1
-                    self.isPaginating = false
-                    completionHandler(nil)
+                    completionHandler(nil, articles.count)
                 }
             })
         }

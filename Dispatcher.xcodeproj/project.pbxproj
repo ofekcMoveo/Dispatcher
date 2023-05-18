@@ -147,6 +147,7 @@
 				6B1FE63E29FE42FA00A7477E /* APIConstants.swift */,
 				6B1FE64029FE50BB00A7477E /* AppConstants.swift */,
 				6B5A9CF02A07F5E500D0FBE3 /* ColorsPalleteNames.swift */,
+				6BDE7C362A0E8D49004291D9 /* TextCostants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -171,6 +172,8 @@
 				6BD3F3FC29EC2760007C4652 /* Info.plist */,
 				6B40CD722A03EC5D003397A8 /* Utils.swift */,
 				6B40CD782A0794BF003397A8 /* Config.json */,
+				6BDE7C1A2A0A2D2C004291D9 /* Errors.swift */,
+
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				6BD3F3F629EC275F007C4652 /* Dispatcher.xcdatamodeld in Sources */,
 				6BDE7C8D2A1503DB004291D9 /* FirebaseManager.swift in Sources */,
 				6BD3F45529EDAA51007C4652 /* FavoritesViewController.swift in Sources */,
+				6BDE7C1B2A0A2D2C004291D9 /* Errors.swift in Sources */,
 				6B95EF4329FA9DCF0014C6EF /* HomepageViewModel.swift in Sources */,
 				6B8908C729FFC157003E08A1 /* Request.swift in Sources */,
 				6B1FE63F29FE42FA00A7477E /* APIConstants.swift in Sources */,
@@ -564,6 +568,7 @@
 				6BDE7C752A125397004291D9 /* Errors.swift in Sources */,
 				6B1FE64129FE50BB00A7477E /* AppConstants.swift in Sources */,
 				6BDE7C8F2A1507DA004291D9 /* FirebaseRepository.swift in Sources */,
+				6BDE7C372A0E8D49004291D9 /* TextCostants.swift in Sources */,
 				6B5A9CED2A07DF1C00D0FBE3 /* SceneDelegate.swift in Sources */,
 				6BDE7C662A125209004291D9 /* AuthViewController.swift in Sources */,
 				6B40CD732A03EC5D003397A8 /* Utils.swift in Sources */,

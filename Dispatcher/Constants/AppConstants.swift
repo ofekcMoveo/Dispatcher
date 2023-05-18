@@ -11,7 +11,6 @@ struct AppConstants {
     
     //MARK: Homepage articles table
     static let tableRowHight = 40
-    static let topHeadlinesHeaderText = "Top Headlines in Israel"
     
     //MARK: Search
     static let latestSearchesAmount = 10
@@ -23,7 +22,6 @@ struct AppConstants {
     
     //MARK: buttons text
     static let navigateToDispatchText = "NAVIGATE TO DISPATCH "
-    
 }
 
 struct TableCellsIdentifiers {
@@ -49,5 +47,9 @@ struct SegueIdentifiers {
 struct FirebaseConfigFilesNames {
     static let devEnvironmentName = "GoogleService-Info - Dev"
     static let prodEnvironmentName = "GoogleService-Info - Prod"
+}
+
+struct UserDefaultsKeys {
+    static let latestSearchesDefualtsKey = "LatestSearches"
 }
 
