@@ -8,16 +8,17 @@
 import Foundation
 
 class SearchViewModel {
+    let searchRepository = SearchRepository()
     var articlesToDisplay: [Article] = []
     var latestSearches: [RecentSearch] = []
     var totalResultsPages = 1
     var isPaginating = false
     var currentPage = 1
     
-    func getArticlesFromAPIBySearch(_ searchKeyWords: String, completionHandler: @escaping (_ errorMsg: String?, _ numberOfNewItems: Int) -> Void) {
+    func getArticlesFromAPIBySearch(searchKeyWords: String, completionHandler: @escaping (_ errorMsg: String?, _ numberOfNewItems: Int) -> Void) {
         if (!isPaginating && currentPage <= totalResultsPages) {
             isPaginating = true
-            ArticlesRepository.shared.getArticlesFromApi(searchKeyWords, pageNumber: currentPage, completionHandler: { articles, totalPages, errorMsg in
+            ArticlesRepository.shared.getArticlesFromApi(searchKeywords: searchKeyWords, pageNumber: currentPage, completionHandler: { articles, totalPages, errorMsg in
                 self.isPaginating = false
                 if (errorMsg != nil) {
                     completionHandler(errorMsg, 0)
@@ -40,7 +41,7 @@ class SearchViewModel {
     }
     
     func fetchLatestSearchs() throws {
-        try latestSearches = SearchRepository.shared.fetchLatestSearchs()
+        try latestSearches = searchRepository.fetchLatestSearchs()
         if(latestSearches.isEmpty == true) {
             throw Errors.userDefaultFetchFailedError
         }
@@ -57,7 +58,7 @@ class SearchViewModel {
 
         latestSearches.append(RecentSearch(searchKeyWords: currentSearch))
         do {
-            try SearchRepository.shared.saveSearches(latestSearches)
+            try searchRepository.saveSearches(latestSearches)
         }
     }
 
@@ -66,12 +67,12 @@ class SearchViewModel {
             recentSearch.searchKeyWords == currentSearch
         }) {
             latestSearches.remove(at: index)
-            try SearchRepository.shared.saveSearches(latestSearches)
+            try searchRepository.saveSearches(latestSearches)
         }
     }
 
     func removeAllSearches() {
-        SearchRepository.shared.removeSearches()
+        searchRepository.removeSearches()
         latestSearches = []
     }
 }

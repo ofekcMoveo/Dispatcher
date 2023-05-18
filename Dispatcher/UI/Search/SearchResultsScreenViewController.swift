@@ -47,7 +47,7 @@ class SearchResultsScreenViewController: UIViewController {
     
     private func getArticlesBySearchKeywords() {
         self.activityIndicator.startAnimating()
-        searchViewModel.getArticlesFromAPIBySearch(searchKeyWords, completionHandler: { errorMsg, numberOfNewItems in
+        searchViewModel.getArticlesFromAPIBySearch(searchKeyWords: searchKeyWords, completionHandler: { errorMsg, numberOfNewItems in
             if(errorMsg != nil) {
                 self.activityIndicator.stopAnimating()
                 if(errorMsg == Errors.noArticlesFoundError.rawValue) {

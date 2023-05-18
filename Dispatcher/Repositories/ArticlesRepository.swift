@@ -14,7 +14,7 @@ class ArticlesRepository {
     
     private init() {}
 
-    func getArticlesFromApi(_ searchKeywords: String?, pageNumber: Int, completionHandler: @escaping (_ articles: [Article], _ totalPages: Int, _ errorMsg: String?) -> Void) {
+    func getArticlesFromApi(searchKeywords: String?, pageNumber: Int, completionHandler: @escaping (_ articles: [Article], _ totalPages: Int, _ errorMsg: String?) -> Void) {
         let request = buildRequest(searchKeywords: searchKeywords, pageNumber: pageNumber)
         alamofireManager.sendRequest(request) { (result: Result<ArticleApiObject, Error>) in
             switch result {
