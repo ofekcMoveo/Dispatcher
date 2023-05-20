@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignupOrLoginView" customModule="Dispatcher" customModuleProvider="target">
+            <connections>
+                <outlet property="authModeLabel" destination="XS8-1s-txA" id="3Hc-QM-ZPQ"/>
+                <outlet property="contentView" destination="Xy7-m4-6bc" id="WQc-32-7Q3"/>
+                <outlet property="separatorImageView" destination="OnI-BX-ser" id="fKq-4r-qW9"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Xy7-m4-6bc">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="442"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Signup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XS8-1s-txA">
+                    <rect key="frame" x="20" y="9.9999999999999982" width="85.666666666666671" height="31.333333333333329"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                    <color key="textColor" name="labelsTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line" translatesAutoresizingMaskIntoConstraints="NO" id="OnI-BX-ser">
+                    <rect key="frame" x="29" y="272.33333333333331" width="335" height="2"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Lhd-1F-tBq"/>
+            <color key="backgroundColor" systemColor="systemGray5Color"/>
+            <constraints>
+                <constraint firstItem="OnI-BX-ser" firstAttribute="centerX" secondItem="Xy7-m4-6bc" secondAttribute="centerX" id="IJu-PD-2n4"/>
+                <constraint firstItem="XS8-1s-txA" firstAttribute="top" secondItem="Xy7-m4-6bc" secondAttribute="top" constant="10" id="UGf-uB-nQs"/>
+                <constraint firstItem="XS8-1s-txA" firstAttribute="leading" secondItem="Xy7-m4-6bc" secondAttribute="leading" constant="20" id="uim-ib-QU4"/>
+                <constraint firstItem="OnI-BX-ser" firstAttribute="top" secondItem="XS8-1s-txA" secondAttribute="bottom" constant="231" id="zx4-UV-hna"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-547.32824427480909" y="531.69014084507046"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="line" width="335" height="2"/>
+        <namedColor name="labelsTextColor">
+            <color red="0.3529999852180481" green="0.3529999852180481" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

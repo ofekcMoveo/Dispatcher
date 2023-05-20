@@ -8,6 +8,7 @@
 import Foundation
 
 class SearchViewModel {
+
     let searchRepository = SearchRepository()
     var articlesToDisplay: [Article] = []
     var latestSearches: [RecentSearch] = []

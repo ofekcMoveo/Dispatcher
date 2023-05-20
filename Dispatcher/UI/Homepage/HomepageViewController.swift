@@ -9,24 +9,39 @@ import UIKit
 import Alamofire
 
 class HomepageViewController: UIViewController {
-    
-    @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var notificationsButton: UIButton!
+
     @IBOutlet weak var articlesTableView: UITableView!
     @IBOutlet var homepageView: UIView!
     
     let homepageViewModel = HomepageViewModel.shared
     let activityIndicator = UIActivityIndicatorView()
+    var headerView: HeaderView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
+        
+        headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: homepageView.frame.width, height: 95), headerType: .mainHeader)
+        homepageView.addSubview(headerView ?? UIView())
+        setHeaderViewConstraints()
         setupTableView()
         configureActivityIndicator()
         getArticles()
     }
     
+    private func setHeaderViewConstraints() {
+        headerView!.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            headerView!.leadingAnchor.constraint(equalTo: homepageView.leadingAnchor, constant: 0),
+            headerView!.trailingAnchor.constraint(equalTo: homepageView.trailingAnchor, constant: 0),
+            headerView!.topAnchor.constraint(equalTo: homepageView.topAnchor, constant: 0),
+            headerView!.bottomAnchor.constraint(equalTo: articlesTableView.topAnchor, constant: 0),
+            headerView!.heightAnchor.constraint(lessThanOrEqualToConstant: 95)
+        ])
+    }
+    
     private func setupTableView() {
+        headerView?.delegate = self
         articlesTableView.dataSource = self
         articlesTableView.delegate = self
         articlesTableView.rowHeight = 450
@@ -55,13 +70,13 @@ class HomepageViewController: UIViewController {
             }
         })
     }
-    
+
     private func buildIndexPathForNewRows(numberOfNewItems: Int) -> [IndexPath] {
         
         let numberOfRows = self.articlesTableView.numberOfRows(inSection: 0)
         return (numberOfRows...(numberOfRows + numberOfNewItems - 1)).map { IndexPath(row: $0, section: 0) }
     }
-    
+
     @IBAction func unwindSegue( _ segue: UIStoryboardSegue) {
     }
     
@@ -111,7 +126,7 @@ extension HomepageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor(named: colorsPalleteNames.screenBackgroundColor)
+        view.backgroundColor = UIColor(named: ColorsPalleteNames.screenBackgroundColor)
        
         let label = UILabel()
         label.text = TextCostants.topHeadlinesHeaderText
@@ -129,12 +144,20 @@ extension HomepageViewController: UITableViewDataSource {
     }
 }
 
-extension HomepageViewController: ArticleCellDelegate, UITableViewDelegate {
+extension HomepageViewController: ArticleCellDelegate, UITableViewDelegate, HeaderViewDelegate {
+    func searchPressed() {
+        self.performSegue(withIdentifier: SegueIdentifiers.fromHomepageToSearchScreen, sender: self)
+    }
+    
+    func notificationsPressed() {
+        
+    }
+    
     func navigateButtonPressed(_ articleID: String) {
-        print(articleID)
+        
     }
     
     func favoritesButtonPressed(_ articleID: String) {
-        print(articleID)
+        
     }
 }

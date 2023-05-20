@@ -14,6 +14,14 @@ struct AppConstants {
     
     //MARK: Search
     static let latestSearchesAmount = 10
+    static let latestSearchesDefualtsKey = "LatestSearches"
+    
+    //MARK: error msg
+    static let noArticlesFoundError = "Response could not be decoded because of error:\nThe data couldn’t be read because it is missing."
+    static let userDefaultFetchFailedError = "Latest search could not be fetched from User Defaults"
+    
+    //MARK: buttons text
+    static let navigateToDispatchText = "NAVIGATE TO DISPATCH "
 }
 
 struct TableCellsIdentifiers {
@@ -24,11 +32,21 @@ struct TableCellsIdentifiers {
 struct NibNames {
     static let articleCellNibName = "ArticleCell"
     static let latestSearchCellNibName = "LatestSearchCell"
+    static let headerViewNibName = "HeaderView"
+    static let signupOrLoginViewNibName = "SignupOrLoginView"
+    static let validatableTextFieldWithErrorlabelView = "ValidatableTextFieldWithErrorlabelView"
 }
 
 struct SegueIdentifiers {
     static let fromLatestSearchToResults = "fromLatestSearchToResults"
     static let fromSearchResultsToHomepage = "fromSearchResultsToHomepage"
+    static let fromHomepageToSearchScreen = "fromHomepageToSearchScreen"
+    static let fromAuthToTabBar = "fromAuthToTabBar"
+}
+
+struct FirebaseConfigFilesNames {
+    static let devEnvironmentName = "GoogleService-Info - Dev"
+    static let prodEnvironmentName = "GoogleService-Info - Prod"
 }
 
 struct UserDefaultsKeys {

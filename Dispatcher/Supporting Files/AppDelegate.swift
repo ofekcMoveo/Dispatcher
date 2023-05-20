@@ -7,13 +7,15 @@
 
 import UIKit
 import CoreData
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        loadFirebaseEnvironment()
+
         let apiKeyValue = readApiKeyFromConfigFile()
         if(apiKeyValue.contains("Error")) {
             fatalError(apiKeyValue)
@@ -23,6 +25,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func loadFirebaseEnvironment() {
+        #if DEBUG
+        let firebaseConfig = Bundle.main.path(forResource: FirebaseConfigFilesNames.devEnvironmentName, ofType: "plist")
+        #else
+        let firebaseConfig = Bundle.main.path(forResource: FirebaseConfigFilesNames.prodEnvironmentName, ofType: "plist")
+        #endif
+
+        guard let filePath = firebaseConfig,
+              let fileopts = FirebaseOptions(contentsOfFile: filePath) else {
+            fatalError(FirebaseErrors.firebaseLoadConfigFileError.errorDescription ?? "")
+        }
+
+        FirebaseApp.configure(options: fileopts)
+            }
 
     // MARK: UISceneSession Lifecycle
 
