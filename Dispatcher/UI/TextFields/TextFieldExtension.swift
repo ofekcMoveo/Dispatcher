@@ -8,22 +8,6 @@
 import UIKit
 
 extension UITextField {
-//    func addIconToTextField(position: Position, image: UIImage) {
-//        let imageView = UIImageView(image: image)
-//        imageView.frame = CGRect(x: 0, y: 0, width: 30, height: 20)
-//        imageView.contentMode = .scaleAspectFit
-//
-//        switch position {
-//        case .start:
-//            self.leftView = imageView
-//            self.leftViewMode = .always
-//            self.rightViewMode = .never
-//        case .end:
-//            self.rightView = imageView
-//            self.rightViewMode = .always
-//            self.leftViewMode = .never
-//        }
-//    }
     
     func addIconToTextField(position: Position, icon: UIButton) {
         switch position {

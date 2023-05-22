@@ -82,6 +82,7 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     }
     
     func styleValidTextField() {
+        print("style color: \(self.text)")
         self.textColor = UIColor(named: ColorsPalleteNames.labelsTextColor)
         self.layer.borderColor = UIColor(named: ColorsPalleteNames.labelsTextColor)?.cgColor
         self.layer.borderWidth = 0.5
@@ -99,19 +100,15 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         setIsSecurePasswordIcon()
     }
 
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.placeholder = ""
-    }
-
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.resignFirstResponder()
         switch type {
         case .email:
-            validateEmail(userInput: self.text)
+            validateEmail(userInput: textField.text)
         case .password:
-            validatePassword(userInput: self.text)
+            validatePassword(userInput: textField.text)
         case .reEnterPssword:
-            comparePassword(userInput: self.text)
+            comparePassword(userInput: textField.text)
         }
            return true
     }
@@ -119,31 +116,30 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     //MARK: Input validation funcs
 
     private func validateEmail(userInput: String?) {
-       let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+"
-       let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
-        if(emailPredicate.evaluate(with: userInput)){
-            validationDelegate?.handleEmailInput(email: userInput, error: nil)
-        } else {
-            validationDelegate?.handleEmailInput(email: nil, error: UserInputErrors.invalidEmailError)
-        }
-    }
-    
-    private func validatePassword(userInput: String?) {
-        let passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}$"
-        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        if(passwordPredicate.evaluate(with: userInput)) {
-            validationDelegate?.handlePasswordInput(password: userInput, error: nil)
-        } else {
-            validationDelegate?.handlePasswordInput(password: nil, error: UserInputErrors.invalidPasswordError)
-        }
-    }
-    
-    private func comparePassword(userInput: String?) {
-        if (userInput != passwordToCompareTo) {
-            validationDelegate?.handleReEnterPasswordInput(password: nil, error: UserInputErrors.passwordsNotMatchError)
-        } else {
-            validationDelegate?.handleReEnterPasswordInput(password: passwordToCompareTo, error: nil)
-        }
-    }
+          let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+"
+           validationByRegex(regexExpression: emailRegex, inputToEvaluate: userInput, handleValidationResult: validationDelegate!.handleEmailInput)
+       }
+       
+       private func validatePassword(userInput: String?) {
+           let passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}$"
+           validationByRegex(regexExpression: passwordRegex, inputToEvaluate: userInput, handleValidationResult: validationDelegate!.handlePasswordInput)
+       }
+       
+       private func comparePassword(userInput: String?) {
+           if (userInput != passwordToCompareTo) {
+               validationDelegate?.handleReEnterPasswordInput(password: nil, error: UserInputErrors.passwordsNotMatchError)
+           } else {
+               validationDelegate?.handleReEnterPasswordInput(password: passwordToCompareTo, error: nil)
+           }
+       }
+       
+       private func validationByRegex(regexExpression: String, inputToEvaluate: String?, handleValidationResult: @escaping (_ input: String?, _ errorMsg: UserInputErrors?) -> Void) {
+           let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", regexExpression)
+           if(passwordPredicate.evaluate(with: inputToEvaluate)) {
+               handleValidationResult(inputToEvaluate, nil)
+           } else {
+               handleValidationResult(nil, UserInputErrors.invalidPasswordError)
+           }
+       }
 }
 
