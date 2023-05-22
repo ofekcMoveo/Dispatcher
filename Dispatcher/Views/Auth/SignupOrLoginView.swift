@@ -28,9 +28,9 @@ class SignupOrLoginView: UIView {
     var passwordTextField: TextFieldWithValidation?
     var reEnterPasswordTextField: TextFieldWithValidation?
 
-    var emailErrorLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 180, height: 14))
-    var passwordErrorLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 180, height: 14))
-    var reEnterPasswordErrorLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 180, height: 14))
+    var emailErrorLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 180, height: 16))
+    var passwordErrorLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 180, height: 16))
+    var reEnterPasswordErrorLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 180, height: 16))
 
     override init(frame: CGRect) {
         self.authMode = .Signup
@@ -80,7 +80,7 @@ class SignupOrLoginView: UIView {
                 emailErrorLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 3),
                 emailErrorLabel.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
                 emailErrorLabel.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
-                emailErrorLabel.heightAnchor.constraint(equalToConstant: 14)
+                emailErrorLabel.heightAnchor.constraint(equalToConstant: 16)
             ])
 
             NSLayoutConstraint.activate([
@@ -92,7 +92,7 @@ class SignupOrLoginView: UIView {
                 passwordErrorLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 3),
                 passwordErrorLabel.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
                 passwordErrorLabel.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
-                passwordErrorLabel.heightAnchor.constraint(equalToConstant: 14)
+                passwordErrorLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 16)
             ])
 
             NSLayoutConstraint.activate([
@@ -106,7 +106,7 @@ class SignupOrLoginView: UIView {
                 reEnterPasswordErrorLabel.trailingAnchor.constraint(equalTo: reEnterPasswordTextField.trailingAnchor),
                 reEnterPasswordErrorLabel.trailingAnchor.constraint(equalTo: reEnterPasswordTextField.trailingAnchor),
                 reEnterPasswordErrorLabel.bottomAnchor.constraint(equalTo: separatorImageView.topAnchor, constant: -20),
-                reEnterPasswordErrorLabel.heightAnchor.constraint(equalToConstant: 14)
+                reEnterPasswordErrorLabel.heightAnchor.constraint(equalToConstant: 16)
             ])
         }
     }

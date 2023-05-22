@@ -77,7 +77,7 @@ class HeaderView: UIView {
         }
     }
         
-    private func setupMainHeader() {
+    func setupMainHeader() {
         logoImageView.isHidden = false
         searchButton.isHidden = false
         notificationsButton.isHidden = false
@@ -85,7 +85,7 @@ class HeaderView: UIView {
         backButton.isHidden = true
     }
     
-    private func setupBackHeader() {
+    func setupBackHeader() {
         backButton.isHidden = false
         
         logoImageView.isHidden = true
@@ -93,11 +93,11 @@ class HeaderView: UIView {
         notificationsButton.isHidden = true
     }
     
-    private func setupApproveOrDenyHeader() {
+    func setupApproveOrDenyHeader() {
         
     }
     
-    private func setupLogoHeader() {
+    func setupLogoHeader() {
         logoImageView.isHidden = false
         
         logoImageView.translatesAutoresizingMaskIntoConstraints = false

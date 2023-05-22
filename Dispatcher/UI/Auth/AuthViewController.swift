@@ -13,6 +13,7 @@ class AuthViewController: UIViewController, SignupOrLoginDelegate{
     var logoHeader: HeaderView?
     var signupOrLoginView: SignupOrLoginView?
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

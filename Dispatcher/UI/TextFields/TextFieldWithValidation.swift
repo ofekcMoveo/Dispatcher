@@ -79,10 +79,10 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         showOrHideTextIcon.imageView?.contentMode = .scaleAspectFit
         showOrHideTextIcon.addTarget(self, action: #selector(showOrHidePasswordPressed) , for: .touchUpInside)
         self.addIconToTextField(position: .end, icon: showOrHideTextIcon)
+        
     }
     
     func styleValidTextField() {
-        print("style color: \(self.text)")
         self.textColor = UIColor(named: ColorsPalleteNames.labelsTextColor)
         self.layer.borderColor = UIColor(named: ColorsPalleteNames.labelsTextColor)?.cgColor
         self.layer.borderWidth = 0.5
@@ -99,8 +99,20 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         self.isSecureTextEntry = !self.isSecureTextEntry
         setIsSecurePasswordIcon()
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shadowRadius = 4
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldShouldReturn(textField)
+    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.layer.shadowOpacity = 0
         self.resignFirstResponder()
         switch type {
         case .email:
@@ -134,11 +146,16 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
        }
        
        private func validationByRegex(regexExpression: String, inputToEvaluate: String?, handleValidationResult: @escaping (_ input: String?, _ errorMsg: UserInputErrors?) -> Void) {
-           let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", regexExpression)
-           if(passwordPredicate.evaluate(with: inputToEvaluate)) {
+           let predicate = NSPredicate(format: "SELF MATCHES %@", regexExpression)
+           if(predicate.evaluate(with: inputToEvaluate)) {
                handleValidationResult(inputToEvaluate, nil)
            } else {
-               handleValidationResult(nil, UserInputErrors.invalidPasswordError)
+               if(self.type == .email) {
+                   handleValidationResult(nil, UserInputErrors.invalidEmailError)
+               } else if (self.type == .password){
+                   handleValidationResult(nil, UserInputErrors.invalidPasswordError)
+               }
+               
            }
        }
 }
