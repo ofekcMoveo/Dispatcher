@@ -63,7 +63,7 @@
             <objects>
                 <viewController id="F4O-w4-xin" customClass="SearchScreenViewController" customModule="Dispatcher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9r7-cE-yJl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdx-7h-PnZ" userLabel="SearchTextEditView">
@@ -105,7 +105,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6lX-Il-2cu">
-                                <rect key="frame" x="0.0" y="82" width="414" height="814"/>
+                                <rect key="frame" x="0.0" y="82" width="414" height="804"/>
                                 <color key="backgroundColor" name="screenBackgroundColor"/>
                                 <color key="tintColor" name="screenBackgroundColor"/>
                                 <color key="separatorColor" name="secondaryButtonColor"/>
@@ -193,7 +193,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPS-CZ-iMh">
                                         <rect key="frame" x="5" y="21" width="45" height="34.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="45" id="u6V-uY-2Uf"/>
+                                            <constraint firstAttribute="width" constant="45" id="FHf-6X-k0j"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="Arrow - Left" title=" "/>
@@ -227,8 +227,8 @@
                                     <constraint firstAttribute="height" constant="76" id="DpD-E2-k2F"/>
                                     <constraint firstItem="WPS-CZ-iMh" firstAttribute="leading" secondItem="fLx-zt-F0u" secondAttribute="leading" constant="5" id="Kd4-jT-vqe"/>
                                     <constraint firstItem="gzN-jx-rNP" firstAttribute="centerY" secondItem="fLx-zt-F0u" secondAttribute="centerY" id="O6f-46-mEi"/>
+                                    <constraint firstItem="gzN-jx-rNP" firstAttribute="leading" secondItem="WPS-CZ-iMh" secondAttribute="trailing" constant="3" id="Xm6-TB-Nzk"/>
                                     <constraint firstItem="CJa-IQ-TIh" firstAttribute="leading" secondItem="gzN-jx-rNP" secondAttribute="trailing" constant="3" id="ht2-mb-Klu"/>
-                                    <constraint firstItem="gzN-jx-rNP" firstAttribute="leading" secondItem="WPS-CZ-iMh" secondAttribute="trailing" constant="3" id="kkE-Vg-5vg"/>
                                     <constraint firstAttribute="trailing" secondItem="CJa-IQ-TIh" secondAttribute="trailing" constant="5" id="kvH-eA-g0b"/>
                                 </constraints>
                             </view>
@@ -271,6 +271,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="MLG-Ub-wwK" firstAttribute="leading" secondItem="GgN-7r-qY4" secondAttribute="leading" id="594-nk-y20"/>
+                            <constraint firstItem="4Vn-vu-C8g" firstAttribute="centerX" secondItem="u1g-96-vqQ" secondAttribute="centerX" id="G0P-Ko-UcO"/>
                             <constraint firstItem="4Vn-vu-C8g" firstAttribute="top" secondItem="fLx-zt-F0u" secondAttribute="bottom" id="GFv-Ue-9YQ"/>
                             <constraint firstAttribute="bottom" secondItem="4Vn-vu-C8g" secondAttribute="bottom" id="GTH-P2-qKJ"/>
                             <constraint firstItem="GgN-7r-qY4" firstAttribute="trailing" secondItem="fLx-zt-F0u" secondAttribute="trailing" id="Idn-lP-aX2"/>
@@ -481,7 +482,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oNL-5q-Vwr"/>
+        <segue reference="RWA-46-Q6d"/>
+        <segue reference="m3G-Z4-Knh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

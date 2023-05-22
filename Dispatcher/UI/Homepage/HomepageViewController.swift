@@ -22,6 +22,7 @@ class HomepageViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         
         headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: homepageView.frame.width, height: 95), headerType: .mainHeader)
+        headerView?.delegate = self
         homepageView.addSubview(headerView ?? UIView())
         setHeaderViewConstraints()
         setupTableView()
@@ -41,7 +42,6 @@ class HomepageViewController: UIViewController {
     }
     
     private func setupTableView() {
-        headerView?.delegate = self
         articlesTableView.dataSource = self
         articlesTableView.delegate = self
         articlesTableView.rowHeight = 450
@@ -72,7 +72,6 @@ class HomepageViewController: UIViewController {
     }
 
     private func buildIndexPathForNewRows(numberOfNewItems: Int) -> [IndexPath] {
-        
         let numberOfRows = self.articlesTableView.numberOfRows(inSection: 0)
         return (numberOfRows...(numberOfRows + numberOfNewItems - 1)).map { IndexPath(row: $0, section: 0) }
     }
@@ -145,19 +144,17 @@ extension HomepageViewController: UITableViewDataSource {
 }
 
 extension HomepageViewController: ArticleCellDelegate, UITableViewDelegate, HeaderViewDelegate {
+    func notificationsPressed() {
+    }
+    
     func searchPressed() {
         self.performSegue(withIdentifier: SegueIdentifiers.fromHomepageToSearchScreen, sender: self)
     }
     
-    func notificationsPressed() {
-        
-    }
-    
+  
     func navigateButtonPressed(_ articleID: String) {
-        
     }
     
     func favoritesButtonPressed(_ articleID: String) {
-        
     }
 }

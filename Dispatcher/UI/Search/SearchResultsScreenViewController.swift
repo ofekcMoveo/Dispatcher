@@ -25,10 +25,7 @@ class SearchResultsScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchResultsTableView.delegate = self
-        searchResultsTableView.dataSource = self
-        searchResultsTableView.register(UINib(nibName: NibNames.articleCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.articleCellIdentifier)
-        
+        setupTableView()
         noResultsView.isHidden = true
         searchKeyWordsLabel.text = (searchKeyWords)
         configureActivityIndicator()
@@ -39,6 +36,13 @@ class SearchResultsScreenViewController: UIViewController {
         searchResultsTableView.reloadData()
     }
     
+    private func setupTableView() {
+        searchResultsTableView.delegate = self
+        searchResultsTableView.dataSource = self
+        searchResultsTableView.rowHeight = 450
+        searchResultsTableView.register(UINib(nibName: NibNames.articleCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.articleCellIdentifier)
+    }
+    
     private func configureActivityIndicator() {
         activityIndicator.style = .large
         activityIndicator.center = searchResultsView.center
@@ -47,9 +51,10 @@ class SearchResultsScreenViewController: UIViewController {
     
     private func getArticlesBySearchKeywords() {
         self.activityIndicator.startAnimating()
+        
         searchViewModel.getArticlesFromAPIBySearch(searchKeyWords: searchKeyWords, completionHandler: { errorMsg, numberOfNewItems in
+            self.activityIndicator.stopAnimating()
             if(errorMsg != nil) {
-                self.activityIndicator.stopAnimating()
                 if(errorMsg == Errors.noArticlesFoundError.rawValue) {
                     self.noResultsView.isHidden = false
                 } else {
@@ -62,17 +67,14 @@ class SearchResultsScreenViewController: UIViewController {
                     } catch (let error) {
                        self.present(createErrorAlert(error.localizedDescription), animated: true, completion: nil)
                     }
-                    self.activityIndicator.stopAnimating()
                     let indexPathForNewRows = self.buildIndexPathForNewRows(numberOfNewItems: numberOfNewItems)
                     self.searchResultsTableView.insertRows(at: indexPathForNewRows, with: .automatic)
-                
                 }
             }
         })
     }
     
     func buildIndexPathForNewRows(numberOfNewItems: Int) -> [IndexPath] {
-        
         let numberOfRows = self.searchResultsTableView.numberOfRows(inSection: 0)
         return (numberOfRows...(numberOfRows + numberOfNewItems - 1)).map { IndexPath(row: $0, section: 0) }
     }
@@ -86,11 +88,9 @@ class SearchResultsScreenViewController: UIViewController {
 extension SearchResultsScreenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchViewModel.articlesAmount()
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let currentArticle = searchViewModel.getArticleByIndex(index: indexPath.row)
         
         if let cell = (tableView.dequeueReusableCell(withIdentifier: TableCellsIdentifiers.articleCellIdentifier, for: indexPath) as? ArticleCell) {
@@ -116,6 +116,10 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
         } else {
             return UITableViewCell()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(AppConstants.tableRowHight)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

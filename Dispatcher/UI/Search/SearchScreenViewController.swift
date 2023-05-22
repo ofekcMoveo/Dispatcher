@@ -92,6 +92,7 @@ extension SearchScreenViewController: UITableViewDataSource {
 extension SearchScreenViewController: UITableViewDelegate, UISearchBarDelegate, LatestSearchCellDelegate {
     func searchCellSelected(_ search: String) {
         searchBar.text = search
+        searchScreenViewModel.articlesToDisplay = []
         performSegue(withIdentifier: SegueIdentifiers.fromLatestSearchToResults, sender: self)
     }
     

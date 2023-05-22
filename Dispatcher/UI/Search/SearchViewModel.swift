@@ -24,7 +24,7 @@ class SearchViewModel {
                 if (errorMsg != nil) {
                     completionHandler(errorMsg, 0)
                 } else {
-                    self.articlesToDisplay = articles
+                    self.articlesToDisplay.append(contentsOf: articles)
                     self.totalResultsPages = totalPages
                     self.currentPage += 1
                     completionHandler(nil, articles.count)

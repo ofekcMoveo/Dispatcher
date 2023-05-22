@@ -16,7 +16,7 @@ class SignupOrLoginView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var authModeLabel: UILabel!
     @IBOutlet weak var separatorImageView: UIImageView!
-
+    
     var delegate: SignupOrLoginDelegate?
     var mainButton: DispatcherAppButton?
     var secondaryButton: DispatcherAppButton?
@@ -58,10 +58,10 @@ class SignupOrLoginView: UIView {
         setViewItemsByAuthMode()
         initTextFields()
         setErrorLabels()
-        
+                
         setTextFieldsAndLabelsConstarints()
     }
-    
+
     private func setTextFieldsAndLabelsConstarints(){      
         if let passwordTextField, let emailTextField, let reEnterPasswordTextField {
             emailTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -221,7 +221,7 @@ class SignupOrLoginView: UIView {
     
     private func styleErrorLabel(label: UILabel, error: String) {
         label.text = error
-        label.textColor = .red
+        label.textColor = UIColor(named: ColorsPalleteNames.errorColor)
         label.isHidden = false
     }
     
@@ -261,7 +261,6 @@ class SignupOrLoginView: UIView {
 }
 
 extension SignupOrLoginView: TextFieldWithValidationDelegate {
-
     func handleEmailInput(email: String?, error: UserInputErrors?) {
         handleInput(editedtextField: emailTextField, errorlabel: emailErrorLabel, error: error)
         

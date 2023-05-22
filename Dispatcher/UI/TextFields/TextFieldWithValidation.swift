@@ -89,8 +89,8 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     }
     
     func styleErrorTextField() {
-        self.textColor = .red
-        self.styleTextFieldPlaceHolder(placeholderText: self.placeholder ?? "", fontColor: .red)
+        self.textColor = UIColor(named: ColorsPalleteNames.errorColor)
+        self.styleTextFieldPlaceHolder(placeholderText: self.placeholder ?? "", fontColor: UIColor(named: ColorsPalleteNames.errorColor))
         self.layer.borderColor = UIColor.red.cgColor
         self.layer.borderWidth = 0.5
     }
