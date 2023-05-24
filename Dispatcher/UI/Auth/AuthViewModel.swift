@@ -18,7 +18,7 @@ class AuthViewModel {
     func authenticateUser(authMode: AuthMode, email: String, password: String, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
         firebaseRepository.exceuteAuthentication(authMode: authMode, email: email, password: password) { errorMsg in
             if let err = errorMsg {
-                completionHandler(errorMsg)
+                completionHandler(err)
             } else {
                 completionHandler(nil)
             }
