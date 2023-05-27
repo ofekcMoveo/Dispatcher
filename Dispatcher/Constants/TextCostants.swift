@@ -11,6 +11,6 @@ struct TextCostants {
 
     static let emailTextFieldPlaceholder = "Your email"
     static let passwordTextFieldPlaceholder = "Password"
-    static let reEnterPasswordTextFieldPlaceholder = "ReEnter Password"
+    static let reEnterPasswordTextFieldPlaceholder = "Re-Enter Password"
     static let topHeadlinesHeaderText = "Top Headlines in Israel"
 }

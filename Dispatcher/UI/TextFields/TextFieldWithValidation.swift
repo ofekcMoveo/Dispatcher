@@ -23,17 +23,24 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     var type: TextFieldType
     var passwordToCompareTo: String?
     var validationDelegate: TextFieldWithValidationDelegate?
-        
+    
     init(frame: CGRect, type: TextFieldType) {
         self.type = type
         super.init(frame: frame)
-        self.delegate = self
-        styleTextField()
-        setTextFieldByType()
+        
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.type = .email
+        super.init(coder: coder)
+    }
+    
+    func initTextField(type: TextFieldType) {
+        self.type = type
+        self.delegate = self
+        
+        styleTextField()
+        setTextFieldByType()
     }
     
     private func styleTextField() {
@@ -74,10 +81,12 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     private func setIsSecurePasswordIcon() {
         let image = (self.isSecureTextEntry ? UIImage(named: "hideText") : UIImage(named: "showText")) ?? UIImage()
         
-        let showOrHideTextIcon = UIButton()
+        let showOrHideTextIcon = UIButton(frame: CGRect(x: 0, y: 0, width: (image.size.width + 16), height: (image.size.height + 10)))
         showOrHideTextIcon.setImage(image, for: .normal)
         showOrHideTextIcon.imageView?.contentMode = .scaleAspectFit
         showOrHideTextIcon.addTarget(self, action: #selector(showOrHidePasswordPressed) , for: .touchUpInside)
+        
+        showOrHideTextIcon.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
         self.addIconToTextField(position: .end, icon: showOrHideTextIcon)
         
     }
@@ -122,7 +131,7 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         case .reEnterPssword:
             comparePassword(userInput: textField.text)
         }
-           return true
+        return true
     }
     
     //MARK: Input validation funcs
@@ -132,20 +141,21 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
            validationByRegex(regexExpression: emailRegex, inputToEvaluate: userInput, handleValidationResult: validationDelegate!.handleEmailInput)
        }
        
-       private func validatePassword(userInput: String?) {
-           let passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}$"
-           validationByRegex(regexExpression: passwordRegex, inputToEvaluate: userInput, handleValidationResult: validationDelegate!.handlePasswordInput)
+   private func validatePassword(userInput: String?) {
+       let passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}$"
+       validationByRegex(regexExpression: passwordRegex, inputToEvaluate: userInput, handleValidationResult: validationDelegate!.handlePasswordInput)
+   }
+   
+   private func comparePassword(userInput: String?) {
+       if (userInput != passwordToCompareTo && userInput != "") {
+           validationDelegate?.handleReEnterPasswordInput(password: nil, error: UserInputErrors.passwordsNotMatchError)
+       } else {
+           validationDelegate?.handleReEnterPasswordInput(password: passwordToCompareTo, error: nil)
        }
-       
-       private func comparePassword(userInput: String?) {
-           if (userInput != passwordToCompareTo) {
-               validationDelegate?.handleReEnterPasswordInput(password: nil, error: UserInputErrors.passwordsNotMatchError)
-           } else {
-               validationDelegate?.handleReEnterPasswordInput(password: passwordToCompareTo, error: nil)
-           }
-       }
-       
-       private func validationByRegex(regexExpression: String, inputToEvaluate: String?, handleValidationResult: @escaping (_ input: String?, _ errorMsg: UserInputErrors?) -> Void) {
+   }
+   
+   private func validationByRegex(regexExpression: String, inputToEvaluate: String?, handleValidationResult: @escaping (_ input: String?, _ errorMsg: UserInputErrors?) -> Void) {
+       if(inputToEvaluate != "") {
            let predicate = NSPredicate(format: "SELF MATCHES %@", regexExpression)
            if(predicate.evaluate(with: inputToEvaluate)) {
                handleValidationResult(inputToEvaluate, nil)
@@ -158,5 +168,7 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
                
            }
        }
+       
+   }
 }
 
