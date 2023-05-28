@@ -123,7 +123,7 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (searchViewModel.articlesToDisplay.count - 2) {
+        if indexPath.row == (searchViewModel.articlesToDisplay.count - 3) {
             if (searchViewModel.currentPage < searchViewModel.totalResultsPages) {
                 getArticlesBySearchKeywords()
             }

@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet var contentView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

@@ -33,6 +33,8 @@
 		6B95EF4029FA9D9E0014C6EF /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B95EF3F29FA9D9E0014C6EF /* ProfileViewModel.swift */; };
 		6B95EF4329FA9DCF0014C6EF /* HomepageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B95EF4229FA9DCF0014C6EF /* HomepageViewModel.swift */; };
 		6B95EF4629FA9DF80014C6EF /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B95EF4529FA9DF80014C6EF /* FavoritesViewModel.swift */; };
+		6BAD5B042A234C4A008D8974 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAD5B032A234C49008D8974 /* SplashViewController.swift */; };
+		6BAD5B082A235711008D8974 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BAD5B072A235711008D8974 /* Launch Screen.storyboard */; };
 		6BD3F3F329EC275F007C4652 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BD3F3F129EC275F007C4652 /* Main.storyboard */; };
 		6BD3F3F629EC275F007C4652 /* Dispatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BD3F3F429EC275F007C4652 /* Dispatcher.xcdatamodeld */; };
 		6BD3F3F829EC2760007C4652 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BD3F3F729EC2760007C4652 /* Assets.xcassets */; };
@@ -89,6 +91,8 @@
 		6B95EF3F29FA9D9E0014C6EF /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		6B95EF4229FA9DCF0014C6EF /* HomepageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageViewModel.swift; sourceTree = "<group>"; };
 		6B95EF4529FA9DF80014C6EF /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		6BAD5B032A234C49008D8974 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		6BAD5B072A235711008D8974 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6BD3F3E829EC275F007C4652 /* Dispatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dispatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BD3F3F229EC275F007C4652 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6BD3F3F529EC275F007C4652 /* Dispatcher.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Dispatcher.xcdatamodel; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 				6BD3F3F129EC275F007C4652 /* Main.storyboard */,
 				6B8908E62A016644003E08A1 /* SearchTableCells */,
 				6BDE7C2B2A0CD326004291D9 /* Headers */,
+				6BAD5B072A235711008D8974 /* Launch Screen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 		6BD3F42529ED42E5007C4652 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6BAD5B032A234C49008D8974 /* SplashViewController.swift */,
 				6BDE7C832A12AF8B004291D9 /* TextFields */,
 				6BDE7C722A125384004291D9 /* Enums */,
 				6BDE7C622A1251FC004291D9 /* Auth */,
@@ -477,6 +483,7 @@
 				6B40CD792A0794BF003397A8 /* Config.json in Resources */,
 				6B95EF2829F019360014C6EF /* ArticleCell.xib in Resources */,
 				6B5A9CEF2A07F0F600D0FBE3 /* .gitignore in Resources */,
+				6BAD5B082A235711008D8974 /* Launch Screen.storyboard in Resources */,
 				6BDE7C8B2A14F12A004291D9 /* GoogleService-Info - Dev.plist in Resources */,
 				6BDE7C912A152915004291D9 /* GoogleService-Info - Prod.plist in Resources */,
 				6BD3F3F329EC275F007C4652 /* Main.storyboard in Resources */,
@@ -566,6 +573,7 @@
 				6BDE7C8F2A1507DA004291D9 /* FirebaseRepository.swift in Sources */,
 				6B5A9CED2A07DF1C00D0FBE3 /* SceneDelegate.swift in Sources */,
 				6BDE7C662A125209004291D9 /* AuthViewController.swift in Sources */,
+				6BAD5B042A234C4A008D8974 /* SplashViewController.swift in Sources */,
 				6B40CD732A03EC5D003397A8 /* Utils.swift in Sources */,
 				6B5A9CF42A0800A400D0FBE3 /* UserDefaultsManager.swift in Sources */,
 				6B95EF2729F019360014C6EF /* ArticleCell.swift in Sources */,

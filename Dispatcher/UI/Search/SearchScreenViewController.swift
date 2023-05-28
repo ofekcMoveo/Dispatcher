@@ -36,7 +36,7 @@ class SearchScreenViewController: UIViewController {
     }
     
     private func styleSearchHeaderView() {
-        searchHeaderView.layer.borderWidth = 0.5
+        searchHeaderView.layer.borderWidth = 1
         searchHeaderView.layer.borderColor = UIColor(named: ColorsPalleteNames.secondaryButtonColor)?.cgColor
         styleSearchBar()
     }
@@ -48,7 +48,7 @@ class SearchScreenViewController: UIViewController {
         searchTextField.textColor = UIColor(named: ColorsPalleteNames.labelsTextColor)
         searchTextField.styleTextFieldPlaceHolder(placeholderText: "Search", fontColor: UIColor(named: ColorsPalleteNames.labelsTextColor)?.withAlphaComponent(0.5))
         
-        searchBar.setImage(UIImage(named: "exit"), for: .clear, state: .normal)
+        searchBar.setImage(UIImage(named: "bigExit"), for: .clear, state: .normal)
     }
     
     
@@ -99,7 +99,7 @@ extension SearchScreenViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 58
+        return 62
     }
 }
 

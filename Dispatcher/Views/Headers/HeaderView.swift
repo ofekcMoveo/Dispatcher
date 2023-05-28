@@ -104,7 +104,8 @@ class HeaderView: UIView {
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             logoImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5),
-            logoImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1)
+            logoImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1),
+            logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 90)
         ])
         
         searchButton.isHidden = true

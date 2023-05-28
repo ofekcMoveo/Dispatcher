@@ -12,33 +12,22 @@ class HomepageViewController: UIViewController {
 
     @IBOutlet weak var articlesTableView: UITableView!
     @IBOutlet var homepageView: UIView!
+    @IBOutlet weak var headerView: HeaderView!
     
     let homepageViewModel = HomepageViewModel.shared
     let activityIndicator = UIActivityIndicatorView()
-    var headerView: HeaderView?
+   // var headerView: HeaderView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         
-        headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: homepageView.frame.width, height: 95), headerType: .mainHeader)
-        headerView?.delegate = self
-        homepageView.addSubview(headerView ?? UIView())
-        setHeaderViewConstraints()
+        headerView.initView(headerType: .mainHeader)
+        headerView.delegate = self
+
         setupTableView()
         configureActivityIndicator()
         getArticles()
-    }
-    
-    private func setHeaderViewConstraints() {
-        headerView!.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            headerView!.leadingAnchor.constraint(equalTo: homepageView.leadingAnchor, constant: 0),
-            headerView!.trailingAnchor.constraint(equalTo: homepageView.trailingAnchor, constant: 0),
-            headerView!.topAnchor.constraint(equalTo: homepageView.topAnchor, constant: 0),
-            headerView!.bottomAnchor.constraint(equalTo: articlesTableView.topAnchor, constant: 0),
-            headerView!.heightAnchor.constraint(lessThanOrEqualToConstant: 95)
-        ])
     }
     
     private func setupTableView() {
@@ -116,7 +105,7 @@ extension HomepageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (homepageViewModel.articlesToDisplay.count - 2) {
+        if indexPath.row == (homepageViewModel.articlesToDisplay.count - 3) {
             if (homepageViewModel.currentPage < homepageViewModel.totalResultsPages) {
                 getArticles()
             }
@@ -130,8 +119,8 @@ extension HomepageViewController: UITableViewDataSource {
         let label = UILabel()
         label.text = TextCostants.topHeadlinesHeaderText
         label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
-        label.frame = CGRect(x: 10, y: 10, width: 250, height: 28)
+        label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        label.frame = CGRect(x: 10, y: 10, width: 250, height: 42)
         
         view.addSubview(label)
             

@@ -23,6 +23,8 @@ class LatestSearchCell: UITableViewCell {
         super.awakeFromNib()
         
         self.contentView.backgroundColor = UIColor(named: ColorsPalleteNames.screenBackgroundColor)
+        
+        removeSearchCellButton.imageView?.contentMode = .scaleAspectFill
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

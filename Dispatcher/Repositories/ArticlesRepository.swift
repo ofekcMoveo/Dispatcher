@@ -21,7 +21,7 @@ class ArticlesRepository {
             case .success(let dataResult):
                 var articles: [Article] = []
                 for article in dataResult.articles {
-                    if(article.language == "en" || article.language == "he") {
+                    if(article.language == "en") {
                         articles.append(self.buildArticleFromArticleResponse(article))
                     }
                 }
@@ -37,13 +37,13 @@ class ArticlesRepository {
             return Request(
                 baseUrl: APIConstants.baseApiUrl,
                 endpoint: APIConstants.searchEndpoint,
-                parameters: ["q" : searchKeywords, "countries" : "IL", "page_size" : APIConstants.articlesPageSize , "page" : pageNumber],
+                parameters: ["q" : searchKeywords, "countries" : "US", "page_size" : APIConstants.articlesPageSize , "page" : pageNumber],
                 method: .get)
         } else {
             return Request(
                 baseUrl: APIConstants.baseApiUrl,
                 endpoint: APIConstants.latestHeadlinesEndpoint,
-                parameters: ["countries" : "IL", "page_size": APIConstants.articlesPageSize, "page" : pageNumber],
+                parameters: ["countries" : "US", "page_size": APIConstants.articlesPageSize, "page" : pageNumber],
                 method: .get)
         }
         

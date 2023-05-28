@@ -42,6 +42,8 @@ struct SegueIdentifiers {
     static let fromSearchResultsToHomepage = "fromSearchResultsToHomepage"
     static let fromHomepageToSearchScreen = "fromHomepageToSearchScreen"
     static let fromAuthToTabBar = "fromAuthToTabBar"
+    static let fromSplashToTabBar = "fromSplashToTabBar"
+    static let fromSplashToAuth = "fromSplashToAuth"
 }
 
 struct FirebaseConfigFilesNames {

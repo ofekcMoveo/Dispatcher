@@ -13,9 +13,8 @@ import FirebaseCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
         loadFirebaseEnvironment()
-
+    
         let apiKeyValue = readApiKeyFromConfigFile()
         if(apiKeyValue.contains("Error")) {
             fatalError(apiKeyValue)
@@ -39,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         FirebaseApp.configure(options: fileopts)
-            }
+    }
 
     // MARK: UISceneSession Lifecycle
 
