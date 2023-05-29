@@ -30,4 +30,13 @@ class FirebaseManager {
             }
         }
     }
+    
+    func logoutUserFromFirebase(completionHandler: @escaping (_ errorMsg: String?) -> Void) {
+        do {
+          try Auth.auth().signOut()
+            completionHandler(nil)
+        } catch let signOutError as NSError {
+            completionHandler(signOutError.localizedDescription)
+        }
+    }
 }

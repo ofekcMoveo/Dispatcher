@@ -76,8 +76,8 @@ class AuthViewController: UIViewController{
         
         func signupOrLoginPressed(authMode: AuthMode, email: String, password: String) {
             authViewModel.authenticateUser(authMode: authMode, email: email, password: password, completionHandler: { errorMsg in
-                if(errorMsg != nil) {
-                    self.present(createErrorAlert(errorMsg!), animated: true, completion: nil)
+                if let error = errorMsg {
+                    self.present(createErrorAlert(error), animated: true, completion: nil)
                 } else {
                     self.performSegue(withIdentifier: SegueIdentifiers.fromAuthToTabBar, sender: self)
                 }
@@ -162,41 +162,50 @@ class AuthViewController: UIViewController{
             }
         }
         
+    func scrollScrollViewDown() {
+        let contentOffset = CGPoint(x: scrollView.contentOffset.x, y: scrollView.contentOffset.y + 70)
+        scrollView.setContentOffset(contentOffset, animated: true)
     }
     
-    extension AuthViewController: TextFieldWithValidationDelegate {
-        func textFieldBeginEditing() {
-            
-        }
+    func scrollScrollViewUp() {
+        let contentOffset = CGPoint(x: scrollView.contentOffset.x, y: scrollView.contentOffset.y - 70)
+        scrollView.setContentOffset(contentOffset, animated: true)
+    }
+}
+    
+extension AuthViewController: TextFieldWithValidationDelegate {
+    func textFieldBeginEditing() {
+        scrollScrollViewDown()
+    }
+    
+    func textFieldFinishedEditing() {
+        scrollScrollViewUp()
+    }
+    
+    func handleEmailInput(email: String?, error: UserInputErrors?) {
+        handleInput(editedtextField: emailTextField, errorlabel: emailErrorLabel, error: error)
         
-        func textFieldFinishedEditing() {
-            
+        if let email {
+            validatedEmail = email
         }
+    }
+    
+    func handlePasswordInput(password: String?, error: UserInputErrors?) {
+        handleInput(editedtextField: passwordTextField, errorlabel: passwordErrorLabel, error: error)
         
-        func handleEmailInput(email: String?, error: UserInputErrors?) {
-            handleInput(editedtextField: emailTextField, errorlabel: emailErrorLabel, error: error)
-            
-            if let email {
-                validatedEmail = email
+        if let password {
+            if(authMode == AuthMode.Signup) {
+                reEnterPasswordTextField?.passwordToCompareTo = "\(password)"
+            } else {
+                validatedPassword = password
             }
         }
-        
-        func handlePasswordInput(password: String?, error: UserInputErrors?) {
-            handleInput(editedtextField: passwordTextField, errorlabel: passwordErrorLabel, error: error)
-            
-            if let password {
-                if(authMode == AuthMode.Signup) {
-                    reEnterPasswordTextField?.passwordToCompareTo = "\(password)"
-                } else {
-                    validatedPassword = password
-                }
-            }
-        }
-        
-        func handleReEnterPasswordInput(password: String?, error: UserInputErrors?) {
-            handleInput(editedtextField: reEnterPasswordTextField, errorlabel: reEnterPasswordErrorLabel, error: error)
-            validatedPassword = password ?? ""
-        }
+    }
+    
+    func handleReEnterPasswordInput(password: String?, error: UserInputErrors?) {
+        handleInput(editedtextField: reEnterPasswordTextField, errorlabel: reEnterPasswordErrorLabel, error: error)
+        validatedPassword = password ?? ""
+    }
 }
     
 

@@ -16,7 +16,8 @@ class HomepageViewController: UIViewController {
     
     let homepageViewModel = HomepageViewModel.shared
     let activityIndicator = UIActivityIndicatorView()
-   // var headerView: HeaderView?
+    let tableFotterActivityIndicator = UIActivityIndicatorView()
+    var isPagination = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,18 @@ class HomepageViewController: UIViewController {
         articlesTableView.delegate = self
         articlesTableView.rowHeight = 450
         articlesTableView.register(UINib(nibName: NibNames.articleCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.articleCellIdentifier)
+        
+        setupFotterView()
+    }
+    
+    private func setupFotterView() {
+        tableFotterActivityIndicator.style = .large
+        articlesTableView.tableFooterView = tableFotterActivityIndicator
+        NSLayoutConstraint.activate([
+            tableFotterActivityIndicator.centerXAnchor.constraint(equalTo: articlesTableView.tableFooterView?.centerXAnchor ?? NSLayoutXAxisAnchor()),
+            tableFotterActivityIndicator.centerYAnchor.constraint(equalTo: articlesTableView.tableFooterView?.centerYAnchor ?? NSLayoutYAxisAnchor())
+        ])
+        
     }
     
     private func configureActivityIndicator() {
@@ -45,10 +58,10 @@ class HomepageViewController: UIViewController {
     }
     
     private func getArticles() {
-        self.activityIndicator.startAnimating()
-
+        isPagination == true ? (tableFotterActivityIndicator.startAnimating()) : self.activityIndicator.startAnimating()
+    
         homepageViewModel.getArticlesToDisplay(completionHandler: { errorMsg, numberOfNewItems in
-            self.activityIndicator.stopAnimating()
+            self.isPagination == true ? (self.tableFotterActivityIndicator.stopAnimating()) : self.activityIndicator.stopAnimating()
             if(errorMsg != nil) {
                 self.present(createErrorAlert(errorMsg!), animated: true, completion: nil)
             } else {
@@ -107,7 +120,9 @@ extension HomepageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == (homepageViewModel.articlesToDisplay.count - 3) {
             if (homepageViewModel.currentPage < homepageViewModel.totalResultsPages) {
+                isPagination = true
                 getArticles()
+                isPagination = false
             }
         }
     }
@@ -120,10 +135,9 @@ extension HomepageViewController: UITableViewDataSource {
         label.text = TextCostants.topHeadlinesHeaderText
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        label.frame = CGRect(x: 10, y: 10, width: 250, height: 42)
+        label.frame = CGRect(x: 10, y: 10, width: 250, height: 40)
         
         view.addSubview(label)
-            
         return view
       }
     

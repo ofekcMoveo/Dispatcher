@@ -19,8 +19,10 @@ class SearchResultsScreenViewController: UIViewController {
     
     var searchViewModel = SearchViewModel()
     let activityIndicator = UIActivityIndicatorView()
+    let tableFotterActivityIndicator = UIActivityIndicatorView()
     var searchKeyWords: String = ""
     var gotResults = false
+    var isPagination = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,8 @@ class SearchResultsScreenViewController: UIViewController {
         searchResultsTableView.dataSource = self
         searchResultsTableView.rowHeight = 450
         searchResultsTableView.register(UINib(nibName: NibNames.articleCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.articleCellIdentifier)
+        
+        setupFotterView()
     }
     
     private func configureActivityIndicator() {
@@ -49,11 +53,21 @@ class SearchResultsScreenViewController: UIViewController {
         searchResultsView.addSubview(activityIndicator)
     }
     
+    private func setupFotterView() {
+        tableFotterActivityIndicator.style = .large
+        searchResultsTableView.tableFooterView = tableFotterActivityIndicator
+        NSLayoutConstraint.activate([
+            tableFotterActivityIndicator.centerXAnchor.constraint(equalTo: searchResultsTableView.tableFooterView?.centerXAnchor ?? NSLayoutXAxisAnchor()),
+            tableFotterActivityIndicator.centerYAnchor.constraint(equalTo: searchResultsTableView.tableFooterView?.centerYAnchor ?? NSLayoutYAxisAnchor())
+        ])
+        
+    }
+    
     private func getArticlesBySearchKeywords() {
-        self.activityIndicator.startAnimating()
+        isPagination == true ? (tableFotterActivityIndicator.startAnimating()) : self.activityIndicator.startAnimating()
         
         searchViewModel.getArticlesFromAPIBySearch(searchKeyWords: searchKeyWords, completionHandler: { errorMsg, numberOfNewItems in
-            self.activityIndicator.stopAnimating()
+            self.isPagination == true ? (self.tableFotterActivityIndicator.stopAnimating()) : self.activityIndicator.stopAnimating()
             if(errorMsg != nil) {
                 if(errorMsg == Errors.noArticlesFoundError.rawValue) {
                     self.noResultsView.isHidden = false
@@ -125,7 +139,9 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == (searchViewModel.articlesToDisplay.count - 3) {
             if (searchViewModel.currentPage < searchViewModel.totalResultsPages) {
+                isPagination = true
                 getArticlesBySearchKeywords()
+                isPagination = false
             }
         } 
     }

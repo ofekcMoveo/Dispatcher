@@ -29,13 +29,10 @@ class LatestSearchCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-    }
-    
+    }    
 
     @IBAction func removeSearchCellButtonPressed(_ sender: UIButton) {
         delegate?.removeButtonPressed(searchWordsLabel.text ?? "")
     }
-    
-
-    
+   
 }

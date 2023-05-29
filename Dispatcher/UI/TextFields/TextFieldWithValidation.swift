@@ -17,6 +17,8 @@ protocol TextFieldWithValidationDelegate {
     func handleEmailInput(email: String?, error: UserInputErrors?)
     func handlePasswordInput(password: String?, error: UserInputErrors?)
     func handleReEnterPasswordInput(password: String?, error: UserInputErrors?)
+    func textFieldBeginEditing()
+    func textFieldFinishedEditing()
 }
 
 class TextFieldWithValidation : UITextField, UITextFieldDelegate {
@@ -81,14 +83,13 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     private func setIsSecurePasswordIcon() {
         let image = (self.isSecureTextEntry ? UIImage(named: "hideText") : UIImage(named: "showText")) ?? UIImage()
         
-        let showOrHideTextIcon = UIButton(frame: CGRect(x: 0, y: 0, width: (image.size.width + 16), height: (image.size.height + 10)))
-        showOrHideTextIcon.setImage(image, for: .normal)
-        showOrHideTextIcon.imageView?.contentMode = .scaleAspectFit
+        var configuration = UIButton.Configuration.filled()
+        configuration.image = image
+        configuration.imagePadding = 10
+        
+        let showOrHideTextIcon = UIButton(configuration:configuration)
         showOrHideTextIcon.addTarget(self, action: #selector(showOrHidePasswordPressed) , for: .touchUpInside)
-        
-        showOrHideTextIcon.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
         self.addIconToTextField(position: .end, icon: showOrHideTextIcon)
-        
     }
     
     func styleValidTextField() {
@@ -114,6 +115,10 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         self.layer.shadowOpacity = 0.5
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.layer.shadowRadius = 4
+        
+        if(type == .reEnterPssword) {
+            validationDelegate?.textFieldBeginEditing()
+        }
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -129,7 +134,8 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         case .password:
             validatePassword(userInput: textField.text)
         case .reEnterPssword:
-            comparePassword(userInput: textField.text)
+            validationDelegate?.textFieldFinishedEditing()
+            comparePassword(userInput: textField.text)            
         }
         return true
     }

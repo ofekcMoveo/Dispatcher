@@ -10,7 +10,7 @@ import Foundation
 struct AppConstants {
     
     //MARK: Homepage articles table
-    static let tableRowHight = 40
+    static let tableRowHight = 46
     
     //MARK: Search
     static let latestSearchesAmount = 10
@@ -27,6 +27,9 @@ struct AppConstants {
 struct TableCellsIdentifiers {
     static let articleCellIdentifier = "articleCell"
     static let latestSearchesCellIdentifier = "latestSearchCell"
+    static let profileSettingsCellIdentifier = "settingsCell"
+    static let profileTermsAndPrivacyCellIdentifier = "terms&privacyCell"
+    static let profileLogoutCellIdentifier = "logoutCell"
 }
 
 struct NibNames {
@@ -44,6 +47,7 @@ struct SegueIdentifiers {
     static let fromAuthToTabBar = "fromAuthToTabBar"
     static let fromSplashToTabBar = "fromSplashToTabBar"
     static let fromSplashToAuth = "fromSplashToAuth"
+    static let fromLogoutToAuth = "fromLogoutToAuth"
 }
 
 struct FirebaseConfigFilesNames {

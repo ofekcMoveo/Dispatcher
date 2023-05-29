@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="KGk-i7-Jjw" customClass="LatestSearchCell" customModule="Dispatcher" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="LatestSearchCell" customModule="Dispatcher" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="407" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -21,8 +21,8 @@
                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nZ-qa-qrg">
                         <rect key="frame" x="365" y="30" width="12" height="12"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="7Ce-KI-bhe"/>
-                            <constraint firstAttribute="height" constant="30" id="ng0-wb-UNs"/>
+                            <constraint firstAttribute="width" constant="35" id="7Ce-KI-bhe"/>
+                            <constraint firstAttribute="height" constant="35" id="ng0-wb-UNs"/>
                         </constraints>
                         <inset key="imageEdgeInsets" minX="6" minY="5" maxX="6" maxY="5"/>
                         <state key="normal" title="Button"/>
@@ -35,12 +35,12 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQI-7r-9Mf">
-                        <rect key="frame" x="12" y="34" width="100" height="22"/>
+                        <rect key="frame" x="15" y="34" width="100" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="Ugc-FI-LBE"/>
                             <constraint firstAttribute="height" constant="22" id="gpS-2u-ghR"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" name="labelsTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -48,7 +48,7 @@
                 <color key="backgroundColor" name="screenBackgroundColor"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="4nZ-qa-qrg" secondAttribute="trailing" constant="12" id="65J-a3-7gs"/>
-                    <constraint firstItem="cQI-7r-9Mf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Ou3-hN-xSU"/>
+                    <constraint firstItem="cQI-7r-9Mf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Ou3-hN-xSU"/>
                     <constraint firstItem="4nZ-qa-qrg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cxR-uq-TaB"/>
                     <constraint firstItem="cQI-7r-9Mf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hBe-kk-cBH"/>
                 </constraints>

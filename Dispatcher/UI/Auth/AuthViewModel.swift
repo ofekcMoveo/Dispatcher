@@ -13,7 +13,7 @@ enum AuthMode: String {
 }
 
 class AuthViewModel {
-    let firebaseRepository = FirebaseRepository()
+    let firebaseRepository = FirebaseRepository.shared
     
     func authenticateUser(authMode: AuthMode, email: String, password: String, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
         firebaseRepository.exceuteAuthentication(authMode: authMode, email: email, password: password) { errorMsg in
