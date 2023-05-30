@@ -44,4 +44,8 @@ class FirebaseRepository {
             }
         }
     }
+    
+    func getLastLogin() -> String {
+        return firebaseManager.getLastLoginOfCurrentUser()
+    }
 }

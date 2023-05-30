@@ -13,8 +13,10 @@ class HomepageViewController: UIViewController {
     @IBOutlet weak var articlesTableView: UITableView!
     @IBOutlet var homepageView: UIView!
     @IBOutlet weak var headerView: HeaderView!
+    @IBOutlet weak var noResultsView: UIView!
     
     let homepageViewModel = HomepageViewModel.shared
+    let authViewModel = AuthViewModel.shared
     let activityIndicator = UIActivityIndicatorView()
     let tableFotterActivityIndicator = UIActivityIndicatorView()
     var isPagination = false
@@ -25,6 +27,7 @@ class HomepageViewController: UIViewController {
         
         headerView.initView(headerType: .mainHeader)
         headerView.delegate = self
+        noResultsView.isHidden = true
 
         setupTableView()
         configureActivityIndicator()
@@ -63,7 +66,11 @@ class HomepageViewController: UIViewController {
         homepageViewModel.getArticlesToDisplay(completionHandler: { errorMsg, numberOfNewItems in
             self.isPagination == true ? (self.tableFotterActivityIndicator.stopAnimating()) : self.activityIndicator.stopAnimating()
             if(errorMsg != nil) {
-                self.present(createErrorAlert(errorMsg!), animated: true, completion: nil)
+                if(errorMsg == Errors.noArticlesFoundError.rawValue || numberOfNewItems == 0) {
+                    self.noResultsView.isHidden = false
+                } else {
+                    self.present(createErrorAlert(errorMsg!), animated: true, completion: nil)
+                }
             } else {
                 DispatchQueue.main.async {
                     let indexPathForNewRows = self.buildIndexPathForNewRows(numberOfNewItems: numberOfNewItems)
@@ -99,7 +106,17 @@ extension HomepageViewController: UITableViewDataSource {
             cell.subTitleLabel.text = currentArticle.summary
             cell.tagLabel.text = currentArticle.topic.first
             cell.dateLabel.text = formatDate(currentArticle.date)
-            cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
+            loadImageFromUrl(currentArticle.imageURL) { image, errorMsg in
+                DispatchQueue.main.async {
+                    if let error = errorMsg {
+                        cell.imageView?.image = UIImage(named: "defaultArticalImage")
+                    } else {
+                        cell.articleImage.image = image
+                    }
+                }
+                
+                
+            }
             
             let numberOfTags = currentArticle.topic.count - 1
             if(numberOfTags > 0) {
@@ -110,7 +127,6 @@ extension HomepageViewController: UITableViewDataSource {
             }
             
             cell.delegate = self
-        
             return cell
         } else {
             return UITableViewCell()
@@ -118,7 +134,7 @@ extension HomepageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (homepageViewModel.articlesToDisplay.count - 3) {
+        if indexPath.row == (homepageViewModel.articlesToDisplay.count - 4) {
             if (homepageViewModel.currentPage < homepageViewModel.totalResultsPages) {
                 isPagination = true
                 getArticles()
@@ -130,14 +146,15 @@ extension HomepageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = UIColor(named: ColorsPalleteNames.screenBackgroundColor)
-       
-        let label = UILabel()
-        label.text = TextCostants.topHeadlinesHeaderText
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        label.frame = CGRect(x: 10, y: 10, width: 250, height: 40)
         
-        view.addSubview(label)
+        let headline = UILabel()
+        headline.text = TextCostants.topHeadlinesHeaderText
+        headline.textColor = UIColor.black
+        headline.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        headline.frame = CGRect(x: 10, y: 10, width: 250, height: 44)
+        
+        view.addSubview(headline)
+       
         return view
       }
     

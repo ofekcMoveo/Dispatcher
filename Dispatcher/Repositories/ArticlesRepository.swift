@@ -21,9 +21,7 @@ class ArticlesRepository {
             case .success(let dataResult):
                 var articles: [Article] = []
                 for article in dataResult.articles {
-                    if(article.language == "en") {
-                        articles.append(self.buildArticleFromArticleResponse(article))
-                    }
+                    articles.append(self.buildArticleFromArticleResponse(article))
                 }
                 completionHandler(articles, dataResult.totalPages, nil)
             case .failure(let error):
@@ -37,7 +35,7 @@ class ArticlesRepository {
             return Request(
                 baseUrl: APIConstants.baseApiUrl,
                 endpoint: APIConstants.searchEndpoint,
-                parameters: ["q" : searchKeywords, "countries" : "US", "page_size" : APIConstants.articlesPageSize , "page" : pageNumber],
+                parameters: ["q" : searchKeywords, "countries" : "IL", "page_size" : APIConstants.articlesPageSize , "page" : pageNumber, "lang": "en"],
                 method: .get)
         } else {
             return Request(

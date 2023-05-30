@@ -69,7 +69,7 @@ class SearchResultsScreenViewController: UIViewController {
         searchViewModel.getArticlesFromAPIBySearch(searchKeyWords: searchKeyWords, completionHandler: { errorMsg, numberOfNewItems in
             self.isPagination == true ? (self.tableFotterActivityIndicator.stopAnimating()) : self.activityIndicator.stopAnimating()
             if(errorMsg != nil) {
-                if(errorMsg == Errors.noArticlesFoundError.rawValue) {
+                if(errorMsg == Errors.noArticlesFoundError.rawValue || numberOfNewItems == 0) {
                     self.noResultsView.isHidden = false
                 } else {
                     self.present(createErrorAlert(errorMsg!),animated: true, completion: nil)
@@ -114,7 +114,17 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
             cell.subTitleLabel.text = currentArticle.summary
             cell.tagLabel.text = currentArticle.topic.first
             cell.dateLabel.text = formatDate(currentArticle.date)
-            cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
+            //cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
+            
+            loadImageFromUrl(currentArticle.imageURL) { image, errorMsg in
+                DispatchQueue.main.async {
+                    if let error = errorMsg {
+                        cell.imageView?.image = UIImage(named: "defaultArticalImage")
+                    } else {
+                        cell.articleImage.image = image
+                    }
+                }
+            }
             
             let numberOfTags = currentArticle.topic.count - 1
             if(numberOfTags > 0) {
@@ -137,7 +147,7 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (searchViewModel.articlesToDisplay.count - 3) {
+        if indexPath.row == (searchViewModel.articlesToDisplay.count - 4) {
             if (searchViewModel.currentPage < searchViewModel.totalResultsPages) {
                 isPagination = true
                 getArticlesBySearchKeywords()

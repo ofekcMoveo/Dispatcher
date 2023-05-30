@@ -23,14 +23,16 @@ class HomepageViewModel {
         if(!isPaginating && currentPage <= totalResultsPages) {
             isPaginating = true
             ArticlesRepository.shared.getArticlesFromApi(searchKeywords: nil, pageNumber: currentPage) { articles, totalPages,  errorMsg in
-                self.isPaginating = false
-                if (errorMsg != nil) {
-                    completionHandler(errorMsg!, 0)
-                } else {
-                    self.articlesToDisplay.append(contentsOf: articles)
-                    self.totalResultsPages = totalPages
-                    self.currentPage += 1
-                    completionHandler(nil, articles.count)
+                DispatchQueue.main.async {
+                    if (errorMsg != nil) {
+                        completionHandler(errorMsg!, 0)
+                    } else {
+                        self.articlesToDisplay.append(contentsOf: articles)
+                        self.totalResultsPages = totalPages
+                        self.currentPage += 1
+                        completionHandler(nil, articles.count)
+                    }
+                    self.isPaginating = false
                 }
             }
         }

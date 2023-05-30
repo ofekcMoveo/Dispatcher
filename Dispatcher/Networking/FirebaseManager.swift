@@ -39,4 +39,14 @@ class FirebaseManager {
             completionHandler(signOutError.localizedDescription)
         }
     }
+    
+    func getLastLoginOfCurrentUser() -> String {
+        let lastLogin = Auth.auth().currentUser?.metadata.lastSignInDate ?? Date()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm, dd.MM.yyyy"
+        let currentTimeString = dateFormatter.string(from: lastLogin)
+        
+        return currentTimeString
+    }
 }

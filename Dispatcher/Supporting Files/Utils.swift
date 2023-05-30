@@ -15,17 +15,52 @@ func formatDate(_ date: String) -> String {
     return dateFormatter.string(from: fomattedDate)
 }
 
-func loadImageFromUrl(_ imageUrl: String) -> UIImage {
+//func loadImageFromUrl(_ imageUrl: String) -> UIImage {
+//    if let url = URL(string: imageUrl) {
+//        if let data = try? Data(contentsOf: url) {
+//            if let image = UIImage(data: data) {
+//               return image
+//            }
+//        }
+//    }
+//
+//    return UIImage()
+//}
+
+func loadImageFromUrl(_ imageUrl: String, completion: @escaping (UIImage?, String?) -> Void) {
     if let url = URL(string: imageUrl) {
-        if let data = try? Data(contentsOf: url) {
-            if let image = UIImage(data: data) {
-               return image
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(nil, error.localizedDescription)
+                return
+            }
+            if let data = data, let image = UIImage(data: data) {
+                completion(image, nil)
+            } else {
+                completion(nil, "Could not load image")
             }
         }
+        
+        task.resume()
+    } else {
+        completion(nil, "Could not build url")
     }
-
-    return UIImage()
 }
+
+//func loadImageFromUrl(_ stringUrl: String) -> UIImage {
+//    var image = UIImage()
+//    if let url = URL(string: stringUrl) {
+//    URLSession.shared.dataTask(with: url) { (data, response, error) in
+//      // Error handling...
+//      guard let imageData = data else { return }
+//
+//      DispatchQueue.main.async {
+//          image = UIImage(data: imageData) ?? UIImage()
+//      }
+//    }.resume()
+//  }
+//    return image
+//}
 
 
 func createErrorAlert(_ msg: String) -> UIAlertController {

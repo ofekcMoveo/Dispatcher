@@ -30,8 +30,8 @@
             filePath = "Dispatcher/UI/Auth/AuthViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "mainButtonPressed()"
             landmarkType = "7">
             <Locations>

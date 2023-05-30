@@ -24,11 +24,11 @@ class ProfileViewController: UIViewController {
     }
     
     private func styleHeaderShadow() {
-        profileHeaderView.layer.shadowColor = UIColor.gray.cgColor
-        profileHeaderView.layer.shadowOpacity = 0.3
-        profileHeaderView.layer.shadowOffset = CGSize(width: 0, height: 1)
-        profileHeaderView.layer.shadowRadius = 4
-        profileHeaderView.layer.masksToBounds = false
+        profileHeaderView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.09).cgColor
+           profileHeaderView.layer.shadowOpacity = 0.6
+           profileHeaderView.layer.shadowOffset = CGSize(width: 0, height: 2)
+           profileHeaderView.layer.shadowRadius = 4
+           profileHeaderView.layer.masksToBounds = false
     }
     
     private func handleLogout() {

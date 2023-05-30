@@ -39,6 +39,15 @@ class SearchScreenViewController: UIViewController {
         searchHeaderView.layer.borderWidth = 1
         searchHeaderView.layer.borderColor = UIColor(named: ColorsPalleteNames.secondaryButtonColor)?.cgColor
         styleSearchBar()
+        styleHeaderShadow()
+    }
+    
+    private func styleHeaderShadow() {
+        searchHeaderView.layer.shadowColor = UIColor(named: ColorsPalleteNames.borderAndButtonBackground)?.cgColor
+        searchHeaderView.layer.shadowOpacity = 0.2
+        searchHeaderView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        searchHeaderView.layer.shadowRadius = 4
+        searchHeaderView.layer.masksToBounds = false
     }
     
     private func styleSearchBar() {

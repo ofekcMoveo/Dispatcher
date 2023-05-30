@@ -28,7 +28,7 @@ class AuthViewController: UIViewController{
     @IBOutlet weak var primaryButton: DispatcherAppButton!
     @IBOutlet weak var secondaryButton: DispatcherAppButton!
     
-    var authViewModel = AuthViewModel()
+    //var authViewModel = AuthViewModel()
     var authMode: AuthMode = .Signup
     var validatedEmail: String = ""
     var validatedPassword: String = ""
@@ -46,12 +46,6 @@ class AuthViewController: UIViewController{
         reEnterPasswordTextField?.validationDelegate = self
         
         setSignupView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-//        let handle = Auth.auth().addStateDidChangeListener { auth, user in
-//
-//        }
     }
         
         private func setLoginView() {
@@ -72,10 +66,8 @@ class AuthViewController: UIViewController{
             reEnterPasswordErrorLabel.isHidden = false
         }
         
-        
-        
         func signupOrLoginPressed(authMode: AuthMode, email: String, password: String) {
-            authViewModel.authenticateUser(authMode: authMode, email: email, password: password, completionHandler: { errorMsg in
+            AuthViewModel.shared.authenticateUser(authMode: authMode, email: email, password: password, completionHandler: { errorMsg in
                 if let error = errorMsg {
                     self.present(createErrorAlert(error), animated: true, completion: nil)
                 } else {
@@ -120,7 +112,7 @@ class AuthViewController: UIViewController{
                     styleErrorLabel(label: passwordErrorLabel, error: UserInputErrors.invalidPasswordError.errorDescription ?? "")
                 }
             } else {
-                authViewModel.authenticateUser(authMode: authMode, email: validatedEmail, password: validatedPassword) { errorMsg in
+                AuthViewModel.shared.authenticateUser(authMode: authMode, email: validatedEmail, password: validatedPassword) { errorMsg in
                     if let err = errorMsg {
                         self.present(createErrorAlert(err), animated: true, completion: nil)
                     } else {
@@ -166,22 +158,22 @@ class AuthViewController: UIViewController{
         let contentOffset = CGPoint(x: scrollView.contentOffset.x, y: scrollView.contentOffset.y + 70)
         scrollView.setContentOffset(contentOffset, animated: true)
     }
-    
+
     func scrollScrollViewUp() {
         let contentOffset = CGPoint(x: scrollView.contentOffset.x, y: scrollView.contentOffset.y - 70)
         scrollView.setContentOffset(contentOffset, animated: true)
     }
-}
-    
-extension AuthViewController: TextFieldWithValidationDelegate {
+    }
+
+    extension AuthViewController: TextFieldWithValidationDelegate {
     func textFieldBeginEditing() {
         scrollScrollViewDown()
     }
-    
+
     func textFieldFinishedEditing() {
         scrollScrollViewUp()
     }
-    
+
     func handleEmailInput(email: String?, error: UserInputErrors?) {
         handleInput(editedtextField: emailTextField, errorlabel: emailErrorLabel, error: error)
         
@@ -189,7 +181,7 @@ extension AuthViewController: TextFieldWithValidationDelegate {
             validatedEmail = email
         }
     }
-    
+
     func handlePasswordInput(password: String?, error: UserInputErrors?) {
         handleInput(editedtextField: passwordTextField, errorlabel: passwordErrorLabel, error: error)
         
@@ -201,11 +193,11 @@ extension AuthViewController: TextFieldWithValidationDelegate {
             }
         }
     }
-    
+
     func handleReEnterPasswordInput(password: String?, error: UserInputErrors?) {
         handleInput(editedtextField: reEnterPasswordTextField, errorlabel: reEnterPasswordErrorLabel, error: error)
         validatedPassword = password ?? ""
     }
-}
+    }
     
 

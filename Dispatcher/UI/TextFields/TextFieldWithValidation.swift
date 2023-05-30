@@ -24,6 +24,7 @@ protocol TextFieldWithValidationDelegate {
 class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     var type: TextFieldType
     var passwordToCompareTo: String?
+    var hasValidated = false
     var validationDelegate: TextFieldWithValidationDelegate?
     
     init(frame: CGRect, type: TextFieldType) {
@@ -120,9 +121,22 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
             validationDelegate?.textFieldBeginEditing()
         }
     }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textFieldShouldReturn(textField)
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if(hasValidated == true) {
+            guard let passwordTextField = textField as? TextFieldWithValidation else {
+                return true
+            }
+            var updatedPassword = passwordTextField.text ?? ""
+            updatedPassword.replaceSubrange(Range(range, in: updatedPassword)!, with: string)
+            
+            if(self.type == .password) {
+                validatePassword(userInput: updatedPassword)
+            } else if (self.type == .email) {
+                validateEmail(userInput: updatedPassword)
+            }
+        }
+        return true
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -143,16 +157,36 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     //MARK: Input validation funcs
 
     private func validateEmail(userInput: String?) {
-          let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+"
-           validationByRegex(regexExpression: emailRegex, inputToEvaluate: userInput, handleValidationResult: validationDelegate!.handleEmailInput)
-       }
+        var errorString = ""
+        hasValidated = true
+        if let emailAddress = userInput {
+            if (emailAddress.contains("@")) {
+                let components = emailAddress.components(separatedBy: "@")
+                let username = components[0]
+                let domain = components[1]
+                if (username.isEmpty) {
+                    validationDelegate!.handleEmailInput(email: nil, error: UserInputErrors.missingUsernameInEmailError)
+                } else if (domain.isEmpty) {
+                    validationDelegate!.handleEmailInput(email: nil, error: UserInputErrors.missingDomainInEmailError)
+                } else {
+                    validationDelegate!.handleEmailInput(email: emailAddress, error: nil)
+                }
+            } else {
+                validationDelegate!.handleEmailInput(email: nil, error: UserInputErrors.missingSignInEmailError)
+            }
+        } else {
+            validationDelegate!.handleEmailInput(email: nil, error: UserInputErrors.invalidEmailError)
+        }
+    }
        
    private func validatePassword(userInput: String?) {
+       hasValidated = true
        let passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}$"
        validationByRegex(regexExpression: passwordRegex, inputToEvaluate: userInput, handleValidationResult: validationDelegate!.handlePasswordInput)
    }
    
    private func comparePassword(userInput: String?) {
+       hasValidated = true
        if (userInput != passwordToCompareTo && userInput != "") {
            validationDelegate?.handleReEnterPasswordInput(password: nil, error: UserInputErrors.passwordsNotMatchError)
        } else {

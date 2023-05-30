@@ -10,7 +10,7 @@ import Foundation
 struct AppConstants {
     
     //MARK: Homepage articles table
-    static let tableRowHight = 46
+    static let tableRowHight = 70
     
     //MARK: Search
     static let latestSearchesAmount = 10
