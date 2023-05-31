@@ -12,6 +12,8 @@ enum Errors: String, Error {
     case decodingError
     case userDefaultFetchFailedError
     case noArticlesFoundError
+    case imageUrlError
+    case imageLoadError
 }
 
 extension Errors: LocalizedError {
@@ -25,6 +27,10 @@ extension Errors: LocalizedError {
             return NSLocalizedString("Latest search could not be fetched from User Defaults", comment: "User Defualts Error")
         case .noArticlesFoundError:
             return NSLocalizedString("Response could not be decoded because of error:\nThe data couldn’t be read because it is missing.", comment: "No Data Error")
+        case .imageUrlError:
+            return NSLocalizedString("Could not build url", comment: "Url Error")
+        case .imageLoadError:
+            return NSLocalizedString("Could not load image", comment: "Url Error")
         }
     }
 }

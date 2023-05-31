@@ -47,7 +47,7 @@ class ArticleCell: UITableViewCell {
         dispatchButton = DispatcherAppButton(
             frame: frame,
             type: .primary,
-            title: AppConstants.navigateToDispatchText,
+            title: TextCostants.navigateToDispatchText,
             icon: UIImage(named: "Arrow - Right"),
             iconPosition: .end
         )

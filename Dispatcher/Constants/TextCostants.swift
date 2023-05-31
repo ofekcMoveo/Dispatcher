@@ -13,4 +13,5 @@ struct TextCostants {
     static let passwordTextFieldPlaceholder = "Password"
     static let reEnterPasswordTextFieldPlaceholder = "Re-Enter Password"
     static let topHeadlinesHeaderText = "Top Headlines in Israel"
+    static let navigateToDispatchText = "NAVIGATE TO DISPATCH "
 }

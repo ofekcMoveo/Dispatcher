@@ -21,7 +21,9 @@ class ArticlesRepository {
             case .success(let dataResult):
                 var articles: [Article] = []
                 for article in dataResult.articles {
-                    articles.append(self.buildArticleFromArticleResponse(article))
+                    if(article.language == "en") {
+                        articles.append(self.buildArticleFromArticleResponse(article))
+                    }
                 }
                 completionHandler(articles, dataResult.totalPages, nil)
             case .failure(let error):

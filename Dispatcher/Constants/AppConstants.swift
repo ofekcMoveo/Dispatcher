@@ -10,7 +10,7 @@ import Foundation
 struct AppConstants {
     
     //MARK: Homepage articles table
-    static let tableRowHight = 70
+    static let tableRowHight = 80
     
     //MARK: Search
     static let latestSearchesAmount = 10
@@ -20,8 +20,10 @@ struct AppConstants {
     static let noArticlesFoundError = "Response could not be decoded because of error:\nThe data couldn’t be read because it is missing."
     static let userDefaultFetchFailedError = "Latest search could not be fetched from User Defaults"
     
-    //MARK: buttons text
-    static let navigateToDispatchText = "NAVIGATE TO DISPATCH "
+    //MARK: date formats
+    static let articleDateFormat = "EEEE, MMM d, yyyy"
+    static let lastLoginDateFormat = "hh:mm a, dd.MM.yyyy"
+    
 }
 
 struct TableCellsIdentifiers {
@@ -38,6 +40,7 @@ struct NibNames {
     static let headerViewNibName = "HeaderView"
     static let signupOrLoginViewNibName = "SignupOrLoginView"
     static let validatableTextFieldWithErrorlabelView = "ValidatableTextFieldWithErrorlabelView"
+    static let articlesTableHeaderView = "ArticlesTableHeaderView"
 }
 
 struct SegueIdentifiers {
@@ -57,5 +60,6 @@ struct FirebaseConfigFilesNames {
 
 struct UserDefaultsKeys {
     static let latestSearchesDefualtsKey = "LatestSearches"
+    static let lastLoginOfUserDefualtsKey = "lastLoginOfUser"
 }
 

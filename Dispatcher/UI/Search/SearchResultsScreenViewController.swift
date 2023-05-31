@@ -113,7 +113,7 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
             cell.titleLabel.text = currentArticle.title
             cell.subTitleLabel.text = currentArticle.summary
             cell.tagLabel.text = currentArticle.topic.first
-            cell.dateLabel.text = formatDate(currentArticle.date)
+            cell.dateLabel.text = formatDate(date: currentArticle.date, format: AppConstants.articleDateFormat)
             //cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
             
             loadImageFromUrl(currentArticle.imageURL) { image, errorMsg in

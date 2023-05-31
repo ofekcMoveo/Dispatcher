@@ -28,7 +28,7 @@ class AuthViewController: UIViewController{
     @IBOutlet weak var primaryButton: DispatcherAppButton!
     @IBOutlet weak var secondaryButton: DispatcherAppButton!
     
-    //var authViewModel = AuthViewModel()
+    var authViewModel = AuthViewModel.shared
     var authMode: AuthMode = .Signup
     var validatedEmail: String = ""
     var validatedPassword: String = ""
@@ -67,7 +67,7 @@ class AuthViewController: UIViewController{
         }
         
         func signupOrLoginPressed(authMode: AuthMode, email: String, password: String) {
-            AuthViewModel.shared.authenticateUser(authMode: authMode, email: email, password: password, completionHandler: { errorMsg in
+            authViewModel.authenticateUser(authMode: authMode, email: email, password: password, completionHandler: { errorMsg in
                 if let error = errorMsg {
                     self.present(createErrorAlert(error), animated: true, completion: nil)
                 } else {
@@ -101,7 +101,7 @@ class AuthViewController: UIViewController{
             label.textColor = UIColor(named: ColorsPalleteNames.errorColor)
             label.isHidden = false
         }
-        
+    
         @IBAction func mainButtonPressed() {
             if (validatedEmail == "" || validatedPassword == "") {
                 if (validatedEmail == "") {
@@ -112,7 +112,7 @@ class AuthViewController: UIViewController{
                     styleErrorLabel(label: passwordErrorLabel, error: UserInputErrors.invalidPasswordError.errorDescription ?? "")
                 }
             } else {
-                AuthViewModel.shared.authenticateUser(authMode: authMode, email: validatedEmail, password: validatedPassword) { errorMsg in
+                authViewModel.authenticateUser(authMode: authMode, email: validatedEmail, password: validatedPassword) { errorMsg in
                     if let err = errorMsg {
                         self.present(createErrorAlert(err), animated: true, completion: nil)
                     } else {

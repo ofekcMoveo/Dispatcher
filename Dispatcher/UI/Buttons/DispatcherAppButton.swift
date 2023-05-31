@@ -54,7 +54,7 @@ class DispatcherAppButton: UIButton {
                 
         self.layer.cornerRadius = cornerRadius
         self.setTitle(title, for: .normal)
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         
         setButtonStyleByType()
         setButtonIcon()

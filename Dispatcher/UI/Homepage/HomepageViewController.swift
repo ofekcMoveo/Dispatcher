@@ -105,11 +105,11 @@ extension HomepageViewController: UITableViewDataSource {
             cell.titleLabel.text = currentArticle.title
             cell.subTitleLabel.text = currentArticle.summary
             cell.tagLabel.text = currentArticle.topic.first
-            cell.dateLabel.text = formatDate(currentArticle.date)
+            cell.dateLabel.text = formatDate(date: currentArticle.date, format: AppConstants.articleDateFormat)
             loadImageFromUrl(currentArticle.imageURL) { image, errorMsg in
                 DispatchQueue.main.async {
                     if let error = errorMsg {
-                        cell.imageView?.image = UIImage(named: "defaultArticalImage")
+                   //     cell.imageView?.image = UIImage(named: "defaultArticalImage")
                     } else {
                         cell.articleImage.image = image
                     }
@@ -144,18 +144,9 @@ extension HomepageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: ColorsPalleteNames.screenBackgroundColor)
-        
-        let headline = UILabel()
-        headline.text = TextCostants.topHeadlinesHeaderText
-        headline.textColor = UIColor.black
-        headline.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        headline.frame = CGRect(x: 10, y: 10, width: 250, height: 44)
-        
-        view.addSubview(headline)
-       
-        return view
+        let header = ArticlesTableHeaderView()
+        header.initView(lastLoginDate: authViewModel.getLastLoginDate())
+        return header
       }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

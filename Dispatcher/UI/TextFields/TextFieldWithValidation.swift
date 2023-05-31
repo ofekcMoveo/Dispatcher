@@ -51,6 +51,7 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         self.layer.borderColor = UIColor(named: ColorsPalleteNames.secondaryButtonColor)?.cgColor
         self.backgroundColor = .white
         self.returnKeyType = .done
+        self.spellCheckingType = .no
     }
     
     private func setTextFieldByType() {
@@ -127,16 +128,20 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
             guard let passwordTextField = textField as? TextFieldWithValidation else {
                 return true
             }
-            var updatedPassword = passwordTextField.text ?? ""
-            updatedPassword.replaceSubrange(Range(range, in: updatedPassword)!, with: string)
+            var updatedString = passwordTextField.text ?? ""
+            updatedString.replaceSubrange(Range(range, in: updatedString)!, with: string)
             
             if(self.type == .password) {
-                validatePassword(userInput: updatedPassword)
+                validatePassword(userInput: updatedString)
             } else if (self.type == .email) {
-                validateEmail(userInput: updatedPassword)
+                validateEmail(userInput: updatedString)
             }
         }
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldShouldReturn(textField)
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

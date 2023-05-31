@@ -13,7 +13,7 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+   
     override func viewDidAppear(_ animated: Bool) {
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {

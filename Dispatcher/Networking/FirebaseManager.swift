@@ -41,12 +41,15 @@ class FirebaseManager {
     }
     
     func getLastLoginOfCurrentUser() -> String {
-        let lastLogin = Auth.auth().currentUser?.metadata.lastSignInDate ?? Date()
+        let previousLogin = UserDefaultsManager().fetchDataFromUserDefaults(wantedItemKey: UserDefaultsKeys.lastLoginOfUserDefualtsKey)
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm, dd.MM.yyyy"
-        let currentTimeString = dateFormatter.string(from: lastLogin)
+        do {
+            let data = try JSONEncoder().encode(Auth.auth().currentUser?.metadata.lastSignInDate ?? Date())
+            UserDefaultsManager().saveItem(itemToSave: data, itemToSaveKey: UserDefaultsKeys.lastLoginOfUserDefualtsKey)
+        } catch (let error) {
+            
+        }
         
-        return currentTimeString
+        return formatDate(date: previousLogin.description, format: AppConstants.lastLoginDateFormat)
     }
 }

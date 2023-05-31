@@ -20,53 +20,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8E8F8931-6C0C-4832-BB46-5723F5B3DACF"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dispatcher/UI/Auth/AuthViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "mainButtonPressed()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "8E8F8931-6C0C-4832-BB46-5723F5B3DACF - 375fcc2deb18971d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Dispatcher.AuthViewController.mainButtonPressed() -&gt; ()"
-                  moduleName = "Dispatcher"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ofekcohen/Desktop/Dispatcher/Dispatcher/UI/Auth/AuthViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "117"
-                  endingLineNumber = "117"
-                  offsetFromSymbolStart = "1540">
-               </Location>
-               <Location
-                  uuid = "8E8F8931-6C0C-4832-BB46-5723F5B3DACF - 983643aa873e7a7c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in Dispatcher.AuthViewController.mainButtonPressed() -&gt; ()"
-                  moduleName = "Dispatcher"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ofekcohen/Desktop/Dispatcher/Dispatcher/UI/Auth/AuthViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "118"
-                  endingLineNumber = "118"
-                  offsetFromSymbolStart = "64">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
