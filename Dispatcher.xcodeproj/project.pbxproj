@@ -17,6 +17,8 @@
 		6B48815E2A248752007221AE /* Poppins in Resources */ = {isa = PBXBuildFile; fileRef = 6B48815D2A248752007221AE /* Poppins */; };
 		6B4881602A272BC3007221AE /* ArticlesTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B48815F2A272BC3007221AE /* ArticlesTableHeaderView.xib */; };
 		6B4881622A272D4D007221AE /* ArticlesTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4881612A272D4D007221AE /* ArticlesTableHeaderView.swift */; };
+		6B4881652A28761B007221AE /* OnboardingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4881642A28761B007221AE /* OnboardingScreenViewController.swift */; };
+		6B4881672A287647007221AE /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4881662A287647007221AE /* OnboardingViewModel.swift */; };
 		6B5A9CEB2A07DF0900D0FBE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A9CEA2A07DF0900D0FBE3 /* AppDelegate.swift */; };
 		6B5A9CED2A07DF1C00D0FBE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A9CEC2A07DF1C00D0FBE3 /* SceneDelegate.swift */; };
 		6B5A9CEF2A07F0F600D0FBE3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6B5A9CEE2A07F0F600D0FBE3 /* .gitignore */; };
@@ -76,6 +78,8 @@
 		6B48815D2A248752007221AE /* Poppins */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Poppins; sourceTree = "<group>"; };
 		6B48815F2A272BC3007221AE /* ArticlesTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticlesTableHeaderView.xib; sourceTree = "<group>"; };
 		6B4881612A272D4D007221AE /* ArticlesTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesTableHeaderView.swift; sourceTree = "<group>"; };
+		6B4881642A28761B007221AE /* OnboardingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreenViewController.swift; sourceTree = "<group>"; };
+		6B4881662A287647007221AE /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		6B5A9CEA2A07DF0900D0FBE3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B5A9CEC2A07DF1C00D0FBE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6B5A9CEE2A07F0F600D0FBE3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -189,6 +193,15 @@
 				6B48815D2A248752007221AE /* Poppins */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		6B4881632A2875E5007221AE /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				6B4881642A28761B007221AE /* OnboardingScreenViewController.swift */,
+				6B4881662A287647007221AE /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		6B5A9CF22A08009700D0FBE3 /* Persistence */ = {
@@ -326,6 +339,7 @@
 		6BD3F42529ED42E5007C4652 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6B4881632A2875E5007221AE /* Onboarding */,
 				6BAD5B032A234C49008D8974 /* SplashViewController.swift */,
 				6BDE7C832A12AF8B004291D9 /* TextFields */,
 				6BDE7C722A125384004291D9 /* Enums */,
@@ -555,6 +569,7 @@
 				6B8908C129FFB64E003E08A1 /* ArticleApiObject.swift in Sources */,
 				6B4881622A272D4D007221AE /* ArticlesTableHeaderView.swift in Sources */,
 				6B8908C929FFD578003E08A1 /* UserInput.swift in Sources */,
+				6B4881652A28761B007221AE /* OnboardingScreenViewController.swift in Sources */,
 				6BDE7C782A1258C0004291D9 /* TextFieldExtension.swift in Sources */,
 				6BDE7C232A0A82E4004291D9 /* DispatcherAppButton.swift in Sources */,
 				6BD3F3F629EC275F007C4652 /* Dispatcher.xcdatamodeld in Sources */,
@@ -562,6 +577,7 @@
 				6BD3F45529EDAA51007C4652 /* FavoritesViewController.swift in Sources */,
 				6B95EF4329FA9DCF0014C6EF /* HomepageViewModel.swift in Sources */,
 				6B8908C729FFC157003E08A1 /* Request.swift in Sources */,
+				6B4881672A287647007221AE /* OnboardingViewModel.swift in Sources */,
 				6B1FE63F29FE42FA00A7477E /* APIConstants.swift in Sources */,
 				6B5A9CF12A07F5E500D0FBE3 /* ColorsPalleteNames.swift in Sources */,
 				6BD3F45129EDAA05007C4652 /* ProfileViewController.swift in Sources */,

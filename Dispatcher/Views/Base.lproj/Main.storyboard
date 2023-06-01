@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xzj-xv-luz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zsR-aF-8p2">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -48,11 +48,109 @@
                     <connections>
                         <segue destination="MY2-Qr-syj" kind="presentation" identifier="fromSplashToAuth" modalPresentationStyle="fullScreen" id="7Iu-Z4-QjX"/>
                         <segue destination="BiU-yt-af2" kind="presentation" identifier="fromSplashToTabBar" modalPresentationStyle="fullScreen" id="W67-Eh-H2R"/>
+                        <segue destination="zsR-aF-8p2" kind="presentation" identifier="fromSplashToOnboarding" modalPresentationStyle="fullScreen" id="om4-SH-Adb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mQs-TC-QoR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3013.04347826087" y="-1510.0446428571429"/>
+        </scene>
+        <!--Onboarding Screen View Controller-->
+        <scene sceneID="IaX-ba-GMh">
+            <objects>
+                <viewController id="zsR-aF-8p2" customClass="OnboardingScreenViewController" customModule="Dispatcher" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rAO-ra-UvW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dispatcher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4o-ve-5fk">
+                                <rect key="frame" x="122" y="85" width="170" height="38.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="kkh-PW-yhZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JtK-K6-Fy9">
+                                <rect key="frame" x="92" y="30" width="230" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="C3D-KL-eCv"/>
+                                    <constraint firstAttribute="width" constant="230" id="k3b-le-vWd"/>
+                                </constraints>
+                                <color key="progressTintColor" name="errorColor"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Icg-O9-e6K">
+                                <rect key="frame" x="82" y="203.5" width="250" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="Gbg-t7-1Wz"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="SvO-E4-9GM"/>
+                                    <constraint firstAttribute="height" constant="30" id="jxD-hv-uC9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.792156862745098" green="0.792156862745098" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXJ-Tt-Lek">
+                                <rect key="frame" x="317" y="876" width="82" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="forwardArrow" imagePlacement="trailing" title="Next" imagePadding="12">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="nextButtonPressed:" destination="zsR-aF-8p2" eventType="touchUpInside" id="yNv-aX-DRl"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="firstBoardingBackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="IUl-NE-W9U">
+                                <rect key="frame" x="-48" y="432" width="323" height="464"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="464" id="YhU-pZ-wLe"/>
+                                    <constraint firstAttribute="width" constant="323" id="mC8-rM-22W"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iJ-yY-pbD">
+                                <rect key="frame" x="15" y="846" width="57" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Skip">
+                                    <color key="baseForegroundColor" name="backgroundColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="skipButtonPressed:" destination="zsR-aF-8p2" eventType="touchUpInside" id="x3A-G0-oYs"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Eux-4M-ZIg"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Eux-4M-ZIg" firstAttribute="trailing" secondItem="eXJ-Tt-Lek" secondAttribute="trailing" constant="15" id="2Dm-Vt-49g"/>
+                            <constraint firstItem="5iJ-yY-pbD" firstAttribute="leading" secondItem="Eux-4M-ZIg" secondAttribute="leading" constant="15" id="2Tm-rR-KoV"/>
+                            <constraint firstItem="Icg-O9-e6K" firstAttribute="top" secondItem="q4o-ve-5fk" secondAttribute="bottom" constant="80" id="3bX-HY-NrL"/>
+                            <constraint firstItem="IUl-NE-W9U" firstAttribute="leading" secondItem="Eux-4M-ZIg" secondAttribute="leading" id="5Hx-Cm-164"/>
+                            <constraint firstItem="q4o-ve-5fk" firstAttribute="centerX" secondItem="rAO-ra-UvW" secondAttribute="centerX" id="6IC-32-MsZ"/>
+                            <constraint firstAttribute="bottom" secondItem="IUl-NE-W9U" secondAttribute="bottom" id="8HN-na-QL9"/>
+                            <constraint firstItem="JtK-K6-Fy9" firstAttribute="top" secondItem="Eux-4M-ZIg" secondAttribute="top" constant="30" id="8PB-Vd-M2r"/>
+                            <constraint firstItem="JtK-K6-Fy9" firstAttribute="centerX" secondItem="rAO-ra-UvW" secondAttribute="centerX" id="8vA-9C-QVp"/>
+                            <constraint firstAttribute="bottom" secondItem="IUl-NE-W9U" secondAttribute="bottom" id="94A-3N-baW"/>
+                            <constraint firstItem="Icg-O9-e6K" firstAttribute="centerX" secondItem="rAO-ra-UvW" secondAttribute="centerX" id="Cl8-bY-Uu1"/>
+                            <constraint firstItem="q4o-ve-5fk" firstAttribute="top" secondItem="JtK-K6-Fy9" secondAttribute="bottom" constant="40" id="IDp-b6-OLy"/>
+                            <constraint firstItem="eXJ-Tt-Lek" firstAttribute="bottom" secondItem="Eux-4M-ZIg" secondAttribute="bottom" constant="15" id="cuw-2d-hrn"/>
+                            <constraint firstItem="IUl-NE-W9U" firstAttribute="leading" secondItem="rAO-ra-UvW" secondAttribute="leading" id="iqU-na-ttH"/>
+                            <constraint firstAttribute="bottom" secondItem="5iJ-yY-pbD" secondAttribute="bottom" constant="15" id="vTW-Uz-ZAb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="IUl-NE-W9U" id="0v6-9r-LgQ"/>
+                        <outlet property="boardingProgressView" destination="JtK-K6-Fy9" id="Nxx-uU-Ssm"/>
+                        <outlet property="dispatcherLabel" destination="q4o-ve-5fk" id="28B-Tv-p5Q"/>
+                        <outlet property="introductionLabel" destination="Icg-O9-e6K" id="VJw-CY-APx"/>
+                        <outlet property="nextButton" destination="eXJ-Tt-Lek" id="4RC-6X-Frz"/>
+                        <outlet property="skipButton" destination="5iJ-yY-pbD" id="Pdr-o9-SDT"/>
+                        <segue destination="BzR-Vt-ntS" kind="presentation" identifier="fromOnboardingToHomepage" modalPresentationStyle="fullScreen" id="3b1-98-Ff4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WRP-B3-sFC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3013.04347826087" y="-2225.2232142857142"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="1IX-Vh-52Z">
@@ -545,7 +643,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AhQ-nD-UA5" userLabel="ProfileHeaderView">
-                                <rect key="frame" x="0.0" y="92" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skg-wt-lap">
                                         <rect key="frame" x="15" y="20" width="93" height="33.5"/>
@@ -584,7 +682,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="IIY-aP-qny">
-                                <rect key="frame" x="0.0" y="189" width="414" height="707"/>
+                                <rect key="frame" x="0.0" y="141" width="414" height="755"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" name="borderAndButtonBackground"/>
@@ -818,7 +916,7 @@
                     <tabBarItem key="tabBarItem" title="" image="profile" selectedImage="selectedProfile" id="X07-DV-YK8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tty-ae-EQ7">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <navigationBarAppearance key="standardAppearance">
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -873,7 +971,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yrq-8D-NFp">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <navigationBarAppearance key="standardAppearance">
                             <color key="backgroundColor" name="backgroundColor"/>
@@ -893,15 +991,17 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="znJ-Wy-ltS"/>
+        <segue reference="3b1-98-Ff4"/>
         <segue reference="oNL-5q-Vwr"/>
-        <segue reference="bee-fX-TY1"/>
-        <segue reference="QeI-Ko-Mb5"/>
+        <segue reference="W67-Eh-H2R"/>
+        <segue reference="7Iu-Z4-QjX"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="Arrow - Left" width="23" height="18"/>
         <image name="favorites" width="28" height="28"/>
+        <image name="firstBoardingBackgroundImage" width="95" height="178.5"/>
+        <image name="forwardArrow" width="10" height="18"/>
         <image name="home" width="22" height="24"/>
         <image name="line" width="335" height="2"/>
         <image name="logoIcon" width="95.5" height="89"/>
@@ -922,6 +1022,9 @@
         </namedColor>
         <namedColor name="borderAndButtonBackground">
             <color red="0.85100001096725464" green="0.85900002717971802" blue="0.91399997472763062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="errorColor">
+            <color red="0.99199998378753662" green="0.34900000691413879" blue="0.34900000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="iconsColor">
             <color red="0.71399998664855957" green="0.71399998664855957" blue="0.9179999828338623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -58,7 +58,7 @@
                     <rect key="frame" x="10" y="59" width="72" height="35"/>
                     <color key="tintColor" name="secondaryButtonColor"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="Forward" title="Back"/>
+                    <buttonConfiguration key="configuration" style="plain" image="backArrow" title="Back"/>
                     <connections>
                         <action selector="backButtonPressed:" destination="-1" eventType="touchUpInside" id="ybM-Wx-ujC"/>
                     </connections>
@@ -81,7 +81,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Forward" width="10" height="18"/>
+        <image name="backArrow" width="10" height="18"/>
         <image name="logoIcon" width="63.666667938232422" height="59.333332061767578"/>
         <image name="notificationsIcon" width="16" height="20"/>
         <image name="searchIconLight" width="20" height="20"/>
