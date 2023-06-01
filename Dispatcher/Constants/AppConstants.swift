@@ -63,5 +63,6 @@ struct FirebaseConfigFilesNames {
 struct UserDefaultsKeys {
     static let latestSearchesDefualtsKey = "LatestSearches"
     static let lastLoginOfUserDefualtsKey = "lastLoginOfUser"
+    static let firstLoginOfUserDefualtsKey = "firstLoginOfUser"
 }
 
