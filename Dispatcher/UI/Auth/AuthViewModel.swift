@@ -26,14 +26,13 @@ class AuthViewModel {
                 if let err = errorMsg {
                     completionHandler(err)
                 } else {
-                    self.getLastLoginDate()
                     completionHandler(nil)
                 }
         }
     }
     
-    func getLastLoginDate() -> String{
-        lastLoginOfCurrentUser = firebaseRepository.getLastLogin()
+    func getLastLoginDate() throws -> String{
+        lastLoginOfCurrentUser = try firebaseRepository.getLastLogin()
         return lastLoginOfCurrentUser
     }
     

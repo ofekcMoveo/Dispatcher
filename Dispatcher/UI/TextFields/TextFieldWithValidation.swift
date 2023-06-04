@@ -162,7 +162,6 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     //MARK: Input validation funcs
 
     private func validateEmail(userInput: String?) {
-        var errorString = ""
         hasValidated = true
         if let emailAddress = userInput {
             if (emailAddress.contains("@")) {

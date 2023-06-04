@@ -51,7 +51,7 @@ struct SegueIdentifiers {
     static let fromSplashToTabBar = "fromSplashToTabBar"
     static let fromSplashToAuth = "fromSplashToAuth"
     static let fromLogoutToAuth = "fromLogoutToAuth"
-    static let fromOnboardingToHomepage = "fromOnboardingToHomepage"
+    static let fromOnboardingToTabBar = "fromOnboardingToTabBar"
     static let fromSplashToOnboarding = "fromSplashToOnboarding"
 }
 

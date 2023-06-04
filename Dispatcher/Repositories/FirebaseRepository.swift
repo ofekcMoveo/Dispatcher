@@ -45,7 +45,7 @@ class FirebaseRepository {
         }
     }
     
-    func getLastLogin() -> String {
-        return firebaseManager.getLastLoginOfCurrentUser()
+    func getLastLogin() throws -> String {
+        return try firebaseManager.getLastLoginOfCurrentUser()
     }
 }

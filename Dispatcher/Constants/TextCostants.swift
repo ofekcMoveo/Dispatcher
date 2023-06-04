@@ -17,7 +17,7 @@ struct TextCostants {
     
     //MARK: Onboarding screens text
     
-    static let firstOnBaordingText = "welcome to Dispatcher,\n the right way to read your news. Just open the app"
+    static let firstOnBaordingText = "Welcome to Dispatcher,\n the right way to read your news. Just open the app"
     static let secondOnBaordingText = "Search your fields of interest\nand the best part.."
     static let thirdOnBaordingText = "Save all your articles for later, filter, learn and explore the latest news"
 }

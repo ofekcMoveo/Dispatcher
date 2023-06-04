@@ -20,7 +20,6 @@ class AuthViewController: UIViewController{
     @IBOutlet weak var passwordTextField: TextFieldWithValidation!
     @IBOutlet weak var passwordErrorLabel: UILabel!
     
-    
     @IBOutlet weak var reEnterPasswordTextField: TextFieldWithValidation!
     @IBOutlet weak var reEnterPasswordErrorLabel: UILabel!
     

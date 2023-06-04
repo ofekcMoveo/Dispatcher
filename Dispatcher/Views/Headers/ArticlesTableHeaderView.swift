@@ -29,8 +29,5 @@ class ArticlesTableHeaderView: UIView {
         Bundle.main.loadNibNamed(NibNames.articlesTableHeaderView, owner: self, options: nil)
         contentView.frame = self.bounds
         self.addSubview(contentView)
-    }
-     
-    
-    
+    } 
 }

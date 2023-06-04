@@ -108,14 +108,8 @@ extension HomepageViewController: UITableViewDataSource {
             cell.dateLabel.text = formatDate(date: currentArticle.date, format: AppConstants.articleDateFormat)
             loadImageFromUrl(currentArticle.imageURL) { image, errorMsg in
                 DispatchQueue.main.async {
-                    if let error = errorMsg {
-                   //     cell.imageView?.image = UIImage(named: "defaultArticalImage")
-                    } else {
-                        cell.articleImage.image = image
-                    }
+                    cell.articleImage.image = image
                 }
-                
-                
             }
             
             let numberOfTags = currentArticle.topic.count - 1
@@ -145,7 +139,11 @@ extension HomepageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ArticlesTableHeaderView()
-        header.initView(lastLoginDate: authViewModel.getLastLoginDate())
+        do {
+            header.initView(lastLoginDate: try authViewModel.getLastLoginDate())
+        } catch (let error) {
+            self.present(createErrorAlert(error.localizedDescription), animated: true, completion: nil)
+        }
         return header
       }
     

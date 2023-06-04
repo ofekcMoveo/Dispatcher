@@ -22,11 +22,13 @@ class OnboardingScreenViewController: UIViewController {
         super.viewDidLoad()
         
         introductionLabel.text = TextCostants.firstOnBaordingText
-       
+        boardingProgressView.setProgress(0.333, animated: true)
+        boardingProgressView.layer.cornerRadius = 7
     }
     
 
     @IBAction func skipButtonPressed(_ sender: UIButton) {
+        currentPage = 3
         prepareForThirdPage()
     }
     
@@ -43,7 +45,7 @@ class OnboardingScreenViewController: UIViewController {
         case 3:
             prepareForThirdPage()
         case 4:
-            self.performSegue(withIdentifier: SegueIdentifiers.fromOnboardingToHomepage, sender: self)
+            self.performSegue(withIdentifier: SegueIdentifiers.fromOnboardingToTabBar, sender: self)
         default:
             break
         }
@@ -52,14 +54,13 @@ class OnboardingScreenViewController: UIViewController {
     private func prepareForSecondPage() {
         introductionLabel.text = TextCostants.secondOnBaordingText
         backgroundImageView.image = UIImage(named: "secondBoardingBackgroundImage")
-        //boardingProgressView.
+        boardingProgressView.setProgress(0.666, animated: true)
         
     }
     
     private func prepareForThirdPage() {
         introductionLabel.text = TextCostants.thirdOnBaordingText
         backgroundImageView.image = UIImage(named: "thirdBoardingBackgroundImage")
+        boardingProgressView.setProgress(1, animated: true)
     }
-    
-
 }
