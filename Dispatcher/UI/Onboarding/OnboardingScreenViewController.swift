@@ -45,7 +45,7 @@ class OnboardingScreenViewController: UIViewController {
         case 3:
             prepareForThirdPage()
         case 4:
-            self.performSegue(withIdentifier: SegueIdentifiers.fromOnboardingToTabBar, sender: self)
+            self.performSegue(withIdentifier: SegueIdentifiers.fromOnboardingToAuth, sender: self)
         default:
             break
         }

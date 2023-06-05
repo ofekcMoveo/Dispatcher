@@ -20,18 +20,18 @@ class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         checkUserAlreadyLoggedIn()
         
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            if let currentUser = user {
-                self.performSegue(withIdentifier: SegueIdentifiers.fromSplashToTabBar, sender: self)
-            } else {
-                    if (self.isUserFirstLogin == true) {
-                        self.setFirstLogin()
-                        self.performSegue(withIdentifier: SegueIdentifiers.fromSplashToOnboarding, sender: self)
-                    } else {
-                        self.performSegue(withIdentifier: SegueIdentifiers.fromSplashToAuth, sender: self)
-                    }
+        if (self.isUserFirstLogin == true) {
+            self.setFirstLogin()
+            self.performSegue(withIdentifier: SegueIdentifiers.fromSplashToOnboarding, sender: self)
+        } else {
+            Auth.auth().addStateDidChangeListener { (auth, user) in
+                if (user != nil) {
+                    self.performSegue(withIdentifier: SegueIdentifiers.fromSplashToTabBar, sender: self)
+                } else {
+                    self.performSegue(withIdentifier: SegueIdentifiers.fromSplashToAuth, sender: self)
                 }
             }
+        }
     }
     
     func checkUserAlreadyLoggedIn() {

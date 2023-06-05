@@ -144,7 +144,7 @@
                         <outlet property="introductionLabel" destination="Icg-O9-e6K" id="VJw-CY-APx"/>
                         <outlet property="nextButton" destination="eXJ-Tt-Lek" id="4RC-6X-Frz"/>
                         <outlet property="skipButton" destination="5iJ-yY-pbD" id="Pdr-o9-SDT"/>
-                        <segue destination="BiU-yt-af2" kind="presentation" identifier="fromOnboardingToTabBar" modalPresentationStyle="fullScreen" id="7kA-qb-Kwv"/>
+                        <segue destination="MY2-Qr-syj" kind="presentation" identifier="fromOnboardingToAuth" modalPresentationStyle="fullScreen" id="Ec0-2e-C0v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRP-B3-sFC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -991,8 +991,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="oNL-5q-Vwr"/>
-        <segue reference="7kA-qb-Kwv"/>
-        <segue reference="7Iu-Z4-QjX"/>
+        <segue reference="W67-Eh-H2R"/>
+        <segue reference="Ec0-2e-C0v"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
