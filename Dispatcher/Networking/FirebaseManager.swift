@@ -45,7 +45,7 @@ class FirebaseManager {
         
         do {
             let data = try JSONEncoder().encode(Auth.auth().currentUser?.metadata.lastSignInDate ?? Date())
-            UserDefaultsManager().saveItem(itemToSave: data, itemToSaveKey: UserDefaultsKeys.lastLoginOfUserDefualtsKey)
+            UserDefaultsManager().saveItemAsData(itemToSave: data, itemToSaveKey: UserDefaultsKeys.lastLoginOfUserDefualtsKey)
         } 
         
         return formatDate(date: previousLogin.description, format: AppConstants.lastLoginDateFormat)

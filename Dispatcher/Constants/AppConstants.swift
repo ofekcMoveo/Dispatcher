@@ -23,7 +23,6 @@ struct AppConstants {
     //MARK: date formats
     static let articleDateFormat = "EEEE, MMM d, yyyy"
     static let lastLoginDateFormat = "hh:mm a, dd.MM.yyyy"
-    
 }
 
 struct TableCellsIdentifiers {

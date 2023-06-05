@@ -14,7 +14,7 @@ class SearchRepository {
     func saveSearches(_ latestSearches: [RecentSearch]) throws {
         do {
             let data = try JSONEncoder().encode(latestSearches)
-            userDefaultsManager.saveItem(itemToSave: data, itemToSaveKey: UserDefaultsKeys.latestSearchesDefualtsKey)
+            userDefaultsManager.saveItemAsData(itemToSave: data, itemToSaveKey: UserDefaultsKeys.latestSearchesDefualtsKey)
         }
     }
     

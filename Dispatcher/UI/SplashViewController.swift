@@ -35,23 +35,14 @@ class SplashViewController: UIViewController {
     }
     
     func checkUserAlreadyLoggedIn() {
-        do {
-            let data = userDefualtsManager.fetchDataFromUserDefaults(wantedItemKey: UserDefaultsKeys.firstLoginOfUserDefualtsKey)
-            let userAlreadyLoggedIn = try JSONDecoder().decode(Bool.self, from: data)
-            isUserFirstLogin = !userAlreadyLoggedIn
-        } catch (let error) {
-            self.present(createErrorAlert(error.localizedDescription), animated: true, completion: nil)
-        }
+        let userAlreadyLoggedIn = userDefualtsManager.fetchObjectFromUserDefaults(wantedItemKey: UserDefaultsKeys.firstLoginOfUserDefualtsKey) as? Bool
+        isUserFirstLogin = !(userAlreadyLoggedIn ?? false)
     }
     
     func setFirstLogin() {
-        do {
-            let data = try JSONEncoder().encode(true)
-            userDefualtsManager.saveItem(itemToSave: data, itemToSaveKey: UserDefaultsKeys.firstLoginOfUserDefualtsKey)
-            isUserFirstLogin = true
-        } catch (let error) {
-            self.present(createErrorAlert(error.localizedDescription), animated: true, completion: nil)
-        }
+        userDefualtsManager.saveItem(itemToSave: true, itemToSaveKey: UserDefaultsKeys.firstLoginOfUserDefualtsKey)
+        isUserFirstLogin = true
+
     }
 
 }
