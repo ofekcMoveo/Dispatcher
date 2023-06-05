@@ -30,4 +30,24 @@ class FirebaseManager {
             }
         }
     }
+    
+    func logoutUserFromFirebase(completionHandler: @escaping (_ errorMsg: String?) -> Void) {
+        do {
+          try Auth.auth().signOut()
+            completionHandler(nil)
+        } catch let signOutError as NSError {
+            completionHandler(signOutError.localizedDescription)
+        }
+    }
+    
+    func getLastLoginOfCurrentUser() throws -> String {
+        let previousLogin = UserDefaultsManager().fetchDataFromUserDefaults(wantedItemKey: UserDefaultsKeys.lastLoginOfUserDefualtsKey)
+        
+        do {
+            let data = try JSONEncoder().encode(Auth.auth().currentUser?.metadata.lastSignInDate ?? Date())
+            UserDefaultsManager().saveItemAsData(itemToSave: data, itemToSaveKey: UserDefaultsKeys.lastLoginOfUserDefualtsKey)
+        } 
+        
+        return formatDate(date: previousLogin.description, format: AppConstants.lastLoginDateFormat)
+    }
 }

@@ -8,7 +8,10 @@
 import Foundation
 
 class FirebaseRepository {
+    static let shared = FirebaseRepository()
     let firebaseManager = FirebaseManager()
+    
+    private init() {}
     
     func exceuteAuthentication(authMode: AuthMode, email: String, password: String, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
         switch authMode{
@@ -30,5 +33,19 @@ class FirebaseRepository {
                 }
             }
         }
+    }
+    
+    func logout(completionHandler: @escaping (_ errorMsg: String?) -> Void) {
+        firebaseManager.logoutUserFromFirebase { errorMsg in
+            if let error = errorMsg {
+                completionHandler(error)
+            } else {
+                completionHandler(nil)
+            }
+        }
+    }
+    
+    func getLastLogin() throws -> String {
+        return try firebaseManager.getLastLoginOfCurrentUser()
     }
 }

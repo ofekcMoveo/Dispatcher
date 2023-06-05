@@ -14,4 +14,6 @@ struct ColorsPalleteNames {
     static let primaryButtonColor = "primaryButtonColor"
     static let screenBackgroundColor = "screenBackgroundColor"
     static let secondaryButtonColor = "secondaryButtonColor"
+    static let errorColor = "errorColor"
+    static let borderAndButtonBackground = "borderAndButtonBackground"
 }

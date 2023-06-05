@@ -12,40 +12,45 @@ class HomepageViewController: UIViewController {
 
     @IBOutlet weak var articlesTableView: UITableView!
     @IBOutlet var homepageView: UIView!
+    @IBOutlet weak var headerView: HeaderView!
+    @IBOutlet weak var noResultsView: UIView!
     
     let homepageViewModel = HomepageViewModel.shared
+    let authViewModel = AuthViewModel.shared
     let activityIndicator = UIActivityIndicatorView()
-    var headerView: HeaderView?
+    let tableFotterActivityIndicator = UIActivityIndicatorView()
+    var isPagination = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         
-        headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: homepageView.frame.width, height: 95), headerType: .mainHeader)
-        homepageView.addSubview(headerView ?? UIView())
-        setHeaderViewConstraints()
+        headerView.initView(headerType: .mainHeader)
+        headerView.delegate = self
+        noResultsView.isHidden = true
+
         setupTableView()
         configureActivityIndicator()
         getArticles()
     }
     
-    private func setHeaderViewConstraints() {
-        headerView!.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            headerView!.leadingAnchor.constraint(equalTo: homepageView.leadingAnchor, constant: 0),
-            headerView!.trailingAnchor.constraint(equalTo: homepageView.trailingAnchor, constant: 0),
-            headerView!.topAnchor.constraint(equalTo: homepageView.topAnchor, constant: 0),
-            headerView!.bottomAnchor.constraint(equalTo: articlesTableView.topAnchor, constant: 0),
-            headerView!.heightAnchor.constraint(lessThanOrEqualToConstant: 95)
-        ])
-    }
-    
     private func setupTableView() {
-        headerView?.delegate = self
         articlesTableView.dataSource = self
         articlesTableView.delegate = self
         articlesTableView.rowHeight = 450
         articlesTableView.register(UINib(nibName: NibNames.articleCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.articleCellIdentifier)
+        
+        setupFotterView()
+    }
+    
+    private func setupFotterView() {
+        tableFotterActivityIndicator.style = .large
+        articlesTableView.tableFooterView = tableFotterActivityIndicator
+        NSLayoutConstraint.activate([
+            tableFotterActivityIndicator.centerXAnchor.constraint(equalTo: articlesTableView.tableFooterView?.centerXAnchor ?? NSLayoutXAxisAnchor()),
+            tableFotterActivityIndicator.centerYAnchor.constraint(equalTo: articlesTableView.tableFooterView?.centerYAnchor ?? NSLayoutYAxisAnchor())
+        ])
+        
     }
     
     private func configureActivityIndicator() {
@@ -56,12 +61,16 @@ class HomepageViewController: UIViewController {
     }
     
     private func getArticles() {
-        self.activityIndicator.startAnimating()
-
+        isPagination == true ? (tableFotterActivityIndicator.startAnimating()) : self.activityIndicator.startAnimating()
+    
         homepageViewModel.getArticlesToDisplay(completionHandler: { errorMsg, numberOfNewItems in
-            self.activityIndicator.stopAnimating()
+            self.isPagination == true ? (self.tableFotterActivityIndicator.stopAnimating()) : self.activityIndicator.stopAnimating()
             if(errorMsg != nil) {
-                self.present(createErrorAlert(errorMsg!), animated: true, completion: nil)
+                if(errorMsg == Errors.noArticlesFoundError.rawValue || numberOfNewItems == 0) {
+                    self.noResultsView.isHidden = false
+                } else {
+                    self.present(createErrorAlert(errorMsg!), animated: true, completion: nil)
+                }
             } else {
                 DispatchQueue.main.async {
                     let indexPathForNewRows = self.buildIndexPathForNewRows(numberOfNewItems: numberOfNewItems)
@@ -72,7 +81,6 @@ class HomepageViewController: UIViewController {
     }
 
     private func buildIndexPathForNewRows(numberOfNewItems: Int) -> [IndexPath] {
-        
         let numberOfRows = self.articlesTableView.numberOfRows(inSection: 0)
         return (numberOfRows...(numberOfRows + numberOfNewItems - 1)).map { IndexPath(row: $0, section: 0) }
     }
@@ -97,8 +105,12 @@ extension HomepageViewController: UITableViewDataSource {
             cell.titleLabel.text = currentArticle.title
             cell.subTitleLabel.text = currentArticle.summary
             cell.tagLabel.text = currentArticle.topic.first
-            cell.dateLabel.text = formatDate(currentArticle.date)
-            cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
+            cell.dateLabel.text = formatDate(date: currentArticle.date, format: AppConstants.articleDateFormat)
+            loadImageFromUrl(currentArticle.imageURL) { image, errorMsg in
+                DispatchQueue.main.async {
+                    cell.articleImage.image = image
+                }
+            }
             
             let numberOfTags = currentArticle.topic.count - 1
             if(numberOfTags > 0) {
@@ -109,7 +121,6 @@ extension HomepageViewController: UITableViewDataSource {
             }
             
             cell.delegate = self
-        
             return cell
         } else {
             return UITableViewCell()
@@ -117,26 +128,23 @@ extension HomepageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (homepageViewModel.articlesToDisplay.count - 2) {
+        if indexPath.row == (homepageViewModel.articlesToDisplay.count - 4) {
             if (homepageViewModel.currentPage < homepageViewModel.totalResultsPages) {
+                isPagination = true
                 getArticles()
+                isPagination = false
             }
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: ColorsPalleteNames.screenBackgroundColor)
-       
-        let label = UILabel()
-        label.text = TextCostants.topHeadlinesHeaderText
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
-        label.frame = CGRect(x: 10, y: 10, width: 250, height: 28)
-        
-        view.addSubview(label)
-            
-        return view
+        let header = ArticlesTableHeaderView()
+        do {
+            header.initView(lastLoginDate: try authViewModel.getLastLoginDate())
+        } catch (let error) {
+            self.present(createErrorAlert(error.localizedDescription), animated: true, completion: nil)
+        }
+        return header
       }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -145,19 +153,17 @@ extension HomepageViewController: UITableViewDataSource {
 }
 
 extension HomepageViewController: ArticleCellDelegate, UITableViewDelegate, HeaderViewDelegate {
+    func notificationsPressed() {
+    }
+    
     func searchPressed() {
         self.performSegue(withIdentifier: SegueIdentifiers.fromHomepageToSearchScreen, sender: self)
     }
     
-    func notificationsPressed() {
-        
-    }
-    
+  
     func navigateButtonPressed(_ articleID: String) {
-        
     }
     
     func favoritesButtonPressed(_ articleID: String) {
-        
     }
 }

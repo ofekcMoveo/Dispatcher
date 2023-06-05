@@ -29,7 +29,24 @@ class HeaderView: UIView {
     
     var headerType: HeaderType
     var delegate: HeaderViewDelegate?
+    
+    func initView(delegate: HeaderViewDelegate? = nil, headerType: HeaderType) {
+        self.headerType = headerType
+        commonInit()
+        setHeaderItemsByType()
+        if let safeDelegate = delegate {
+            self.delegate = safeDelegate
+        }
+    }
         
+    private func commonInit() {
+        Bundle.main.loadNibNamed(NibNames.headerViewNibName, owner: self, options: nil)
+        contentView.frame = self.bounds
+        self.addSubview(contentView)
+        
+        setHeaderItemsByType()
+    }
+     
     init(frame: CGRect, headerType: HeaderType) {
         self.headerType = headerType
         super.init(frame: frame)
@@ -37,8 +54,6 @@ class HeaderView: UIView {
         Bundle.main.loadNibNamed(NibNames.headerViewNibName, owner: self)
         addSubview(contentView)
         contentView.frame = self.frame
-        
-        setHeaderItemsByType()
     }
         
     required init?(coder aDecoder: NSCoder) {
@@ -48,22 +63,8 @@ class HeaderView: UIView {
         Bundle.main.loadNibNamed(NibNames.headerViewNibName, owner: self)
         addSubview(contentView)
         contentView.frame = self.frame
-        
-        setHeaderItemsByType()
     }
-    
-    private func commonInit() {
-        let nib = UINib(nibName: NibNames.headerViewNibName, bundle: Bundle(for: type(of: self)))
-        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
-            return
-        }
-        view.frame = bounds
-        addSubview(view)
-        setHeaderItemsByType()
-    }
-    
-    
-    
+
     private func setHeaderItemsByType() {
         switch headerType {
         case HeaderType.mainHeader:
@@ -77,7 +78,7 @@ class HeaderView: UIView {
         }
     }
         
-    private func setupMainHeader() {
+    func setupMainHeader() {
         logoImageView.isHidden = false
         searchButton.isHidden = false
         notificationsButton.isHidden = false
@@ -85,7 +86,7 @@ class HeaderView: UIView {
         backButton.isHidden = true
     }
     
-    private func setupBackHeader() {
+    func setupBackHeader() {
         backButton.isHidden = false
         
         logoImageView.isHidden = true
@@ -93,17 +94,18 @@ class HeaderView: UIView {
         notificationsButton.isHidden = true
     }
     
-    private func setupApproveOrDenyHeader() {
+    func setupApproveOrDenyHeader() {
         
     }
     
-    private func setupLogoHeader() {
+    func setupLogoHeader() {
         logoImageView.isHidden = false
         
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             logoImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5),
-            logoImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1)
+            logoImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1),
+            logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 90)
         ])
         
         searchButton.isHidden = true

@@ -17,23 +17,33 @@ protocol TextFieldWithValidationDelegate {
     func handleEmailInput(email: String?, error: UserInputErrors?)
     func handlePasswordInput(password: String?, error: UserInputErrors?)
     func handleReEnterPasswordInput(password: String?, error: UserInputErrors?)
+    func textFieldBeginEditing()
+    func textFieldFinishedEditing()
 }
 
 class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     var type: TextFieldType
     var passwordToCompareTo: String?
+    var hasValidated = false
     var validationDelegate: TextFieldWithValidationDelegate?
-        
+    
     init(frame: CGRect, type: TextFieldType) {
         self.type = type
         super.init(frame: frame)
-        self.delegate = self
-        styleTextField()
-        setTextFieldByType()
+        
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.type = .email
+        super.init(coder: coder)
+    }
+    
+    func initTextField(type: TextFieldType) {
+        self.type = type
+        self.delegate = self
+        
+        styleTextField()
+        setTextFieldByType()
     }
     
     private func styleTextField() {
@@ -41,6 +51,7 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         self.layer.borderColor = UIColor(named: ColorsPalleteNames.secondaryButtonColor)?.cgColor
         self.backgroundColor = .white
         self.returnKeyType = .done
+        self.spellCheckingType = .no
     }
     
     private func setTextFieldByType() {
@@ -74,9 +85,11 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     private func setIsSecurePasswordIcon() {
         let image = (self.isSecureTextEntry ? UIImage(named: "hideText") : UIImage(named: "showText")) ?? UIImage()
         
-        let showOrHideTextIcon = UIButton()
-        showOrHideTextIcon.setImage(image, for: .normal)
-        showOrHideTextIcon.imageView?.contentMode = .scaleAspectFit
+        var configuration = UIButton.Configuration.filled()
+        configuration.image = image
+        configuration.imagePadding = 10
+        
+        let showOrHideTextIcon = UIButton(configuration:configuration)
         showOrHideTextIcon.addTarget(self, action: #selector(showOrHidePasswordPressed) , for: .touchUpInside)
         self.addIconToTextField(position: .end, icon: showOrHideTextIcon)
     }
@@ -88,8 +101,8 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
     }
     
     func styleErrorTextField() {
-        self.textColor = .red
-        self.styleTextFieldPlaceHolder(placeholderText: self.placeholder ?? "", fontColor: .red)
+        self.textColor = UIColor(named: ColorsPalleteNames.errorColor)
+        self.styleTextFieldPlaceHolder(placeholderText: self.placeholder ?? "", fontColor: UIColor(named: ColorsPalleteNames.errorColor))
         self.layer.borderColor = UIColor.red.cgColor
         self.layer.borderWidth = 0.5
     }
@@ -98,52 +111,108 @@ class TextFieldWithValidation : UITextField, UITextFieldDelegate {
         self.isSecureTextEntry = !self.isSecureTextEntry
         setIsSecurePasswordIcon()
     }
-
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.placeholder = ""
+        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shadowRadius = 4
+        
+        if(type == .reEnterPssword) {
+            validationDelegate?.textFieldBeginEditing()
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if(hasValidated == true) {
+            guard let passwordTextField = textField as? TextFieldWithValidation else {
+                return true
+            }
+            var updatedString = passwordTextField.text ?? ""
+            updatedString.replaceSubrange(Range(range, in: updatedString)!, with: string)
+            
+            if(self.type == .password) {
+                validatePassword(userInput: updatedString)
+            } else if (self.type == .email) {
+                validateEmail(userInput: updatedString)
+            }
+        }
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldShouldReturn(textField)
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.layer.shadowOpacity = 0
         self.resignFirstResponder()
         switch type {
         case .email:
-            validateEmail(userInput: self.text)
+            validateEmail(userInput: textField.text)
         case .password:
-            validatePassword(userInput: self.text)
+            validatePassword(userInput: textField.text)
         case .reEnterPssword:
-            comparePassword(userInput: self.text)
+            validationDelegate?.textFieldFinishedEditing()
+            comparePassword(userInput: textField.text)            
         }
-           return true
+        return true
     }
     
     //MARK: Input validation funcs
 
     private func validateEmail(userInput: String?) {
-       let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+"
-       let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
-        if(emailPredicate.evaluate(with: userInput)){
-            validationDelegate?.handleEmailInput(email: userInput, error: nil)
+        hasValidated = true
+        if let emailAddress = userInput {
+            if (emailAddress.contains("@")) {
+                let components = emailAddress.components(separatedBy: "@")
+                let username = components[0]
+                let domain = components[1]
+                if (username.isEmpty) {
+                    validationDelegate!.handleEmailInput(email: nil, error: UserInputErrors.missingUsernameInEmailError)
+                } else if (domain.isEmpty) {
+                    validationDelegate!.handleEmailInput(email: nil, error: UserInputErrors.missingDomainInEmailError)
+                } else {
+                    validationDelegate!.handleEmailInput(email: emailAddress, error: nil)
+                }
+            } else {
+                validationDelegate!.handleEmailInput(email: nil, error: UserInputErrors.missingSignInEmailError)
+            }
         } else {
-            validationDelegate?.handleEmailInput(email: nil, error: UserInputErrors.invalidEmailError)
+            validationDelegate!.handleEmailInput(email: nil, error: UserInputErrors.invalidEmailError)
         }
     }
-    
-    private func validatePassword(userInput: String?) {
-        let passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}$"
-        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        if(passwordPredicate.evaluate(with: userInput)) {
-            validationDelegate?.handlePasswordInput(password: userInput, error: nil)
-        } else {
-            validationDelegate?.handlePasswordInput(password: nil, error: UserInputErrors.invalidPasswordError)
-        }
-    }
-    
-    private func comparePassword(userInput: String?) {
-        if (userInput != passwordToCompareTo) {
-            validationDelegate?.handleReEnterPasswordInput(password: nil, error: UserInputErrors.passwordsNotMatchError)
-        } else {
-            validationDelegate?.handleReEnterPasswordInput(password: passwordToCompareTo, error: nil)
-        }
-    }
+       
+   private func validatePassword(userInput: String?) {
+       hasValidated = true
+       let passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}$"
+       validationByRegex(regexExpression: passwordRegex, inputToEvaluate: userInput, handleValidationResult: validationDelegate!.handlePasswordInput)
+   }
+   
+   private func comparePassword(userInput: String?) {
+       hasValidated = true
+       if (userInput != passwordToCompareTo && userInput != "") {
+           validationDelegate?.handleReEnterPasswordInput(password: nil, error: UserInputErrors.passwordsNotMatchError)
+       } else {
+           validationDelegate?.handleReEnterPasswordInput(password: passwordToCompareTo, error: nil)
+       }
+   }
+   
+   private func validationByRegex(regexExpression: String, inputToEvaluate: String?, handleValidationResult: @escaping (_ input: String?, _ errorMsg: UserInputErrors?) -> Void) {
+       if(inputToEvaluate != "") {
+           let predicate = NSPredicate(format: "SELF MATCHES %@", regexExpression)
+           if(predicate.evaluate(with: inputToEvaluate)) {
+               handleValidationResult(inputToEvaluate, nil)
+           } else {
+               if(self.type == .email) {
+                   handleValidationResult(nil, UserInputErrors.invalidEmailError)
+               } else if (self.type == .password){
+                   handleValidationResult(nil, UserInputErrors.invalidPasswordError)
+               }
+               
+           }
+       }
+       
+   }
 }
 

@@ -7,26 +7,33 @@
 
 import UIKit
 
-func formatDate(_ date: String) -> String {
+func formatDate(date: String, format: String) -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+    dateFormatter.dateFormat = format
     dateFormatter.locale = Locale(identifier: "en_US")
     let fomattedDate = dateFormatter.date(from: date) ?? Date()
     return dateFormatter.string(from: fomattedDate)
 }
 
-func loadImageFromUrl(_ imageUrl: String) -> UIImage {
+func loadImageFromUrl(_ imageUrl: String, completion: @escaping (UIImage?, String?) -> Void) {
     if let url = URL(string: imageUrl) {
-        if let data = try? Data(contentsOf: url) {
-            if let image = UIImage(data: data) {
-               return image
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(nil, error.localizedDescription)
+                return
+            }
+            if let data = data, let image = UIImage(data: data) {
+                completion(image, nil)
+            } else {
+                completion(nil, Errors.imageLoadError.rawValue)
             }
         }
+        
+        task.resume()
+    } else {
+        completion(nil, Errors.imageUrlError.rawValue)
     }
-
-    return UIImage()
 }
-
 
 func createErrorAlert(_ msg: String) -> UIAlertController {
     

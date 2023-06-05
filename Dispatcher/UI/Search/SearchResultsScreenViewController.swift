@@ -19,16 +19,15 @@ class SearchResultsScreenViewController: UIViewController {
     
     var searchViewModel = SearchViewModel()
     let activityIndicator = UIActivityIndicatorView()
+    let tableFotterActivityIndicator = UIActivityIndicatorView()
     var searchKeyWords: String = ""
     var gotResults = false
+    var isPagination = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchResultsTableView.delegate = self
-        searchResultsTableView.dataSource = self
-        searchResultsTableView.register(UINib(nibName: NibNames.articleCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.articleCellIdentifier)
-        
+        setupTableView()
         noResultsView.isHidden = true
         searchKeyWordsLabel.text = (searchKeyWords)
         configureActivityIndicator()
@@ -39,18 +38,38 @@ class SearchResultsScreenViewController: UIViewController {
         searchResultsTableView.reloadData()
     }
     
+    private func setupTableView() {
+        searchResultsTableView.delegate = self
+        searchResultsTableView.dataSource = self
+        searchResultsTableView.rowHeight = 450
+        searchResultsTableView.register(UINib(nibName: NibNames.articleCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.articleCellIdentifier)
+        
+        setupFotterView()
+    }
+    
     private func configureActivityIndicator() {
         activityIndicator.style = .large
         activityIndicator.center = searchResultsView.center
         searchResultsView.addSubview(activityIndicator)
     }
     
+    private func setupFotterView() {
+        tableFotterActivityIndicator.style = .large
+        searchResultsTableView.tableFooterView = tableFotterActivityIndicator
+        NSLayoutConstraint.activate([
+            tableFotterActivityIndicator.centerXAnchor.constraint(equalTo: searchResultsTableView.tableFooterView?.centerXAnchor ?? NSLayoutXAxisAnchor()),
+            tableFotterActivityIndicator.centerYAnchor.constraint(equalTo: searchResultsTableView.tableFooterView?.centerYAnchor ?? NSLayoutYAxisAnchor())
+        ])
+        
+    }
+    
     private func getArticlesBySearchKeywords() {
-        self.activityIndicator.startAnimating()
+        isPagination == true ? (tableFotterActivityIndicator.startAnimating()) : self.activityIndicator.startAnimating()
+        
         searchViewModel.getArticlesFromAPIBySearch(searchKeyWords: searchKeyWords, completionHandler: { errorMsg, numberOfNewItems in
+            self.isPagination == true ? (self.tableFotterActivityIndicator.stopAnimating()) : self.activityIndicator.stopAnimating()
             if(errorMsg != nil) {
-                self.activityIndicator.stopAnimating()
-                if(errorMsg == Errors.noArticlesFoundError.rawValue) {
+                if(errorMsg == Errors.noArticlesFoundError.rawValue || numberOfNewItems == 0) {
                     self.noResultsView.isHidden = false
                 } else {
                     self.present(createErrorAlert(errorMsg!),animated: true, completion: nil)
@@ -62,17 +81,14 @@ class SearchResultsScreenViewController: UIViewController {
                     } catch (let error) {
                        self.present(createErrorAlert(error.localizedDescription), animated: true, completion: nil)
                     }
-                    self.activityIndicator.stopAnimating()
                     let indexPathForNewRows = self.buildIndexPathForNewRows(numberOfNewItems: numberOfNewItems)
                     self.searchResultsTableView.insertRows(at: indexPathForNewRows, with: .automatic)
-                
                 }
             }
         })
     }
     
     func buildIndexPathForNewRows(numberOfNewItems: Int) -> [IndexPath] {
-        
         let numberOfRows = self.searchResultsTableView.numberOfRows(inSection: 0)
         return (numberOfRows...(numberOfRows + numberOfNewItems - 1)).map { IndexPath(row: $0, section: 0) }
     }
@@ -86,11 +102,9 @@ class SearchResultsScreenViewController: UIViewController {
 extension SearchResultsScreenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchViewModel.articlesAmount()
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let currentArticle = searchViewModel.getArticleByIndex(index: indexPath.row)
         
         if let cell = (tableView.dequeueReusableCell(withIdentifier: TableCellsIdentifiers.articleCellIdentifier, for: indexPath) as? ArticleCell) {
@@ -99,8 +113,18 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
             cell.titleLabel.text = currentArticle.title
             cell.subTitleLabel.text = currentArticle.summary
             cell.tagLabel.text = currentArticle.topic.first
-            cell.dateLabel.text = formatDate(currentArticle.date)
-            cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
+            cell.dateLabel.text = formatDate(date: currentArticle.date, format: AppConstants.articleDateFormat)
+            //cell.articleImage.image = loadImageFromUrl(currentArticle.imageURL)
+            
+            loadImageFromUrl(currentArticle.imageURL) { image, errorMsg in
+                DispatchQueue.main.async {
+                    if let error = errorMsg {
+                        cell.imageView?.image = UIImage(named: "defaultArticalImage")
+                    } else {
+                        cell.articleImage.image = image
+                    }
+                }
+            }
             
             let numberOfTags = currentArticle.topic.count - 1
             if(numberOfTags > 0) {
@@ -118,10 +142,16 @@ extension SearchResultsScreenViewController: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(AppConstants.tableRowHight)
+    }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == (searchViewModel.articlesToDisplay.count - 2) {
+        if indexPath.row == (searchViewModel.articlesToDisplay.count - 4) {
             if (searchViewModel.currentPage < searchViewModel.totalResultsPages) {
+                isPagination = true
                 getArticlesBySearchKeywords()
+                isPagination = false
             }
         } 
     }

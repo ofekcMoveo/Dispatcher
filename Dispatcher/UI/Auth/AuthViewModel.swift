@@ -13,17 +13,27 @@ enum AuthMode: String {
 }
 
 class AuthViewModel {
-    let firebaseRepository = FirebaseRepository()
+    
+    static let shared = AuthViewModel()
+    
+    let firebaseRepository = FirebaseRepository.shared
+    var lastLoginOfCurrentUser: String = ""
+    
+    private init() {}
     
     func authenticateUser(authMode: AuthMode, email: String, password: String, completionHandler: @escaping (_ errorMsg: String?) -> Void) {
         firebaseRepository.exceuteAuthentication(authMode: authMode, email: email, password: password) { errorMsg in
-            if let err = errorMsg {
-                completionHandler(errorMsg)
-            } else {
-                completionHandler(nil)
-            }
+                if let err = errorMsg {
+                    completionHandler(err)
+                } else {
+                    completionHandler(nil)
+                }
         }
-        
+    }
+    
+    func getLastLoginDate() throws -> String{
+        lastLoginOfCurrentUser = try firebaseRepository.getLastLogin()
+        return lastLoginOfCurrentUser
     }
     
     

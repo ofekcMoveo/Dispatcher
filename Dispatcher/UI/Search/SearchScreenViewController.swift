@@ -14,11 +14,13 @@ class SearchScreenViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var searchHeaderView: UIView!
     let searchScreenViewModel = SearchViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        styleSearchBar()
+        
+        styleSearchHeaderView()
         searchTableView.dataSource = self
         searchTableView.delegate = self
         searchTableView.register(UINib(nibName: NibNames.latestSearchCellNibName, bundle: nil), forCellReuseIdentifier: TableCellsIdentifiers.latestSearchesCellIdentifier)
@@ -33,12 +35,29 @@ class SearchScreenViewController: UIViewController {
         }
     }
     
+    private func styleSearchHeaderView() {
+        searchHeaderView.layer.borderWidth = 1
+        searchHeaderView.layer.borderColor = UIColor(named: ColorsPalleteNames.secondaryButtonColor)?.cgColor
+        styleSearchBar()
+        styleHeaderShadow()
+    }
+    
+    private func styleHeaderShadow() {
+        searchHeaderView.layer.shadowColor = UIColor(named: ColorsPalleteNames.borderAndButtonBackground)?.cgColor
+        searchHeaderView.layer.shadowOpacity = 0.2
+        searchHeaderView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        searchHeaderView.layer.shadowRadius = 4
+        searchHeaderView.layer.masksToBounds = false
+    }
+    
     private func styleSearchBar() {
         let searchTextField = searchBar.searchTextField
         searchTextField.leftView = nil
         searchTextField.backgroundColor = .white
+        searchTextField.textColor = UIColor(named: ColorsPalleteNames.labelsTextColor)
+        searchTextField.styleTextFieldPlaceHolder(placeholderText: "Search", fontColor: UIColor(named: ColorsPalleteNames.labelsTextColor)?.withAlphaComponent(0.5))
         
-        searchBar.setImage(UIImage(named: "exit"), for: .clear, state: .normal)
+        searchBar.setImage(UIImage(named: "bigExit"), for: .clear, state: .normal)
     }
     
     
@@ -87,11 +106,16 @@ extension SearchScreenViewController: UITableViewDataSource {
             performSegue(withIdentifier: SegueIdentifiers.fromLatestSearchToResults, sender: self)
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 62
+    }
 }
 
 extension SearchScreenViewController: UITableViewDelegate, UISearchBarDelegate, LatestSearchCellDelegate {
     func searchCellSelected(_ search: String) {
         searchBar.text = search
+        searchScreenViewModel.articlesToDisplay = []
         performSegue(withIdentifier: SegueIdentifiers.fromLatestSearchToResults, sender: self)
     }
     

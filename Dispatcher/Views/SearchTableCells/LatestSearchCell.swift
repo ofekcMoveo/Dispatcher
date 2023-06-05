@@ -23,17 +23,16 @@ class LatestSearchCell: UITableViewCell {
         super.awakeFromNib()
         
         self.contentView.backgroundColor = UIColor(named: ColorsPalleteNames.screenBackgroundColor)
+        
+        removeSearchCellButton.imageView?.contentMode = .scaleAspectFill
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-    }
-    
+    }    
 
     @IBAction func removeSearchCellButtonPressed(_ sender: UIButton) {
         delegate?.removeButtonPressed(searchWordsLabel.text ?? "")
     }
-    
-
-    
+   
 }
